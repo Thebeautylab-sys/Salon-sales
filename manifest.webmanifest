@@ -1,11 +1,13 @@
 {
-  "name": "Salon Sales, The Beauty Lab",
-  "short_name": "Salon Sales",
+  "name": "JOIA Sales, The Beauty Lab",
+  "short_name": "JOIA Sales",
+  "description": "Salon visits, samples, follow-ups and stock for the JOIA team",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#F5F2F5",
-  "theme_color": "#7B1E3A",
+  "orientation": "portrait",
+  "background_color": "#FBF6F8",
+  "theme_color": "#B0426F",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },

@@ -3,35 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#7B1E3A">
+<meta name="theme-color" content="#FBF6F8" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#171114" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Salon Sales">
-<title>Salon Sales, The Beauty Lab</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-title" content="JOIA Sales">
+<title>JOIA Sales, The Beauty Lab</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F5F2F5;--surface:#FFFFFF;--sunk:#EDE7EE;--ink:#241A26;--muted:#6E6371;--line:#E4DCE5;
-  --wine:#7B1E3A;--wine-soft:#F3E3E8;--on-wine:#FFFFFF;
+  --bg:#FBF6F8;--surface:#FFFFFF;--sunk:#F4E9EE;--ink:#2E2A33;--muted:#6B6772;--line:#F1DDE2;
+  --wine:#B0426F;--wine-soft:#FCE8EF;--on-wine:#FFFFFF;
   --ok:#2E7452;--warn:#A86412;--bad:#B42318;--ok-soft:#E3F1EA;--warn-soft:#FAEEDC;--bad-soft:#FBE6E3;
   --s-lead:#8A7CB2;--s-sampled:#C9668F;--s-follow:#D08A2C;--s-customer:#2E7452;--s-lost:#A09AA2;
   --shadow:0 1px 0 rgba(36,26,38,.04),0 8px 24px -12px rgba(36,26,38,.18);
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#161116;--surface:#211A21;--sunk:#2B222B;--ink:#F3EDF3;--muted:#ABA0AC;--line:#3A2F3A;
-  --wine:#E07A9A;--wine-soft:#3A1F2A;--on-wine:#1C1218;
+  --bg:#171114;--surface:#221A1F;--sunk:#2C2228;--ink:#F6EEF1;--muted:#B8AEB5;--line:#3E3038;
+  --wine:#E883AC;--wine-soft:#3E2230;--on-wine:#1A1016;
   --ok:#6CC69A;--warn:#E5A955;--bad:#F07B6E;--ok-soft:#1E3329;--warn-soft:#3A2B17;--bad-soft:#3D1D1A;
   --s-lead:#A99BD3;--s-sampled:#E58AB0;--s-follow:#E8A64E;--s-customer:#6CC69A;--s-lost:#8C858E;
   --shadow:0 8px 24px -12px rgba(0,0,0,.6);color-scheme:dark;}}
 :root[data-theme="dark"]{
-  --bg:#161116;--surface:#211A21;--sunk:#2B222B;--ink:#F3EDF3;--muted:#ABA0AC;--line:#3A2F3A;
-  --wine:#E07A9A;--wine-soft:#3A1F2A;--on-wine:#1C1218;
+  --bg:#171114;--surface:#221A1F;--sunk:#2C2228;--ink:#F6EEF1;--muted:#B8AEB5;--line:#3E3038;
+  --wine:#E883AC;--wine-soft:#3E2230;--on-wine:#1A1016;
   --ok:#6CC69A;--warn:#E5A955;--bad:#F07B6E;--ok-soft:#1E3329;--warn-soft:#3A2B17;--bad-soft:#3D1D1A;
   --s-lead:#A99BD3;--s-sampled:#E58AB0;--s-follow:#E8A64E;--s-customer:#6CC69A;--s-lost:#8C858E;
   --shadow:0 8px 24px -12px rgba(0,0,0,.6);color-scheme:dark;}
@@ -39,9 +39,9 @@
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
-body{font:16px/1.45 "Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100%}
+body{font:16px/1.45 "Urbanist",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100%}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
-h1,h2,h3,.disp{font-family:"Bricolage Grotesque","Figtree",system-ui,sans-serif;letter-spacing:-.01em;margin:0}
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","Urbanist",system-ui,sans-serif;letter-spacing:-.01em;margin:0}
 h1{font-size:30px;line-height:1.1;font-weight:700}
 h2{font-size:19px;font-weight:650}
 h3{font-size:16px;font-weight:650}
@@ -51,7 +51,7 @@ a{color:var(--wine)}
 .muted{color:var(--muted)} .small{font-size:13.5px} .tiny{font-size:12px}
 .wrap{max-width:720px;margin:0 auto;padding:12px 16px 120px}
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:flex;align-items:center;gap:8px;padding:10px 12px;max-width:720px;margin:0 auto}
-.topbar .title{flex:1;font-weight:650;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .title{flex:1;font-weight:650;font-family:"Urbanist",system-ui,sans-serif;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ib{width:42px;height:42px;border-radius:12px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--ink)}
 .ib:active{background:var(--sunk)}
 svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
@@ -77,10 +77,10 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .empty b{display:block;color:var(--ink);margin-bottom:4px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
 .stat{background:var(--surface);padding:14px 16px}
-.stat .v{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:22px;font-weight:700;line-height:1.15}
+.stat .v{font-family:"Urbanist",system-ui,sans-serif;font-size:22px;font-weight:700;line-height:1.15}
 .stat .l{font-size:13px;color:var(--muted)}
 .focus{display:flex;align-items:center;gap:14px;padding:18px;background:var(--wine);color:var(--on-wine);border-radius:20px;margin:4px 0 22px;border:0;width:100%;text-align:left;cursor:pointer}
-.focus .n{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:44px;font-weight:700;line-height:1}
+.focus .n{font-family:"Urbanist",system-ui,sans-serif;font-size:44px;font-weight:700;line-height:1}
 .focus .x{font-size:15px;opacity:.92}
 .pipe{display:flex;height:14px;border-radius:99px;overflow:hidden;margin:14px 16px 6px;background:var(--sunk)}
 .pipe span{display:block;height:100%}
@@ -134,7 +134,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .f input:focus,.f select:focus,.f textarea:focus,.inp:focus{border-color:var(--wine)}
 .f textarea{min-height:84px;resize:vertical}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
-.fs{margin:6px 0 4px;font-weight:650;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:16px;padding-top:10px;border-top:1px solid var(--line)}
+.fs{margin:6px 0 4px;font-weight:650;font-family:"Urbanist",system-ui,sans-serif;font-size:16px;padding-top:10px;border-top:1px solid var(--line)}
 .fs:first-child{border-top:0;padding-top:0}
 /* sheet */
 .scrim{position:fixed;inset:0;background:rgba(20,10,18,.45);z-index:40;animation:fade .18s ease}
@@ -162,7 +162,7 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .price{width:78px;border:1px solid var(--line);border-radius:10px;padding:7px 8px;text-align:right;background:var(--surface)}
 .tot{display:grid;grid-template-columns:1fr auto;gap:6px 12px;font-size:15px}
 .tot>span:nth-child(even){text-align:right;white-space:nowrap}
-.tot .big{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:22px;padding-top:6px;border-top:1px solid var(--line)}
+.tot .big{font-family:"Urbanist",system-ui,sans-serif;font-weight:700;font-size:22px;padding-top:6px;border-top:1px solid var(--line)}
 .results{max-height:240px;overflow:auto;border-radius:14px;background:var(--surface);box-shadow:var(--shadow);margin:-4px 0 14px}
 .results .row{padding:10px 14px}
 .steps{display:flex;gap:4px;margin:4px 0 16px}
@@ -180,7 +180,32 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 .inv .sum{margin-left:auto;max-width:300px;display:grid;grid-template-columns:1fr auto;gap:4px 18px}
 .inv .sum .g{font-weight:700;font-size:17px;border-top:1.5px solid #1d141f;padding-top:6px}
 .login{max-width:400px;margin:0 auto;padding:12vh 24px 40px}
-.login .sw.big{margin-bottom:22px}
+.login .brand{width:88px;height:88px;border-radius:24px;background:linear-gradient(135deg,#C95C8A,#92345E);display:grid;place-items:center;margin-bottom:22px;box-shadow:0 14px 30px -14px rgba(146,52,94,.6)}
+.login .brand img{width:66px;height:auto}
+.card.alert{display:block;width:100%;border:1px solid var(--line);cursor:pointer;color:var(--ink);font:inherit;background:var(--surface)}
+.card.alert svg.i{color:var(--bad)} svg.flip{transform:rotate(180deg)} svg.inl{width:15px;height:15px;vertical-align:-3px}
+.qa{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 14px}
+.qbtn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--surface);cursor:pointer;text-align:left;box-shadow:var(--shadow)}
+.qbtn svg.i{color:var(--wine);margin-bottom:6px}.qbtn b{font-size:15px}.qbtn span{font-size:12.5px;color:var(--muted)}
+.pill.qty{font-variant-numeric:tabular-nums;min-width:44px;text-align:center}
+.stockbig{display:flex;align-items:center;gap:16px}
+.stockbig .n{font-size:40px;font-weight:800;line-height:1;min-width:64px;text-align:center;font-variant-numeric:tabular-nums}
+.stockbig.ok .n{color:var(--ok)}.stockbig.warn .n{color:var(--warn)}.stockbig.bad .n{color:var(--bad)}.stockbig .n{color:var(--muted)}
+.stockbig.ok .n,.stockbig.warn .n,.stockbig.bad .n{}
+.actions.three{grid-template-columns:repeat(3,1fr)}
+.neg{color:var(--bad)}.pos{color:var(--ok)}
+.crow{display:flex;align-items:center;gap:12px;padding:10px 16px;border-top:1px solid var(--line)}
+.crow:first-child{border-top:0}.crow .main{flex:1;min-width:0}.crow .t{font-weight:600}.crow .s{font-size:13px;color:var(--muted)}
+.crow input{width:84px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--sunk);text-align:center;font-size:17px;font-weight:600}
+.crow input:focus{border-color:var(--wine);outline:none;background:var(--surface)}
+.crow input::placeholder{color:var(--muted);opacity:.4;font-weight:500}
+.crow input:not(:placeholder-shown){border-color:var(--wine);background:var(--wine-soft);color:var(--wine)}
+.stickyb{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));margin-top:14px}
+.pickc{display:flex;align-items:center;gap:10px;width:100%;border:1px solid var(--line);cursor:pointer;font:inherit;color:var(--ink);background:var(--surface);margin-bottom:12px}
+.av{width:40px;height:40px;border-radius:12px;background:var(--wine-soft);color:var(--wine);display:grid;place-items:center;font-weight:700;flex:none}
+.tog{display:flex;gap:10px;align-items:center;margin:4px 0 14px}.tog input{width:20px;height:20px;accent-color:var(--wine)}
+a.btn{text-decoration:none}
+.msg{white-space:pre-wrap;background:var(--sunk);border-radius:12px;padding:14px;font-size:14px;user-select:text;-webkit-user-select:text}
 .login h1{font-size:34px;margin-bottom:6px}
 .bar2{height:8px;border-radius:9px;background:var(--sunk);overflow:hidden;margin-top:6px}
 .bar2 span{display:block;height:100%;background:var(--wine);border-radius:9px}
@@ -197,94 +222,75 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stro
 <div id="bar"></div><div id="app"></div><div id="sheet-root"></div><div id="toast" aria-live="polite"></div>
 <script>
 /* ============================================================
- * The Beauty Lab · Salon Sales · shared core
- * Used by the server (Code.gs) and by the app (totals, dates).
+ * JOIA Sales by The Beauty Lab · shared core v3
+ * The same code runs on the server (Code.gs) and in the app demo.
  * ============================================================ */
+var APP_VERSION = '3.0';
 var STATUSES = ['Lead', 'Sampled', 'Follow-up', 'Customer', 'Lost'];
-var CONTACT_TYPES = ['visit', 'call', 'whatsapp', 'email', 'sample', 'meeting'];
+var CONTACT_TYPES = ['visit', 'call', 'whatsapp', 'email', 'sample', 'samples', 'meeting'];
+var STOCK_REASONS = { receive: 'Received', salon: 'Salon order', sample: 'Sample', web: 'Website order', count: 'Stock count', damage: 'Damaged or lost', correction: 'Correction', undo: 'Undone', returned: 'Returned' };
 
 var TABLES = {
   salons: { sheet: 'Salons', key: 'id', head: ['id','name','owner','phone','whatsapp','instagram','email','emirate','area','address','lat','lng','mapsUrl','status','assignedTo','source','notes','createdAt','createdBy','updatedAt','lastContact','nextFollowup',
-    'priority','decisionMaker','decisionRole','chairs','staff','brandsUsed','priceTier','hours','tags','billingName','trn','paymentTerms','lostReason'] },
+    'priority','decisionMaker','decisionRole','chairs','staff','brandsUsed','priceTier','hours','tags','lostReason'] },
   acts: { sheet: 'Activities', key: 'id', head: ['id','salonId','type','note','lat','lng','distance','at','by','followupDate','done','outcome'] },
   samples: { sheet: 'Samples', key: 'id', head: ['id','salonId','activityId','product','qty','at','by','sku'] },
-  orders: { sheet: 'Orders', key: 'id', head: ['id','invoiceNo','salonId','status','orderDate','dueDate','confirmedAt','deliveredAt','subtotal','discountMode','discountPct','discount','deliveryMode','delivery','vatRate','vat','total','paid','notes','createdAt','createdBy','updatedAt'] },
-  items: { sheet: 'OrderItems', key: 'id', head: ['id','orderId','sku','product','qty','price','lineTotal'] },
-  payments: { sheet: 'Payments', key: 'id', head: ['id','orderId','amount','method','note','at','by'] },
-  products: { sheet: 'Products', key: 'sku', head: ['sku','code','name','category','price','active'] },
+  products: { sheet: 'Products', key: 'sku', head: ['sku','code','name','category','size','price','active','stock','lowAt','updatedAt'] },
+  moves: { sheet: 'StockMoves', key: 'id', head: ['id','sku','product','change','balance','reason','ref','salonId','note','at','by'] },
   settings: { sheet: 'Settings', key: 'key', head: ['key','value','help'] },
   users: { sheet: 'Users', key: 'email', head: ['email','name','role','pin','active'] }
 };
 
 var DEFAULT_SETTINGS = [
-  ['businessName', 'The Beauty Lab', 'Name printed on invoices'],
-  ['legalName', '', 'Trade licence name, if different'],
-  ['trn', '', 'Your VAT TRN. Leave empty to print a plain invoice'],
-  ['address', '', 'Address printed on invoices'],
-  ['phone', '', ''],
-  ['email', '', ''],
-  ['vatEnabled', 'yes', 'yes or no'],
-  ['vatRate', '5', 'Percent'],
-  ['minOrder', '500', 'Minimum order subtotal (AED)'],
-  ['tier1Amount', '2000', 'Subtotal for discount tier 1 (AED)'],
+  ['businessName', 'The Beauty Lab', 'Your business name in WhatsApp messages'],
+  ['minOrder', '500', 'Salon minimum order (AED), used in the price list message'],
+  ['tier1Amount', '2000', 'Discount tier 1 from (AED)'],
   ['tier1Pct', '10', 'Tier 1 discount %'],
-  ['tier2Amount', '5000', 'Subtotal for discount tier 2 (AED)'],
+  ['tier2Amount', '5000', 'Discount tier 2 from (AED)'],
   ['tier2Pct', '15', 'Tier 2 discount %'],
-  ['deliveryFee', '35', 'Flat delivery fee (AED)'],
-  ['freeDeliveryOver', '', 'Free delivery from this amount. Empty = always charge'],
-  ['invoicePrefix', 'INV-', 'Invoice number prefix'],
-  ['invoiceStart', '1', 'First invoice number'],
-  ['paymentTermsDays', '0', 'Default days to pay. 0 = on delivery'],
-  ['bankDetails', '', 'Bank / IBAN printed on invoices'],
-  ['invoiceFooter', 'Thank you for your business.', ''],
+  ['deliveryFee', '35', 'Delivery fee (AED)'],
+  ['lowStock', '3', 'Warn when stock is at or below this, unless a product has its own level'],
+  ['appUrl', '', 'Link to the installed app, used in login messages to the team'],
+  ['catalogUrl', 'https://beautylabuae.com/products.json', 'Website product list used by Sync with website'],
   ['cadenceLead', '3', 'Days to next follow-up for a Lead'],
   ['cadenceSampled', '7', 'Days to next follow-up after samples'],
   ['cadenceFollowup', '5', 'Days to next follow-up for Follow-up status'],
-  ['cadenceCustomer', '30', 'Days after an order to check for reorder']
+  ['cadenceCustomer', '30', 'Days to check a customer for a reorder']
 ];
 
 /* ---------- small utils ---------- */
 function num(v) { var n = parseFloat(String(v === undefined || v === null ? '' : v).replace(/,/g, '')); return isNaN(n) ? 0 : n; }
 function r2(n) { return Math.round((Number(n) + Number.EPSILON) * 100) / 100; }
 function isTrue(v) { return v === true || /^(true|yes|y|1)$/i.test(String(v === undefined || v === null ? '' : v).trim()); }
+function isDone(v) { var s = String(v === undefined || v === null ? '' : v).trim(); return s !== '' && !/^(no|false|0)$/i.test(s); } /* accepts yes or a date */
+function blank(v) { return v === '' || v === undefined || v === null; }
 function nowISO() { return new Date().toISOString(); }
-function todayStr() { return new Date(Date.now() + 4 * 3600000).toISOString().slice(0, 10); } // UAE, no DST
+function todayStr() { return new Date(Date.now() + 4 * 3600000).toISOString().slice(0, 10); } /* UAE, no DST */
 function addDays(d, n) {
-  var t = new Date(String(d || todayStr()).slice(0, 10) + 'T00:00:00Z');
+  var t = new Date(String(d).slice(0, 10) + 'T12:00:00Z');
   t.setUTCDate(t.getUTCDate() + Number(n || 0));
   return t.toISOString().slice(0, 10);
 }
-function isOpenFu(a) { return !!a.followupDate && !isTrue(a.done); }
+function isOpenFu(a) { return !!a.followupDate && !isDone(a.done); }
 function fail(msg) { throw new Error(msg); }
 function pick(obj, head) { var o = {}; head.forEach(function (h) { if (obj[h] !== undefined) o[h] = obj[h]; }); return o; }
-function pubUser(u) { return { email: String(u.email).trim().toLowerCase(), name: u.name || String(u.email).split('@')[0], role: String(u.role || 'user').toLowerCase() }; }
-
+function isActive(r) { return blank(r.active) || isTrue(r.active); }
+function pubUser(u) { return { email: String(u.email).trim().toLowerCase(), name: u.name || String(u.email).split('@')[0], role: String(u.role || 'user').trim().toLowerCase() === 'admin' ? 'admin' : 'user' }; }
 function settingsObj(rows) {
   var s = {};
   DEFAULT_SETTINGS.forEach(function (d) { s[d[0]] = d[1]; });
   (rows || []).forEach(function (r) { if (r.key) s[String(r.key).trim()] = r.value === undefined || r.value === null ? '' : String(r.value); });
   return s;
 }
-
-/* ---------- money ---------- */
-function calcTotals(items, S, o) {
-  o = o || {};
-  var sub = 0;
-  (items || []).forEach(function (i) { sub += num(i.qty) * num(i.price); });
-  sub = r2(sub);
-  var t2 = num(S.tier2Amount), t1 = num(S.tier1Amount);
-  var tier = (t2 > 0 && sub >= t2) ? num(S.tier2Pct) : (t1 > 0 && sub >= t1) ? num(S.tier1Pct) : 0;
-  var pct = o.discountMode === 'manual' ? num(o.discountPct) : tier;
-  var discount = r2(sub * pct / 100), net = r2(sub - discount);
-  var fee = num(S.deliveryFee), freeOver = num(S.freeDeliveryOver);
-  var delivery = !(items || []).length ? 0
-    : o.deliveryMode === 'free' ? 0
-    : o.deliveryMode === 'manual' ? num(o.delivery)
-    : (freeOver > 0 && net >= freeOver ? 0 : fee);
-  var vatRate = isTrue(S.vatEnabled) ? num(S.vatRate) : 0;
-  var vat = r2((net + delivery) * vatRate / 100);
-  return { subtotal: sub, tierPct: tier, discountPct: pct, discount: discount, delivery: r2(delivery), vatRate: vatRate, vat: vat, total: r2(net + delivery + vat), belowMin: sub < num(S.minOrder) };
+function tracked(p) { return p && !blank(p.stock); }
+function lowLevel(p, S) { return blank(p.lowAt) ? num(S.lowStock) : num(p.lowAt); }
+function stockState(p, S) {
+  if (!tracked(p)) return 'uncounted';
+  var q = num(p.stock);
+  if (q <= 0) return 'out';
+  return q <= lowLevel(p, S) ? 'low' : 'ok';
 }
+function validPin(pin) { return /^[1-9]\d{3,5}$/.test(String(pin || '')); }
 
 /* ============================================================
  * Actions. They need a global DB with: uid(), all(t), upsert(t,obj), remove(t,pred)
@@ -293,7 +299,11 @@ function calcTotals(items, S, o) {
 function newTx() { return { upsert: {}, remove: {} }; }
 function put(tx, t, obj) { var row = DB.upsert(t, obj); (tx.upsert[t] = tx.upsert[t] || []).push(row); return row; }
 function drop(tx, t, pred) { var ids = DB.remove(t, pred); if (ids.length) tx.remove[t] = (tx.remove[t] || []).concat(ids); }
-function findRow(t, id) { var k = TABLES[t].key; return DB.all(t).filter(function (r) { return String(r[k]) === String(id); })[0]; }
+function findRow(t, id) {
+  var k = TABLES[t].key, want = String(id === undefined || id === null ? '' : id);
+  if (t === 'users') want = want.trim().toLowerCase();
+  return DB.all(t).filter(function (r) { var v = String(r[k]); if (t === 'users') v = v.trim().toLowerCase(); return v === want; })[0];
+}
 function S_() { return settingsObj(DB.all('settings')); }
 function isAdmin(me) { return me.role === 'admin'; }
 function needAdmin(me) { if (!isAdmin(me)) fail('Only an admin can do this.'); }
@@ -322,14 +332,40 @@ function cadenceFor(status, S) {
   return num({ 'Lead': S.cadenceLead, 'Sampled': S.cadenceSampled, 'Follow-up': S.cadenceFollowup, 'Customer': S.cadenceCustomer }[status] || S.cadenceFollowup) || 5;
 }
 
+/* ---------- stock ----------
+ * Products with an empty stock cell are "not counted yet": they are never blocked and nothing is deducted.
+ * The first Received or Stock count starts tracking them. */
+function stockMove(tx, me, sku, change, reason, x) {
+  x = x || {};
+  var p = findRow('products', sku);
+  if (!p) return null;
+  var isSet = reason === 'count';
+  if (!tracked(p) && !isSet && reason !== 'receive' && reason !== 'correction' && reason !== 'undo') return null;
+  var cur = tracked(p) ? num(p.stock) : 0;
+  var bal = isSet ? Math.round(num(x.count)) : cur + Math.round(change);
+  var diff = bal - cur;
+  if (isSet && tracked(p) && diff === 0) return null;
+  put(tx, 'products', { sku: p.sku, stock: bal, updatedAt: nowISO() });
+  return put(tx, 'moves', { id: DB.uid(), sku: p.sku, product: p.name, change: diff, balance: bal, reason: reason, ref: x.ref || '', salonId: x.salonId || '', note: x.note || '', at: nowISO(), by: me.email });
+}
+function linesOf(p) {
+  var out = {};
+  (p.lines || []).forEach(function (l) { if (l && l.sku && num(l.qty) > 0) out[l.sku] = (out[l.sku] || 0) + Math.round(num(l.qty)); });
+  return Object.keys(out).map(function (k) { return { sku: k, qty: out[k] }; });
+}
+
 var API = {
   bootstrap: function (me) {
+    var admin = isAdmin(me), users = DB.all('users').filter(function (u) { return u.email; });
+    var moves = admin ? DB.all('moves').slice(-600) : [];
     return {
       me: me,
-      users: DB.all('users').filter(function (u) { return u.email && (u.active === '' || u.active === undefined || isTrue(u.active)); }).map(pubUser),
+      users: users.filter(isActive).map(pubUser),
+      names: users.reduce(function (o, u) { o[String(u.email).trim().toLowerCase()] = u.name || ''; return o; }, {}),
+      team: admin ? users.map(function (u) { var o = pubUser(u); o.active = isActive(u) ? 'yes' : 'no'; o.hasPin = !!String(u.pin || '').trim(); return o; }) : [],
       salons: DB.all('salons'), acts: DB.all('acts'), samples: DB.all('samples'),
-      orders: DB.all('orders'), items: DB.all('items'), payments: DB.all('payments'),
-      products: DB.all('products').filter(function (p) { return p.sku && (p.active === '' || p.active === undefined || isTrue(p.active)); }),
+      products: DB.all('products').filter(function (p) { return p.sku && (admin || isActive(p)); }),
+      moves: moves,
       settings: S_()
     };
   },
@@ -342,7 +378,7 @@ var API = {
     if ((!ex || s.name !== undefined) && !String(s.name || '').trim()) fail('Add the salon name.');
     var wantStatus = s.status;
     if (!ex) {
-      s.id = DB.uid(); s.createdAt = t; s.createdBy = me.email; s.status = 'Lead';
+      s.id = 'S-' + DB.uid().slice(0, 8); s.createdAt = t; s.createdBy = me.email; s.status = 'Lead';
       s.assignedTo = s.assignedTo || me.email;
       put(tx, 'salons', s);
       addAct(tx, me, s.id, { type: 'created', note: 'Salon added' });
@@ -360,12 +396,6 @@ var API = {
   deleteSalon: function (me, p) {
     needAdmin(me);
     var tx = newTx(), id = String(p.id);
-    var live = DB.all('orders').filter(function (o) { return String(o.salonId) === id && o.status !== 'Draft' && o.status !== 'Cancelled'; });
-    if (live.length) fail('This salon has invoices. Mark it Lost instead, so the invoices stay on record.');
-    var oids = DB.all('orders').filter(function (o) { return String(o.salonId) === id; }).map(function (o) { return String(o.id); });
-    drop(tx, 'items', function (r) { return oids.indexOf(String(r.orderId)) >= 0; });
-    drop(tx, 'payments', function (r) { return oids.indexOf(String(r.orderId)) >= 0; });
-    drop(tx, 'orders', function (r) { return String(r.salonId) === id; });
     drop(tx, 'samples', function (r) { return String(r.salonId) === id; });
     drop(tx, 'acts', function (r) { return String(r.salonId) === id; });
     drop(tx, 'salons', function (r) { return String(r.id) === id; });
@@ -376,11 +406,15 @@ var API = {
   logActivity: function (me, p) {
     var tx = newTx(), salon = findRow('salons', p.salonId);
     if (!salon) fail('Salon not found.');
-    var S = S_(), type = p.type || 'note';
+    var type = p.type || 'note';
     var lines = (p.samples || []).filter(function (x) { return x && x.product && num(x.qty) > 0; });
     if (type === 'note' && lines.length) type = 'sample';
     var act = addAct(tx, me, salon.id, { type: type, note: p.note || '', lat: p.lat || '', lng: p.lng || '', distance: p.distance === undefined ? '' : p.distance });
-    lines.forEach(function (x) { put(tx, 'samples', { id: DB.uid(), salonId: salon.id, activityId: act.id, product: x.product, sku: x.sku || '', qty: num(x.qty), at: act.at, by: me.email }); });
+    lines.forEach(function (x) {
+      var q = Math.round(num(x.qty));
+      put(tx, 'samples', { id: DB.uid(), salonId: salon.id, activityId: act.id, product: x.product, sku: x.sku || '', qty: q, at: act.at, by: me.email });
+      if (x.sku) stockMove(tx, me, x.sku, -q, 'sample', { ref: act.id, salonId: salon.id, note: salon.name });
+    });
     if (lines.length && (salon.status === 'Lead' || !salon.status)) changeStatus(tx, me, salon, 'Sampled');
     if (p.followupDate) addAct(tx, me, salon.id, { type: 'followup', note: p.followupNote || '', followupDate: p.followupDate });
     var patch = {};
@@ -417,6 +451,7 @@ var API = {
   snoozeFollowup: function (me, p) {
     var tx = newTx(), fu = findRow('acts', p.id);
     if (!fu) fail('Follow-up not found.');
+    if (!p.date) fail('Pick a date.');
     put(tx, 'acts', { id: fu.id, followupDate: p.date });
     refreshSalon(tx, fu.salonId);
     return tx;
@@ -427,122 +462,104 @@ var API = {
     if (!a) fail('Not found.');
     if (!isAdmin(me) && a.by !== me.email) fail('You can only delete your own entries.');
     var tx = newTx();
+    /* put back any stock this entry took */
+    DB.all('moves').filter(function (m) { return String(m.ref) === String(a.id) && m.reason === 'sample'; }).forEach(function (m) {
+      stockMove(tx, me, m.sku, -num(m.change), 'undo', { ref: a.id, salonId: a.salonId, note: 'Samples entry deleted' });
+    });
     drop(tx, 'samples', function (r) { return String(r.activityId) === String(a.id); });
     drop(tx, 'acts', function (r) { return String(r.id) === String(a.id); });
     refreshSalon(tx, a.salonId);
     return tx;
   },
 
-  saveOrder: function (me, p) {
-    var tx = newTx(), S = S_(), o = pick(p.order || {}, TABLES.orders.head), t = nowISO();
-    var salon = findRow('salons', o.salonId);
-    if (!salon) fail('Pick a salon for this order.');
-    var lines = (p.items || []).filter(function (i) { return i && String(i.product || '').trim() && num(i.qty) > 0; });
-    if (!lines.length) fail('Add at least one product.');
-    var ex = o.id ? findRow('orders', o.id) : null;
-    if (ex && (ex.status === 'Delivered' || ex.status === 'Cancelled') && !isAdmin(me)) fail('Only an admin can edit a ' + ex.status.toLowerCase() + ' order.');
-    var prev = ex ? ex.status : '';
-    if (!ex) { o.id = DB.uid(); o.createdAt = t; o.createdBy = me.email; o.invoiceNo = ''; }
-    else { o.invoiceNo = ex.invoiceNo; o.createdAt = ex.createdAt; o.createdBy = ex.createdBy; }
-    o.status = o.status || (ex ? ex.status : 'Draft');
-    o.orderDate = String(o.orderDate || todayStr()).slice(0, 10);
-    var terms = String(salon.paymentTerms || '').trim() !== '' ? num(salon.paymentTerms) : num(S.paymentTermsDays);
-    if (!o.dueDate) o.dueDate = addDays(o.orderDate, terms);
-    var T = calcTotals(lines, S, o);
-    o.subtotal = T.subtotal; o.discountPct = T.discountPct; o.discount = T.discount; o.delivery = T.delivery; o.vatRate = T.vatRate; o.vat = T.vat; o.total = T.total;
-    o.discountMode = o.discountMode === 'manual' ? 'manual' : 'auto';
-    o.deliveryMode = ['free', 'manual'].indexOf(o.deliveryMode) >= 0 ? o.deliveryMode : 'auto';
-    o.updatedAt = t;
-    drop(tx, 'items', function (r) { return String(r.orderId) === String(o.id); });
-    lines.forEach(function (i) { put(tx, 'items', { id: DB.uid(), orderId: o.id, sku: i.sku || '', product: String(i.product).trim(), qty: num(i.qty), price: r2(num(i.price)), lineTotal: r2(num(i.qty) * num(i.price)) }); });
-    o.paid = paidFor(o.id);
-    put(tx, 'orders', o);
-    afterStatus(tx, me, findRow('orders', o.id), prev, S);
-    return tx;
-  },
-
-  setOrderStatus: function (me, p) {
-    var tx = newTx(), S = S_(), o = findRow('orders', p.id);
-    if (!o) fail('Order not found.');
-    var allowed = ['Draft', 'Confirmed', 'Delivered', 'Cancelled'];
-    if (allowed.indexOf(p.status) < 0) fail('Unknown status.');
-    if ((o.status === 'Delivered' || o.status === 'Cancelled') && !isAdmin(me)) fail('Only an admin can change a ' + o.status.toLowerCase() + ' order.');
-    if (p.status === 'Draft' && o.invoiceNo && !isAdmin(me)) fail('This order already has an invoice number. Cancel it instead.');
-    var prev = o.status;
-    put(tx, 'orders', { id: o.id, status: p.status, updatedAt: nowISO() });
-    afterStatus(tx, me, findRow('orders', o.id), prev, S);
-    return tx;
-  },
-
-  addPayment: function (me, p) {
-    var tx = newTx(), o = findRow('orders', p.orderId);
-    if (!o) fail('Order not found.');
-    if (num(p.amount) <= 0) fail('Enter the amount received.');
-    var pay = put(tx, 'payments', { id: DB.uid(), orderId: o.id, amount: r2(num(p.amount)), method: p.method || 'Cash', note: p.note || '', at: p.date ? p.date + 'T12:00:00.000Z' : nowISO(), by: me.email });
-    var paid = paidFor(o.id);
-    put(tx, 'orders', { id: o.id, paid: paid, updatedAt: nowISO() });
-    addAct(tx, me, o.salonId, { type: 'payment', note: 'AED ' + r2(num(pay.amount)).toFixed(2) + ' received (' + pay.method + ') for ' + (o.invoiceNo || 'draft order') });
-    refreshSalon(tx, o.salonId);
-    return tx;
-  },
-
-  deletePayment: function (me, p) {
+  /* ---------- stock (admin) ---------- */
+  stockAdjust: function (me, p) {
     needAdmin(me);
-    var tx = newTx(), pay = findRow('payments', p.id);
-    if (!pay) fail('Payment not found.');
-    drop(tx, 'payments', function (r) { return String(r.id) === String(pay.id); });
-    put(tx, 'orders', { id: pay.orderId, paid: paidFor(pay.orderId), updatedAt: nowISO() });
+    var tx = newTx(), prod = findRow('products', p.sku);
+    if (!prod) fail('Product not found.');
+    var q = Math.round(num(p.qty)), reason = STOCK_REASONS[p.reason] ? p.reason : 'correction';
+    if (p.mode === 'set') { if (q < 0) fail('The count cannot be below zero.'); stockMove(tx, me, prod.sku, 0, 'count', { count: q, note: p.note || '' }); }
+    else {
+      if (q <= 0) fail('Enter how many.');
+      var change = p.mode === 'remove' ? -q : q;
+      if (!tracked(prod) && change < 0) fail('Count this product first, then remove stock.');
+      stockMove(tx, me, prod.sku, change, reason, { note: p.note || '', salonId: p.salonId || '', ref: p.ref || '' });
+      if (p.salonId && reason === 'salon') { var s = findRow('salons', p.salonId); if (s) addAct(tx, me, s.id, { type: 'delivery', note: q + ' × ' + prod.name + ' delivered' + (p.ref ? ' (' + p.ref + ')' : '') }); }
+    }
     return tx;
   },
 
-  deleteOrder: function (me, p) {
-    var o = findRow('orders', p.id);
-    if (!o) fail('Order not found.');
-    if (o.status !== 'Draft') needAdmin(me);
-    var tx = newTx();
-    drop(tx, 'items', function (r) { return String(r.orderId) === String(o.id); });
-    drop(tx, 'payments', function (r) { return String(r.orderId) === String(o.id); });
-    drop(tx, 'orders', function (r) { return String(r.id) === String(o.id); });
+  /* many products at once. kind: receive | salon | count */
+  stockBatch: function (me, p) {
+    needAdmin(me);
+    var tx = newTx(), kind = p.kind, lines = kind === 'count' ? (p.lines || []).filter(function (l) { return l && l.sku && l.qty !== '' && l.qty !== undefined && num(l.qty) >= 0; }) : linesOf(p);
+    if (!lines.length) fail('Add at least one product.');
+    var salon = p.salonId ? findRow('salons', p.salonId) : null;
+    if (kind === 'salon' && !salon) fail('Choose the salon.');
+    var short = [];
+    lines.forEach(function (l) {
+      var prod = findRow('products', l.sku);
+      if (!prod) return;
+      if (kind === 'count') stockMove(tx, me, prod.sku, 0, 'count', { count: num(l.qty), note: p.note || '' });
+      else if (kind === 'receive') stockMove(tx, me, prod.sku, num(l.qty), 'receive', { ref: p.ref || '', note: p.note || '' });
+      else if (kind === 'salon') {
+        if (tracked(prod) && num(prod.stock) < num(l.qty)) short.push(prod.name);
+        stockMove(tx, me, prod.sku, -num(l.qty), 'salon', { ref: p.ref || '', salonId: salon.id, note: p.note || salon.name });
+      }
+    });
+    if (kind === 'salon') {
+      var units = lines.reduce(function (a, l) { return a + num(l.qty); }, 0);
+      addAct(tx, me, salon.id, { type: 'delivery', note: units + ' units delivered' + (p.ref ? ' (' + p.ref + ')' : '') + (short.length ? '. Stock went below zero for ' + short.join(', ') : '') });
+      if (salon.status !== 'Customer') changeStatus(tx, me, salon, 'Customer', 'first delivery');
+      refreshSalon(tx, salon.id, { lastContact: nowISO() });
+    }
     return tx;
+  },
+
+  saveProduct: function (me, p) {
+    needAdmin(me);
+    var tx = newTx(), x = pick(p.product || {}, ['sku', 'code', 'name', 'category', 'size', 'price', 'active', 'lowAt']);
+    x.sku = String(x.sku || '').trim();
+    if (!x.sku) fail('Add a SKU.');
+    var ex = findRow('products', x.sku);
+    if (!ex && !String(x.name || '').trim()) fail('Add the product name.');
+    if (p.isNew && ex) fail('This SKU already exists.');
+    if (x.lowAt !== undefined && x.lowAt !== '' && num(x.lowAt) < 0) fail('Low stock level cannot be negative.');
+    x.updatedAt = nowISO();
+    if (!ex) { x.active = x.active || 'yes'; x.stock = ''; }
+    put(tx, 'products', x);
+    return tx;
+  },
+
+  /* ---------- team ---------- */
+  saveUser: function (me, p) {
+    needAdmin(me);
+    var tx = newTx(), u = p.user || {}, email = String(u.email || '').trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) fail('Enter a valid email.');
+    var ex = findRow('users', email);
+    if (p.isNew && ex) fail('This person is already in the team.');
+    var row = { email: email };
+    if (u.name !== undefined) row.name = String(u.name).trim();
+    if (u.role !== undefined) row.role = u.role === 'admin' ? 'admin' : 'user';
+    if (u.active !== undefined) row.active = isTrue(u.active) ? 'yes' : 'no';
+    if (u.pin) { if (!validPin(u.pin)) fail('PIN must be 4 to 6 digits and not start with 0.'); row.pin = String(u.pin); }
+    if (!ex) { if (!row.name) fail('Add their name.'); if (!row.pin) fail('Set a PIN.'); row.role = row.role || 'user'; row.active = row.active || 'yes'; }
+    if (ex && email === me.email && (row.role === 'user' || row.active === 'no')) fail('You cannot remove your own admin access.');
+    var admins = DB.all('users').filter(function (x) { return isActive(x) && pubUser(x).role === 'admin' && String(x.email).trim().toLowerCase() !== email; });
+    if (ex && pubUser(ex).role === 'admin' && (row.role === 'user' || row.active === 'no') && !admins.length) fail('The team needs at least one admin.');
+    var saved = put(tx, 'users', row);
+    var o = pubUser(saved); o.active = isActive(saved) ? 'yes' : 'no'; o.hasPin = !!String(saved.pin || '').trim();
+    return { upsert: { team: [o] }, remove: {} };
+  },
+
+  changePin: function (me, p) {
+    var u = findRow('users', me.email);
+    if (!u || String(u.pin).trim() !== String(p.oldPin || '').trim()) fail('Your current PIN is not correct.');
+    if (!validPin(p.newPin)) fail('New PIN must be 4 to 6 digits and not start with 0.');
+    put(newTx(), 'users', { email: u.email, pin: String(p.newPin) });
+    return newTx();
   }
 };
-
-function paidFor(orderId) {
-  var s = 0;
-  DB.all('payments').forEach(function (p) { if (String(p.orderId) === String(orderId)) s += num(p.amount); });
-  return r2(s);
-}
-function nextInvoiceNo(S) {
-  var pre = S.invoicePrefix || 'INV-', max = num(S.invoiceStart) - 1;
-  DB.all('orders').forEach(function (o) {
-    var n = String(o.invoiceNo || '');
-    if (n.indexOf(pre) === 0) { var v = parseInt(n.slice(pre.length), 10); if (!isNaN(v) && v > max) max = v; }
-  });
-  var next = String(max + 1);
-  while (next.length < 4) next = '0' + next;
-  return pre + next;
-}
-function afterStatus(tx, me, o, prev, S) {
-  var live = o.status === 'Confirmed' || o.status === 'Delivered';
-  var patch = {};
-  if (live && !o.invoiceNo) { o.invoiceNo = nextInvoiceNo(S); patch.invoiceNo = o.invoiceNo; }
-  if (live && !o.confirmedAt) patch.confirmedAt = nowISO();
-  if (o.status === 'Delivered' && !o.deliveredAt) patch.deliveredAt = nowISO();
-  if (Object.keys(patch).length) { patch.id = o.id; put(tx, 'orders', patch); }
-  if (prev === o.status) return;
-  var label = o.invoiceNo || 'Draft order';
-  var money = 'AED ' + num(o.total).toFixed(2);
-  if (o.status === 'Confirmed' || (o.status === 'Delivered' && prev !== 'Confirmed')) {
-    addAct(tx, me, o.salonId, { type: 'order', note: label + ' confirmed, ' + money });
-    var salon = findRow('salons', o.salonId);
-    if (salon && salon.status !== 'Customer') changeStatus(tx, me, salon, 'Customer', 'first order ' + label);
-    var hasOpen = DB.all('acts').some(function (a) { return String(a.salonId) === String(o.salonId) && isOpenFu(a); });
-    if (!hasOpen) addAct(tx, me, o.salonId, { type: 'followup', note: 'Reorder check after ' + label, followupDate: addDays(todayStr(), cadenceFor('Customer', S)) });
-  }
-  if (o.status === 'Delivered') addAct(tx, me, o.salonId, { type: 'delivery', note: label + ' delivered' });
-  if (o.status === 'Cancelled') addAct(tx, me, o.salonId, { type: 'order', note: label + ' cancelled' });
-  refreshSalon(tx, o.salonId, CONTACT_TYPES.indexOf('order') >= 0 ? { lastContact: nowISO() } : null);
-}
 
 </script>
 <script>
@@ -556,13 +573,12 @@ const LS = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
   del(k) { try { localStorage.removeItem(k); } catch (e) {} }
 };
-const KEYS = { salons: 'id', acts: 'id', samples: 'id', orders: 'id', items: 'id', payments: 'id', products: 'sku' };
-let S = { me: null, users: [], salons: [], acts: [], samples: [], orders: [], items: [], payments: [], products: [], settings: {} };
+const KEYS = { salons: 'id', acts: 'id', samples: 'id', products: 'sku', moves: 'id', team: 'email' };
+let S = { me: null, users: [], names: {}, team: [], salons: [], acts: [], samples: [], products: [], moves: [], settings: {} };
 let X = {}; // indexes
 let token = LS.get('tbl_token', null);
 let nav = { tab: 'today', stack: [] };
-let ui = { q: '', status: 'All', mine: false, sort: 'next', fuSeg: 'late', fuMine: false, oFilter: 'All', salonTab: 'timeline', oq: '' };
-let ED = null; // order being edited
+let ui = { q: '', status: 'All', mine: false, sort: 'next', fuSeg: 'late', fuMine: false, salonTab: 'timeline', sq: '', sf: 'All', scat: 'All', ccat: '' };
 
 /* ---------- helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -580,7 +596,8 @@ const P = {
   clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2', trash: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13', cash: 'M3 7h18v10H3zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
   truck: 'M3 6h11v10H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0',
   refresh: 'M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7', flag: 'M5 21V4h11l-2 4 2 4H5', star: 'M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z',
-  copy: 'M8 8h12v12H8zM4 16V4h12'
+  copy: 'M8 8h12v12H8zM4 16V4h12', minus: 'M5 12h14', box: 'M3 7.5 12 3l9 4.5v9L12 21l-9-4.5zM3 7.5l9 4.5 9-4.5M12 12v9',
+  arrowIn: 'M12 3v12M7 10l5 5 5-5M4 19h16', list: 'M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01', key: 'M14 10a4 4 0 1 0-3.9 4.9L9 16H7v2H5v2H3v-3l6.1-6.1A4 4 0 0 0 14 10zM16 8h.01'
 };
 const ic = (n, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg>`;
 const money = (n, dec = 2) => 'AED ' + Number(num(n)).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
@@ -597,7 +614,7 @@ function rel(s) {
   if (n < 0) return (-n) + ' days late'; if (n < 7) return 'In ' + n + ' days'; return fmtD(s);
 }
 function ago(iso) { if (!iso) return 'Never'; const n = daysBetween(iso, today()); return n <= 0 ? 'Today' : n === 1 ? 'Yesterday' : n + ' days ago'; }
-const uName = e => { const u = S.users.find(u => u.email === String(e || '').toLowerCase()); return u ? u.name : (e ? String(e).split('@')[0] : ''); };
+const uName = e => { const k = String(e || '').toLowerCase(), u = S.users.find(u => u.email === k); return u ? u.name : (S.names && S.names[k]) || (e ? String(e).split('@')[0] : ''); };
 const first = n => String(n || '').split(' ')[0];
 const isAdminMe = () => S.me && S.me.role === 'admin';
 function waNum(p) { let d = String(p || '').replace(/\D/g, ''); if (!d) return ''; if (d.startsWith('00')) d = d.slice(2); if (d.startsWith('0')) d = '971' + d.slice(1); else if (d.length === 9 && d.startsWith('5')) d = '971' + d; return d; }
@@ -607,37 +624,284 @@ function greet() { const h = new Date().getHours(); return h < 12 ? 'Good mornin
 
 /* ---------- indexes ---------- */
 function reindex() {
-  X = { salon: {}, acts: {}, samplesBySalon: {}, samplesByAct: {}, orders: {}, items: {}, pays: {}, order: {}, prod: {} };
+  X = { salon: {}, acts: {}, samplesBySalon: {}, samplesByAct: {}, prod: {}, moves: {} };
   S.salons.forEach(s => X.salon[s.id] = s);
   S.acts.forEach(a => (X.acts[a.salonId] = X.acts[a.salonId] || []).push(a));
   S.samples.forEach(x => { (X.samplesBySalon[x.salonId] = X.samplesBySalon[x.salonId] || []).push(x); (X.samplesByAct[x.activityId] = X.samplesByAct[x.activityId] || []).push(x); });
-  S.orders.forEach(o => { X.order[o.id] = o; (X.orders[o.salonId] = X.orders[o.salonId] || []).push(o); });
-  S.items.forEach(i => (X.items[i.orderId] = X.items[i.orderId] || []).push(i));
-  S.payments.forEach(p => (X.pays[p.orderId] = X.pays[p.orderId] || []).push(p));
   S.products.forEach(p => X.prod[p.sku] = p);
+  S.moves.forEach(m => (X.moves[m.sku] = X.moves[m.sku] || []).push(m));
   Object.values(X.acts).forEach(l => l.sort((a, b) => String(b.at).localeCompare(String(a.at))));
-}
-const liveOrder = o => o.status === 'Confirmed' || o.status === 'Delivered';
-const balance = o => r2(num(o.total) - num(o.paid));
-function payState(o) {
-  if (o.status === 'Draft') return { t: 'Draft', c: '' };
-  if (o.status === 'Cancelled') return { t: 'Cancelled', c: '' };
-  if (balance(o) <= 0.01) return { t: 'Paid', c: 'ok' };
-  const late = o.dueDate && localDate(o.dueDate) < today();
-  if (num(o.paid) > 0) return { t: late ? 'Part paid, overdue' : 'Part paid', c: late ? 'bad' : 'warn' };
-  return { t: late ? 'Overdue' : 'Unpaid', c: late ? 'bad' : 'warn' };
-}
-function salonNums(id) {
-  const os = (X.orders[id] || []).filter(liveOrder);
-  return {
-    ltv: r2(os.reduce((a, o) => a + num(o.total), 0)), due: r2(os.reduce((a, o) => a + Math.max(0, balance(o)), 0)), count: os.length,
-    last: os.map(o => o.orderDate).sort().pop() || '', samples: (X.samplesBySalon[id] || []).reduce((a, x) => a + num(x.qty), 0)
-  };
+  Object.values(X.moves).forEach(l => l.sort((a, b) => String(a.at).localeCompare(String(b.at))));
 }
 function openFus(filterMine) {
   return S.acts.filter(a => isOpenFu(a) && X.salon[a.salonId] && (!filterMine || (X.salon[a.salonId].assignedTo || a.by) === S.me.email))
     .sort((a, b) => String(a.followupDate).localeCompare(String(b.followupDate)));
 }
+/* ===== v3 views and helpers (inserted) ===== */
+function salonNums(id) {
+  const acts = X.acts[id] || [];
+  return { samples: (X.samplesBySalon[id] || []).reduce((a, x) => a + num(x.qty), 0), visits: acts.filter(a => a.type === 'visit').length, touches: acts.filter(a => CONTACT_TYPES.includes(a.type)).length };
+}
+const STK = { ok: ['ok', 'In stock'], low: ['warn', 'Low'], out: ['bad', 'Out'], uncounted: ['', 'Not counted'] };
+const stk = p => stockState(p, S.settings);
+const stkPill = p => { const s = stk(p), [c, l] = STK[s]; return `<span class="pill ${c} qty">${s === 'uncounted' ? l : num(p.stock) + (s === 'ok' ? '' : ' · ' + l.toLowerCase())}</span>`; };
+
+function vToday() {
+  const t = today(), mo = t.slice(0, 7);
+  const fus = openFus(false), due = fus.filter(a => fuBucket(a) !== 'next'), late = due.filter(a => fuBucket(a) === 'late');
+  const mActs = S.acts.filter(a => localDate(a.at).slice(0, 7) === mo);
+  const visits = mActs.filter(a => a.type === 'visit').length;
+  const samp = S.samples.filter(x => localDate(x.at).slice(0, 7) === mo).reduce((a, x) => a + num(x.qty), 0);
+  const newSalons = S.salons.filter(s => localDate(s.createdAt).slice(0, 7) === mo).length;
+  const customers = S.salons.filter(s => s.status === 'Customer').length;
+  const counts = STATUSES.map(s => [s, S.salons.filter(x => (x.status || 'Lead') === s).length]);
+  const total = S.salons.length || 1;
+  const sv = { Lead: 'var(--s-lead)', Sampled: 'var(--s-sampled)', 'Follow-up': 'var(--s-follow)', Customer: 'var(--s-customer)', Lost: 'var(--s-lost)' };
+  const act = S.products.filter(p => isActive(p));
+  const low = act.filter(p => ['low', 'out'].includes(stk(p)));
+  return `${rootTop(`<button class="ib" data-a="refresh" aria-label="Refresh">${ic('refresh')}</button>`)}<div class="wrap">
+  <div class="hello"><h1>${greet()}, ${esc(first(S.me.name))}</h1><p class="muted">${fmtD(t, true)}${DEMO ? ' <span class="pill wine">Demo data</span>' : ''}</p></div>
+  <button class="focus" data-a="tab" data-id="followups"><div class="n">${due.length}</div><div class="x">${due.length === 1 ? 'follow-up needs you today' : 'follow-ups need you today'}${late.length ? `<br><b>${late.length} overdue</b>` : due.length ? '' : '<br>You are all caught up'}</div></button>
+  ${isAdminMe() && low.length ? `<button class="card alert" data-a="stockFilter" data-id="low"><div style="display:flex;align-items:center;gap:12px">${ic('box')}<div style="flex:1;text-align:left"><b>${low.length} product${low.length === 1 ? '' : 's'} low or out of stock</b><div class="small muted">${esc(low.slice(0, 3).map(p => p.name).join(', '))}${low.length > 3 ? '…' : ''}</div></div>${ic('back', 'flip')}</div></button>` : ''}
+  <div class="block"><div class="stats">
+    <div class="stat"><div class="v">${visits}</div><div class="l">Visits this month</div></div>
+    <div class="stat"><div class="v">${samp}</div><div class="l">Samples given this month</div></div>
+    <div class="stat"><div class="v">${newSalons}</div><div class="l">New salons this month</div></div>
+    <div class="stat"><div class="v">${customers}</div><div class="l">Customers</div></div>
+  </div></div>
+  ${due.length ? `<div class="sec"><h2>Due now</h2><button class="link" data-a="tab" data-id="followups">See all</button></div><div class="block">${due.slice(0, 6).map(fuRow).join('')}</div>` : ''}
+  <div class="sec"><h2>Pipeline</h2><button class="link" data-a="tab" data-id="salons">${S.salons.length} salons</button></div>
+  <div class="block"><div class="pipe">${counts.filter(c => c[1]).map(([s, n]) => `<span style="width:${n / total * 100}%;background:${sv[s]}"></span>`).join('')}</div>
+  <div class="legend">${counts.map(([s, n]) => `<button data-a="filterStatus" data-id="${s}"><span class="sw" data-s="${s}"></span>${s} <b>${n}</b></button>`).join('')}</div></div>
+  ${teamBlock(mo)}
+  <div class="sec"><h2>Latest activity</h2></div>
+  <div class="block">${S.acts.filter(a => a.type !== 'followup' || isDone(a.done)).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 6).map(a => actRow(a, true)).join('') || '<div class="empty"><b>Nothing logged yet</b>Visits, calls and samples show up here.</div>'}</div>
+  </div>`;
+}
+function teamBlock(mo) {
+  if (S.users.length < 2) return '';
+  const rows = S.users.map(u => {
+    const acts = S.acts.filter(a => a.by === u.email && localDate(a.at).slice(0, 7) === mo);
+    return { u, visits: acts.filter(a => a.type === 'visit').length, touches: acts.filter(a => ['call', 'whatsapp', 'email', 'meeting'].includes(a.type)).length, added: acts.filter(a => a.type === 'created').length, samples: S.samples.filter(x => x.by === u.email && localDate(x.at).slice(0, 7) === mo).reduce((a, x) => a + num(x.qty), 0) };
+  }).sort((a, b) => (b.visits + b.touches + b.added) - (a.visits + a.touches + a.added));
+  return `<div class="sec"><h2>Team this month</h2></div><div class="block">${rows.map(r => `<div class="row" style="cursor:default"><div class="main"><div class="t">${esc(r.u.name)}</div><div class="s">${r.visits} visits, ${r.touches} calls and messages, ${r.added} new salons</div></div><div class="end"><b>${r.samples}</b><div class="tiny muted">samples</div></div></div>`).join('')}</div>`;
+}
+function salonSamples(s) {
+  const l = (X.samplesBySalon[s.id] || []).slice().sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  const by = {}; l.forEach(x => { const k = x.product; by[k] = (by[k] || 0) + num(x.qty); });
+  const top = Object.entries(by).sort((a, b) => b[1] - a[1]);
+  return `<div class="block">${top.map(([n, q]) => `<div class="row" style="cursor:default"><div class="main"><div class="t" style="font-weight:500">${esc(n)}</div></div><b>${q}</b></div>`).join('') || '<div class="empty"><b>No samples yet</b>Tap Samples above when you leave products with them.</div>'}</div>
+  ${l.length ? `<p class="small muted" style="margin:0 2px">Last samples ${ago(l[0].at).toLowerCase()} by ${esc(uName(l[0].by))}</p>` : ''}`;
+}
+
+/* ---------- STOCK ---------- */
+function stockList() {
+  const q = ui.sq.trim().toLowerCase();
+  return S.products.filter(p => (ui.sf === 'inactive' ? !isActive(p) : isActive(p)) && (ui.scat === 'All' || p.category === ui.scat) &&
+    (ui.sf === 'All' || ui.sf === 'inactive' || (ui.sf === 'low' ? ['low', 'out'].includes(stk(p)) : stk(p) === ui.sf)) &&
+    (!q || [p.name, p.code, p.sku, p.category].join(' ').toLowerCase().includes(q)));
+}
+function vStock() {
+  if (!isAdminMe()) return vToday();
+  const act = S.products.filter(isActive), cnt = k => act.filter(p => stk(p) === k).length;
+  const units = act.reduce((a, p) => a + (tracked(p) ? Math.max(0, num(p.stock)) : 0), 0);
+  const value = act.reduce((a, p) => a + (tracked(p) ? Math.max(0, num(p.stock)) * num(p.price) : 0), 0);
+  const cats = ['All', ...new Set(S.products.map(p => p.category).filter(Boolean))];
+  const l = stockList();
+  return `${rootTop(`<button class="ib" data-a="syncProducts" aria-label="Sync products with the website">${ic('refresh')}</button><button class="ib" data-a="go" data-id="moves" aria-label="Stock history">${ic('clock')}</button>`)}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 12px">Stock</h1>
+  <div class="block"><div class="stats">
+    <div class="stat"><div class="v">${units.toLocaleString('en-US')}</div><div class="l">Units on the shelf</div></div>
+    <div class="stat"><div class="v">${money0(value)}</div><div class="l">Shelf value at shop prices</div></div>
+  </div></div>
+  <div class="qa">
+    <button class="qbtn" data-a="batch" data-id="receive">${ic('arrowIn')}<b>Receive</b><span>New shipment</span></button>
+    <button class="qbtn" data-a="batch" data-id="salon">${ic('truck')}<b>Salon order</b><span>Stock out</span></button>
+    <button class="qbtn" data-a="go" data-id="count">${ic('list')}<b>Count</b><span>Stock take</span></button>
+  </div>
+  <div class="search">${ic('search')}<input id="stq" data-in="stq" placeholder="Shade code, name or SKU" value="${esc(ui.sq)}" autocomplete="off"></div>
+  <div class="chips">${[['All', 'All', act.length], ['low', 'Low or out', cnt('low') + cnt('out')], ['out', 'Out', cnt('out')], ['uncounted', 'Not counted', cnt('uncounted')], ['inactive', 'Hidden', S.products.length - act.length]].filter(([k, , n]) => n || k === 'All' || k === ui.sf).map(([k, lb, n]) => `<button class="chip ${ui.sf === k ? 'on' : ''}" data-a="stockFilter" data-id="${k}">${lb} <span class="muted">${n}</span></button>`).join('')}</div>
+  <div class="chips">${cats.map(c => `<button class="chip ${ui.scat === c ? 'on' : ''}" data-a="stockCat" data-id="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+  <div id="slist">${stockRows(l)}</div>
+  <p class="small muted" style="margin:14px 2px 0">New products come from the website. After a website update, tap ${ic('refresh', 'inl')} at the top to bring them in.</p></div>`;
+}
+function stockRows(l) {
+  if (!l.length) return `<div class="block"><div class="empty"><b>No products match</b>Try another search or filter.</div></div>`;
+  const shown = l.slice(0, 150);
+  return `<p class="small muted" style="margin:0 2px">${l.length} product${l.length === 1 ? '' : 's'}${l.length > shown.length ? ', showing first ' + shown.length + '. Search to narrow down.' : ''}</p><div class="block">${shown.map(p => `<button class="row" data-a="openProduct" data-id="${esc(p.sku)}"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${esc([p.size, p.sku].filter(Boolean).join(', '))}</div></div><div class="end">${stkPill(p)}</div></button>`).join('')}</div>`;
+}
+function vProduct(v) {
+  const p = X.prod[v.id];
+  if (!p) return topbar('Product') + '<div class="wrap"><div class="empty"><b>Product not found</b></div></div>';
+  const mv = (X.moves[p.sku] || []).slice().reverse();
+  const st = stk(p);
+  return `${topbar('', `<button class="ib" data-a="editProduct" data-id="${esc(p.sku)}" aria-label="Edit product">${ic('edit')}</button>`)}<div class="wrap" style="padding-top:0">
+  <div class="hero"><div style="min-width:0"><h1>${esc(p.name)}</h1><div class="small muted">${esc([p.category, p.size, p.sku, p.price !== '' ? money(p.price) : ''].filter(Boolean).join(', '))}</div>${isActive(p) ? '' : '<span class="pill" style="margin-top:8px">Hidden from the shop</span>'}</div></div>
+  <div class="card stockbig ${STK[st][0]}"><div class="n">${st === 'uncounted' ? '?' : num(p.stock)}</div><div><b>${st === 'uncounted' ? 'Not counted yet' : st === 'out' ? 'Out of stock' : st === 'low' ? 'Running low' : 'In stock'}</b><div class="small muted">${st === 'uncounted' ? 'The shop keeps selling it until you count it.' : 'Low stock alert at ' + lowLevel(p, S.settings)}</div></div></div>
+  <div class="actions three">
+    <button class="act" data-a="adjust" data-id="${esc(p.sku)}" data-m="add">${ic('plus')}Add</button>
+    <button class="act" data-a="adjust" data-id="${esc(p.sku)}" data-m="remove">${ic('minus')}Remove</button>
+    <button class="act" data-a="adjust" data-id="${esc(p.sku)}" data-m="set">${ic('list')}Set count</button>
+  </div>
+  <div class="sec"><h2>History</h2></div>
+  <div class="block">${mv.map(m => moveRow(m)).join('') || '<div class="empty"><b>No movements yet</b>Receiving, samples, salon orders and website sales will show here.</div>'}</div></div>`;
+}
+function moveRow(m, withName) {
+  const c = num(m.change), s = X.salon[m.salonId];
+  const who = m.by === 'website' ? 'Website' : uName(m.by);
+  return `<div class="row" style="cursor:default"><div class="main"><div class="t" style="font-weight:500">${withName ? esc(m.product) : esc(STOCK_REASONS[m.reason] || m.reason)}</div><div class="s">${withName ? esc(STOCK_REASONS[m.reason] || m.reason) + ', ' : ''}${s ? esc(s.name) + ', ' : ''}${m.ref && !String(m.ref).startsWith('web:') && m.reason !== 'sample' && m.reason !== 'undo' ? esc(m.ref) + ', ' : ''}${esc(who)}, ${fmtDT(m.at)}${m.note && !s ? '<br>' + esc(m.note) : ''}</div></div><div class="end"><b class="${c < 0 ? 'neg' : 'pos'}">${c > 0 ? '+' : ''}${c}</b><div class="tiny muted">left ${num(m.balance)}</div></div></div>`;
+}
+function vMoves() {
+  const l = S.moves.slice().sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 200);
+  return `${topbar('Stock history')}<div class="wrap" style="padding-top:0"><div class="block">${l.map(m => moveRow(m, true)).join('') || '<div class="empty"><b>Nothing yet</b></div>'}</div></div>`;
+}
+/* receive or salon order: pick many products */
+let BT = null;
+function vBatch() {
+  const salon = BT.salonId ? X.salon[BT.salonId] : null, units = BT.lines.reduce((a, l) => a + num(l.qty), 0);
+  return `${topbar(BT.kind === 'receive' ? 'Receive stock' : 'Salon order, stock out')}<div class="wrap" style="padding-top:0">
+  ${BT.kind === 'salon' ? `<button class="card pickc" data-a="batchSalon">${salon ? `<span class="sw" data-s="${esc(salon.status || 'Lead')}"></span><b>${esc(salon.name)}</b>` : `${ic('store')}<b>Choose the salon</b>`}<span class="muted small" style="margin-left:auto">Change</span></button>` : ''}
+  <label class="f"><span>${BT.kind === 'receive' ? 'Supplier invoice or shipment no.' : 'Zoho invoice no.'}</span><input id="bref" data-in="bref" value="${esc(BT.ref)}" placeholder="Optional"></label>
+  <div class="search">${ic('search')}<input id="bq" data-in="bq" placeholder="Add products: shade code, name or SKU" autocomplete="off"></div><div id="b-results"></div>
+  <div class="sec"><h2>${BT.lines.length} product${BT.lines.length === 1 ? '' : 's'}, ${units} unit${units === 1 ? '' : 's'}</h2></div>
+  <div class="block"><div id="b-lines" style="padding:4px 16px">${batchLines()}</div></div>
+  <label class="f"><span>Note</span><input id="bnote" data-in="bnote" value="${esc(BT.note)}" placeholder="Optional"></label>
+  <button class="btn block" data-a="batchSave">${ic('check')}${BT.kind === 'receive' ? 'Add to stock' : 'Take out of stock'}</button></div>`;
+}
+function batchLines() {
+  return BT.lines.map((l, i) => { const p = X.prod[l.sku] || {}; const short = BT.kind === 'salon' && tracked(p) && num(p.stock) < num(l.qty); return `<div class="line"><div class="nm">${esc(p.name || l.sku)}<div class="tiny ${short ? 'neg' : 'muted'}">${tracked(p) ? 'On shelf ' + num(p.stock) : 'Not counted'}${short ? ', not enough' : ''}</div></div><div class="step"><button data-a="bqty" data-id="${i}" data-d="-1" aria-label="Less">−</button><input type="number" inputmode="numeric" value="${l.qty}" data-bl="${i}" aria-label="Quantity"><button data-a="bqty" data-id="${i}" data-d="1" aria-label="More">+</button></div></div>`; }).join('') || '<div class="empty" style="padding:16px 4px">Search above and tap products to add them.</div>';
+}
+function bPaint() {
+  const R = $('#b-results'); if (!R) return;
+  const q = BT.q.trim().toLowerCase();
+  if (!q) { R.innerHTML = ''; return; }
+  const hits = S.products.filter(p => isActive(p) && [p.sku, p.code, p.name, p.category].join(' ').toLowerCase().includes(q)).slice(0, 20);
+  R.innerHTML = `<div class="results">${hits.map(p => `<button class="row" data-a="bAdd" data-id="${esc(p.sku)}"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${esc(p.sku)}</div></div>${stkPill(p)}</button>`).join('') || '<div class="empty">No product found</div>'}</div>`;
+}
+/* stock take, one category at a time */
+function vCount() {
+  const cats = [...new Set(S.products.map(p => p.category).filter(Boolean))];
+  if (!ui.ccat) ui.ccat = cats[0] || '';
+  const l = S.products.filter(p => isActive(p) && p.category === ui.ccat);
+  const changed = Object.keys(CNT).length;
+  return `${topbar('Stock count')}<div class="wrap" style="padding-top:0">
+  <p class="small muted" style="margin:0 2px 10px">Count what is on the shelf and type the number. Leave a box empty to skip it. Only the boxes you fill are saved.</p>
+  <div class="chips">${cats.map(c => `<button class="chip ${ui.ccat === c ? 'on' : ''}" data-a="countCat" data-id="${esc(c)}">${esc(c)}</button>`).join('')}</div>
+  <div class="block">${l.map(p => `<label class="crow"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${tracked(p) ? 'Now ' + num(p.stock) : 'Not counted'}</div></div><input type="number" inputmode="numeric" min="0" data-cnt="${esc(p.sku)}" value="${CNT[p.sku] !== undefined ? esc(CNT[p.sku]) : ''}" placeholder="${tracked(p) ? num(p.stock) : '–'}" aria-label="Count for ${esc(p.name)}"></label>`).join('')}</div>
+  <div class="stickyb"><button class="btn block" data-a="countSave" id="cntbtn">${ic('check')}Save ${changed} count${changed === 1 ? '' : 's'}</button></div></div>`;
+}
+let CNT = {};
+function adjustSheet(sku, mode) {
+  const p = X.prod[sku];
+  const reasons = mode === 'add' ? [['receive', 'Received'], ['returned', 'Returned'], ['correction', 'Correction']] : [['salon', 'Salon order'], ['damage', 'Damaged or lost'], ['correction', 'Correction']];
+  openSheet(mode === 'set' ? 'Set the count' : mode === 'add' ? 'Add stock' : 'Remove stock', `<p class="muted" style="margin:0 0 12px">${esc(p.name)}, ${tracked(p) ? 'on shelf now ' + num(p.stock) : 'not counted yet'}</p>
+  ${fld(mode === 'set' ? 'Units on the shelf' : 'How many', 'qty', '', 'type="number" inputmode="numeric" min="0" autofocus')}
+  ${mode === 'set' ? '' : optChips('reason', reasons, reasons[0][0])}
+  ${mode === 'remove' ? sel('Salon, if it went to one', 'salonId', [['', 'None'], ...S.salons.filter(x => x.status !== 'Lost').sort((a, b) => String(a.name).localeCompare(String(b.name))).map(x => [x.id, x.name])], '') : ''}
+  ${mode === 'set' ? '' : fld('Reference', 'ref', '', 'placeholder="Invoice or shipment no., optional"')}
+  ${fld('Note', 'note', '', 'placeholder="Optional"')}`,
+  `<button class="btn block" data-a="adjustSave" data-id="${esc(sku)}" data-m="${mode}">${ic('check')}Save</button>`);
+}
+function productForm(p) {
+  const n = !p; p = p || { active: 'yes' };
+  const cats = [...new Set(S.products.map(x => x.category).filter(Boolean))];
+  openSheet(n ? 'New product' : 'Edit product', `
+  ${fld('SKU', 'sku', p.sku, 'readonly')}
+  ${fld('Name', 'name', p.name)}
+  <div class="grid2">${fld('Shade code', 'code', p.code)}${fld('Size', 'size', p.size, 'placeholder="6 ml"')}</div>
+  <label class="f"><span>Category</span><input name="category" list="pcats" value="${esc(p.category)}"><datalist id="pcats">${cats.map(c => `<option>${esc(c)}</option>`).join('')}</datalist></label>
+  <div class="grid2">${fld('Shop price (AED)', 'price', p.price, 'type="number" inputmode="decimal" step="0.01"')}${fld('Low stock alert at', 'lowAt', p.lowAt, 'type="number" inputmode="numeric" placeholder="Default ' + esc(S.settings.lowStock) + '"')}</div>
+  <label class="tog"><input type="checkbox" name="active" ${isActive(p) ? 'checked' : ''}><span>Show in the shop and in sample lists</span></label>
+  <p class="small muted">Name and price follow the website on the next sync. Use this for the low stock alert and to hide a product.</p>`,
+  `<button class="btn block" data-a="saveProduct" data-new="${n ? 1 : ''}">${ic('check')}${n ? 'Add product' : 'Save'}</button>`);
+}
+
+/* ---------- TEAM ---------- */
+function vTeam() {
+  const l = S.team.slice().sort((a, b) => (a.active === b.active ? 0 : a.active === 'yes' ? -1 : 1) || String(a.name).localeCompare(String(b.name)));
+  return `${topbar('Team')}<div class="wrap" style="padding-top:0">
+  <div class="block">${l.map(u => `<button class="row" data-a="editUser" data-id="${esc(u.email)}"><div class="av">${esc(String(u.name || u.email).slice(0, 1).toUpperCase())}</div><div class="main"><div class="t">${esc(u.name)}${u.email === S.me.email ? ' <span class="muted small">(you)</span>' : ''}</div><div class="s">${esc(u.email)}</div></div><div class="end"><span class="pill ${u.role === 'admin' ? 'wine' : ''}">${u.role === 'admin' ? 'Admin' : 'Sales'}</span>${u.active === 'yes' ? '' : '<br><span class="pill tiny">Off</span>'}</div></button>`).join('')}</div>
+  <p class="small muted" style="margin:0 2px">Admins manage stock and the team. Sales users see salons, follow-ups and samples.</p>
+  <button class="btn fab" data-a="newUser">${ic('plus')}Add person</button></div>`;
+}
+const newPin = () => String(1000 + Math.floor(Math.random() * 9000));
+function userForm(u) {
+  const n = !u; u = u || { role: 'user', active: 'yes' };
+  openSheet(n ? 'Add a person' : 'Edit ' + first(u.name), `
+  ${fld('Name', 'name', u.name)}
+  ${fld('Email', 'email', u.email, n ? 'type="email" autocapitalize="off" inputmode="email"' : 'readonly')}
+  <div class="small muted" style="margin-bottom:6px">Role</div>
+  ${optChips('role', [['user', 'Sales'], ['admin', 'Admin']], u.role)}
+  ${fld(n ? 'PIN for their first login' : 'New PIN (leave empty to keep)', 'pin', n ? newPin() : '', 'inputmode="numeric" maxlength="6"')}
+  ${n ? '' : `<label class="tog"><input type="checkbox" name="active" ${u.active === 'yes' ? 'checked' : ''}><span>Can sign in</span></label>`}`,
+  `<button class="btn block" data-a="saveUser" data-new="${n ? 1 : ''}">${ic('check')}${n ? 'Add and send login' : 'Save'}</button>`);
+}
+function pinSheet() {
+  openSheet('Change my PIN', `${fld('Current PIN', 'oldPin', '', 'type="password" inputmode="numeric" maxlength="6"')}${fld('New PIN, 4 to 6 digits', 'newPin', '', 'type="password" inputmode="numeric" maxlength="6"')}`,
+  `<button class="btn block" data-a="pinSave">${ic('key')}Change PIN</button>`);
+}
+function loginText(name, email, pin) {
+  const url = S.settings.appUrl || location.href.split('#')[0];
+  return `Hi ${first(name)}, here is your JOIA Sales app login.\n\n1. Open ${url}\n2. iPhone: Safari > Share > Add to Home Screen. Android: Chrome > ⋮ > Install app\n3. Sign in with:\nEmail: ${email}\nPIN: ${pin}\n\nChange your PIN under More once you are in.`;
+}
+
+function vMore() {
+  const adm = isAdminMe();
+  return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 16px">More</h1>
+  <div class="block"><div class="row" style="cursor:default"><div class="av">${esc(String(S.me.name || '?').slice(0, 1).toUpperCase())}</div><div class="main"><div class="t">${esc(S.me.name)}</div><div class="s">${esc(S.me.email)}, ${adm ? 'admin' : 'sales'}</div></div></div></div>
+  <div class="block">
+    ${adm ? `<button class="row" data-a="go" data-id="team">${ic('user')}<div class="main"><div class="t">Team</div><div class="s">Add people, roles, PINs</div></div></button>
+    <button class="row" data-a="go" data-id="moves">${ic('clock')}<div class="main"><div class="t">Stock history</div><div class="s">Every unit in and out</div></div></button>` : ''}
+    <button class="row" data-a="go" data-id="reports">${ic('star')}<div class="main"><div class="t">Reports</div><div class="s">Activity by person, sample results, top products</div></div></button>
+    <button class="row" data-a="pinSheet">${ic('key')}<div class="main"><div class="t">Change my PIN</div></div></button>
+    <button class="row" data-a="refresh">${ic('refresh')}<div class="main"><div class="t">Refresh data</div><div class="s">Pull the latest from the team</div></div></button>
+    <button class="row" data-a="installHelp">${ic('share')}<div class="main"><div class="t">Install on your phone</div><div class="s">Add to home screen for the full app</div></div></button>
+  </div>
+  ${adm ? `<p class="small muted" style="margin:0 2px 14px">Message templates, discount tiers and follow-up timing live in the Settings tab of the Google Sheet.</p>` : ''}
+  ${DEMO ? `<button class="btn ghost block" data-a="resetDemo">Reset demo data</button>` : `<button class="btn ghost block" data-a="signOut">Sign out</button>`}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">JOIA Sales ${APP_VERSION}, The Beauty Lab</p></div>`;
+}
+function vReports() {
+  const t = today(), mo = t.slice(0, 7);
+  const per = S.users.map(u => {
+    const acts = S.acts.filter(a => a.by === u.email && localDate(a.at).slice(0, 7) === mo);
+    return { n: u.name, visits: acts.filter(a => a.type === 'visit').length, touch: acts.filter(a => ['call', 'whatsapp', 'email', 'meeting'].includes(a.type)).length, added: acts.filter(a => a.type === 'created').length, fu: acts.filter(a => a.type === 'followup').length, samples: S.samples.filter(x => x.by === u.email && localDate(x.at).slice(0, 7) === mo).reduce((a, x) => a + num(x.qty), 0) };
+  });
+  const sampled = new Set(S.samples.map(x => x.salonId).filter(id => X.salon[id]));
+  const conv = [...sampled].filter(id => X.salon[id].status === 'Customer').length;
+  const lost = [...sampled].filter(id => X.salon[id].status === 'Lost').length;
+  const byP = {}; S.samples.forEach(x => { byP[x.product] = (byP[x.product] || 0) + num(x.qty); });
+  const topP = Object.entries(byP).sort((a, b) => b[1] - a[1]).slice(0, 10), maxP = topP.length ? topP[0][1] : 1;
+  const reasons = {}; S.salons.filter(s => s.status === 'Lost' && s.lostReason).forEach(s => reasons[s.lostReason] = (reasons[s.lostReason] || 0) + 1);
+  return `${topbar('Reports')}<div class="wrap" style="padding-top:0">
+  <div class="sec"><h2>This month by person</h2></div><div class="block">${per.map(r => `<div class="row" style="cursor:default"><div class="main"><div class="t">${esc(r.n)}</div><div class="s">${r.visits} visits, ${r.touch} calls and messages, ${r.added} new salons, ${r.samples} samples</div></div></div>`).join('')}</div>
+  <div class="sec"><h2>Samples that turned into customers</h2></div><div class="card"><span class="disp" style="font-size:28px;font-weight:700">${sampled.size ? Math.round(conv / sampled.size * 100) : 0}%</span> <span class="muted">${conv} of ${sampled.size} sampled salons are customers${lost ? ', ' + lost + ' lost' : ''}</span></div>
+  <div class="sec"><h2>Most sampled products</h2></div><div class="block">${topP.map(([n, q]) => `<div class="row" style="cursor:default;display:block"><div style="display:flex;justify-content:space-between;gap:10px"><span class="t" style="font-weight:600">${esc(n)}</span><span class="small">${q}</span></div><div class="bar2"><span style="width:${q / maxP * 100}%"></span></div></div>`).join('') || '<div class="empty">No samples yet</div>'}</div>
+  ${Object.keys(reasons).length ? `<div class="sec"><h2>Why salons said no</h2></div><div class="block">${Object.entries(reasons).sort((a, b) => b[1] - a[1]).map(([r, n]) => `<div class="row" style="cursor:default"><div class="main"><div class="t" style="font-weight:500">${esc(r)}</div></div><b>${n}</b></div>`).join('')}</div>` : ''}
+  </div>`;
+}
+function render() {
+  const app = $('#app');
+  if (!S.me) { app.innerHTML = loginView(); return; }
+  reindex();
+  const v = view();
+  const fns = { today: vToday, salons: vSalons, followups: vFollowups, stock: vStock, more: vMore, salon: vSalon, product: vProduct, moves: vMoves, batch: vBatch, count: vCount, team: vTeam, reports: vReports };
+  const isRoot = !nav.stack.length;
+  let html = (fns[v.v] || vToday)(v);
+  const late = openFus(false).filter(a => fuBucket(a) !== 'next').length;
+  const lowN = isAdminMe() ? S.products.filter(p => isActive(p) && stk(p) === 'out').length : 0;
+  const tabs = [['today', 'home', 'Today'], ['salons', 'store', 'Salons'], ['followups', 'bell', 'Follow-ups', late]];
+  if (isAdminMe()) tabs.push(['stock', 'box', 'Stock', lowN]);
+  tabs.push(['more', 'menu', 'More']);
+  if (!['batch', 'count'].includes(v.v)) html += `<div class="tabbar"><nav>${tabs.map(([k, i, l, b]) => `<button data-a="tab" data-id="${k}" class="${nav.tab === k && isRoot ? 'on' : ''}" aria-label="${l}">${ic(i)}${l}${b ? `<span class="badge">${b}</span>` : ''}</button>`).join('')}</nav></div>`;
+  app.innerHTML = html;
+}
+function loginView() {
+  return `<div class="login"><div class="brand"><img src="joia-logo-white.png" alt="JOIA Vegan"></div><h1>JOIA Sales</h1><p class="muted" style="margin:0 0 28px">The Beauty Lab team app. Sign in with the email and PIN your admin sent you.</p>
+  <label class="f"><span>Email</span><input id="lg-email" type="email" autocomplete="username" inputmode="email" autocapitalize="off" value="${esc(LS.get('tbl_last_email', ''))}"></label>
+  <label class="f"><span>PIN</span><input id="lg-pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="6"></label>
+  <button class="btn block" data-a="login">Sign in</button><p class="tiny muted" style="text-align:center;margin-top:16px">Forgot your PIN? Ask your admin to reset it.</p></div>`;
+}
+
 const fuBucket = a => { const d = localDate(a.followupDate), t = today(); return d < t ? 'late' : d === t ? 'today' : 'next'; };
 
 /* ---------- API ---------- */
@@ -692,85 +956,25 @@ function popView() { if (!nav.stack.length) return; nav.stack.pop(); if (!DEMO) 
 function tab(t) { nav = { tab: t, stack: [] }; render(); window.scrollTo(0, 0); }
 window.addEventListener('popstate', () => { if (ignorePop) { ignorePop = false; return; } if ($('.sheet')) closeSheet(true); else if (nav.stack.length) { nav.stack.pop(); render(); window.scrollTo(0, 0); } });
 /* ---------- rendering ---------- */
-function render() {
-  const app = $('#app');
-  if (!S.me) { app.innerHTML = loginView(); return; }
-  reindex();
-  const v = view();
-  const fns = { today: vToday, salons: vSalons, followups: vFollowups, orders: vOrders, more: vMore, salon: vSalon, order: vOrder, orderEdit: vOrderEdit, invoice: vInvoice, reports: vReports };
-  const isRoot = !nav.stack.length;
-  let html = (fns[v.v] || vToday)(v);
-  const late = openFus(false).filter(a => fuBucket(a) !== 'next').length;
-  if (v.v !== 'orderEdit' && v.v !== 'invoice') html += `<div class="tabbar"><nav>${[
-    ['today', 'home', 'Today'], ['salons', 'store', 'Salons'], ['followups', 'bell', 'Follow-ups', late], ['orders', 'receipt', 'Orders'], ['more', 'menu', 'More']
-  ].map(([k, i, l, b]) => `<button data-a="tab" data-id="${k}" class="${nav.tab === k && isRoot ? 'on' : ''}" aria-label="${l}">${ic(i)}${l}${b ? `<span class="badge">${b}</span>` : ''}</button>`).join('')}</nav></div>`;
-  app.innerHTML = html;
-  if (v.v === 'orderEdit') edPaint();
-}
 const topbar = (title, right = '') => `<div class="topbar"><button class="ib" data-a="back" aria-label="Back">${ic('back')}</button><div class="title">${esc(title)}</div>${right}</div>`;
 const rootTop = right => `<div class="topbar" style="padding-bottom:0"><div class="title"></div>${right || ''}</div>`;
 
-function loginView() {
-  return `<div class="login"><div class="sw big" data-s="Sampled"></div><h1>Salon Sales</h1><p class="muted" style="margin:0 0 28px">The Beauty Lab team app. Sign in with the email and PIN your admin gave you.</p>
-  <label class="f"><span>Email</span><input id="lg-email" type="email" autocomplete="username" inputmode="email" value="${esc(LS.get('tbl_last_email', ''))}"></label>
-  <label class="f"><span>PIN</span><input id="lg-pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8"></label>
-  <button class="btn block" data-a="login">Sign in</button></div>`;
-}
-
-/* TODAY */
-function vToday() {
-  const t = today(), mo = t.slice(0, 7);
-  const fus = openFus(false), due = fus.filter(a => fuBucket(a) !== 'next'), late = due.filter(a => fuBucket(a) === 'late');
-  const mOrders = S.orders.filter(o => liveOrder(o) && localDate(o.orderDate).slice(0, 7) === mo);
-  const rev = mOrders.reduce((a, o) => a + num(o.total), 0);
-  const outstanding = S.orders.filter(liveOrder).reduce((a, o) => a + Math.max(0, balance(o)), 0);
-  const samp = S.samples.filter(x => localDate(x.at).slice(0, 7) === mo).reduce((a, x) => a + num(x.qty), 0);
-  const counts = STATUSES.map(s => [s, S.salons.filter(x => (x.status || 'Lead') === s).length]);
-  const total = S.salons.length || 1;
-  const sv = { Lead: 'var(--s-lead)', Sampled: 'var(--s-sampled)', 'Follow-up': 'var(--s-follow)', Customer: 'var(--s-customer)', Lost: 'var(--s-lost)' };
-  return `${rootTop(`<button class="ib" data-a="refresh" aria-label="Refresh">${ic('refresh')}</button>`)}<div class="wrap">
-  <div class="hello"><h1>${greet()}, ${esc(first(S.me.name))}</h1><p class="muted">${fmtD(t, true)}${DEMO ? ' <span class="pill wine">Demo data</span>' : ''}</p></div>
-  <button class="focus" data-a="tab" data-id="followups"><div class="n">${due.length}</div><div class="x">${due.length === 1 ? 'follow-up needs you today' : 'follow-ups need you today'}${late.length ? `<br><b>${late.length} overdue</b>` : due.length ? '' : '<br>You are all caught up'}</div></button>
-  <div class="block"><div class="stats">
-    <div class="stat"><div class="v">${money0(rev)}</div><div class="l">Sales this month</div></div>
-    <div class="stat"><div class="v">${money0(outstanding)}</div><div class="l">Waiting to be paid</div></div>
-    <div class="stat"><div class="v">${mOrders.length}</div><div class="l">Orders this month</div></div>
-    <div class="stat"><div class="v">${samp}</div><div class="l">Samples given this month</div></div>
-  </div></div>
-  ${due.length ? `<div class="sec"><h2>Due now</h2><button class="link" data-a="tab" data-id="followups">See all</button></div><div class="block">${due.slice(0, 6).map(fuRow).join('')}</div>` : ''}
-  <div class="sec"><h2>Pipeline</h2><button class="link" data-a="tab" data-id="salons">${S.salons.length} salons</button></div>
-  <div class="block"><div class="pipe">${counts.filter(c => c[1]).map(([s, n]) => `<span style="width:${n / total * 100}%;background:${sv[s]}"></span>`).join('')}</div>
-  <div class="legend">${counts.map(([s, n]) => `<button data-a="filterStatus" data-id="${s}"><span class="sw" data-s="${s}"></span>${s} <b>${n}</b></button>`).join('')}</div></div>
-  ${teamBlock(mo)}
-  <div class="sec"><h2>Latest activity</h2></div>
-  <div class="block">${S.acts.filter(a => a.type !== 'followup' || isTrue(a.done)).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 6).map(a => actRow(a, true)).join('') || '<div class="empty"><b>Nothing logged yet</b>Visits, calls and orders show up here.</div>'}</div>
-  </div>`;
-}
-function teamBlock(mo) {
-  if (S.users.length < 2) return '';
-  const rows = S.users.map(u => {
-    const acts = S.acts.filter(a => a.by === u.email && localDate(a.at).slice(0, 7) === mo);
-    const rev = S.orders.filter(o => liveOrder(o) && o.createdBy === u.email && localDate(o.orderDate).slice(0, 7) === mo).reduce((a, o) => a + num(o.total), 0);
-    return { u, visits: acts.filter(a => a.type === 'visit').length, touches: acts.filter(a => ['call', 'whatsapp', 'email', 'meeting'].includes(a.type)).length, rev };
-  }).sort((a, b) => b.rev - a.rev || b.visits - a.visits);
-  return `<div class="sec"><h2>Team this month</h2></div><div class="block">${rows.map(r => `<div class="row" style="cursor:default"><div class="main"><div class="t">${esc(r.u.name)}</div><div class="s">${r.visits} visits, ${r.touches} calls and messages</div></div><div class="end"><b>${money0(r.rev)}</b></div></div>`).join('')}</div>`;
-}
 function fuRow(a) {
   const s = X.salon[a.salonId], b = fuBucket(a);
   return `<button class="row" data-a="fuOpen" data-id="${a.id}"><span class="sw" data-s="${esc(s.status || 'Lead')}"></span><div class="main"><div class="t">${esc(s.name)}</div><div class="s">${esc(a.note || 'Follow up')}${s.area ? ', ' + esc(s.area) : ''}</div></div><span class="pill ${b === 'late' ? 'bad' : b === 'today' ? 'warn' : ''}">${rel(a.followupDate)}</span></button>`;
 }
 const TYPE = {
   visit: ['pin', 'Visit'], call: ['phone', 'Call'], whatsapp: ['chat', 'WhatsApp'], email: ['note', 'Email'], meeting: ['user', 'Meeting'], note: ['note', 'Note'],
-  sample: ['gift', 'Samples'], followup: ['cal', 'Follow-up'], status: ['flag', 'Status'], order: ['cart', 'Order'], payment: ['cash', 'Payment'], delivery: ['truck', 'Delivery'], created: ['star', 'Added']
+  sample: ['gift', 'Samples'], samples: ['gift', 'Samples'], followup: ['cal', 'Follow-up'], status: ['flag', 'Status'], order: ['cart', 'Order'], payment: ['cash', 'Payment'], delivery: ['truck', 'Delivery'], created: ['star', 'Added']
 };
 function actRow(a, withSalon) {
   const [i, l] = TYPE[a.type] || ['note', a.type];
   const s = X.salon[a.salonId];
   const samples = X.samplesByAct[a.id] || [];
   let title = l;
-  if (a.type === 'followup') title = isTrue(a.done) ? 'Follow-up done' : 'Follow-up ' + rel(a.followupDate).toLowerCase();
+  if (a.type === 'followup') title = isDone(a.done) ? 'Follow-up done' : 'Follow-up ' + rel(a.followupDate).toLowerCase();
   if (a.type === 'visit' && a.distance !== '' && a.distance !== undefined) title += num(a.distance) <= 150 ? ', checked in at salon' : ', ' + num(a.distance) + ' m away';
-  const note = a.type === 'followup' && isTrue(a.done) ? (a.outcome || a.note) : a.note;
+  const note = a.type === 'followup' && isDone(a.done) ? (a.outcome || a.note) : a.note;
   return `<div class="row" ${withSalon && s ? `data-a="openSalon" data-id="${s.id}"` : 'style="cursor:default"'}><div class="tl" style="padding:0;flex:1;min-width:0"><div class="it" style="padding:0">
     <div class="dot">${ic(i)}</div><div class="body"><div><b>${esc(withSalon && s ? s.name : title)}</b></div>
     <div class="small muted">${withSalon ? esc(title) + ', ' : ''}${esc(uName(a.by))}, ${fmtDT(a.at)}</div>
@@ -785,7 +989,7 @@ function vSalons() {
   <div class="search">${ic('search')}<input id="q" data-in="q" placeholder="Search name, area, owner, phone" value="${esc(ui.q)}" autocomplete="off"></div>
   <div class="chips">${['All', ...STATUSES].map(s => `<button class="chip ${ui.status === s ? 'on' : ''}" data-a="setStatusFilter" data-id="${s}">${s === 'All' ? '' : `<span class="sw" data-s="${s}"></span>`}${s}</button>`).join('')}</div>
   <div class="chips"><button class="chip ${ui.mine ? 'on' : ''}" data-a="toggleMine">My salons</button>
-  ${[['next', 'Next follow-up'], ['recent', 'Recently contacted'], ['stale', 'Not contacted longest'], ['value', 'Highest sales'], ['name', 'A to Z']].map(([k, l]) => `<button class="chip ${ui.sort === k ? 'on' : ''}" data-a="setSort" data-id="${k}">${l}</button>`).join('')}</div>
+  ${[['next', 'Next follow-up'], ['recent', 'Recently contacted'], ['stale', 'Not contacted longest'], ['samples', 'Most samples'], ['name', 'A to Z']].map(([k, l]) => `<button class="chip ${ui.sort === k ? 'on' : ''}" data-a="setSort" data-id="${k}">${l}</button>`).join('')}</div>
   <div id="list">${salonList()}</div></div>
   <button class="btn fab" data-a="newSalon">${ic('plus')}Add salon</button>`;
 }
@@ -798,13 +1002,13 @@ function salonList() {
     next: (a, b) => (a.nextFollowup || '9999').localeCompare(b.nextFollowup || '9999'),
     recent: (a, b) => String(b.lastContact || '').localeCompare(String(a.lastContact || '')),
     stale: (a, b) => String(a.lastContact || '').localeCompare(String(b.lastContact || '')),
-    value: (a, b) => nums[b.id].ltv - nums[a.id].ltv, name: (a, b) => String(a.name).localeCompare(String(b.name))
+    samples: (a, b) => nums[b.id].samples - nums[a.id].samples, name: (a, b) => String(a.name).localeCompare(String(b.name))
   };
   l.sort(by[ui.sort] || by.next);
   if (!l.length) return `<div class="block"><div class="empty"><b>${S.salons.length ? 'No salons match' : 'No salons yet'}</b>${S.salons.length ? 'Try another search or filter.' : 'Add your first salon with the button below.'}</div></div>`;
   return `<p class="small muted" style="margin:0 2px">${l.length} salon${l.length === 1 ? '' : 's'}</p><div class="block">${l.map(s => {
     const n = nums[s.id], nf = s.nextFollowup ? localDate(s.nextFollowup) : '';
-    const tag = nf ? `<span class="pill ${nf < today() ? 'bad' : nf === today() ? 'warn' : ''}">${rel(nf)}</span>` : n.ltv ? `<b class="small">${money0(n.ltv)}</b>` : '';
+    const tag = nf ? `<span class="pill ${nf < today() ? 'bad' : nf === today() ? 'warn' : ''}">${rel(nf)}</span>` : n.samples ? `<span class="small muted">${n.samples} samples</span>` : '';
     return `<button class="row" data-a="openSalon" data-id="${s.id}"><span class="sw" data-s="${esc(s.status || 'Lead')}"></span><div class="main"><div class="t">${esc(s.name)}${s.priority === 'Hot' ? ' <span class="pill bad tiny">Hot</span>' : ''}</div><div class="s">${esc([s.area, s.emirate].filter(Boolean).join(', ') || 'No area')}, contacted ${ago(s.lastContact).toLowerCase()}</div></div><div class="end">${tag}</div></button>`;
   }).join('')}</div>`;
 }
@@ -816,36 +1020,31 @@ function vSalon(v) {
   const n = salonNums(s.id);
   const fus = (X.acts[s.id] || []).filter(isOpenFu).sort((a, b) => String(a.followupDate).localeCompare(String(b.followupDate)));
   const next = fus[0];
-  const tabs = [['timeline', 'Timeline'], ['orders', 'Orders' + (n.count ? ` (${(X.orders[s.id] || []).length})` : '')], ['profile', 'Profile']];
+  const tabs = [['timeline', 'Timeline'], ['samples', 'Samples' + (n.samples ? ` (${n.samples})` : '')], ['profile', 'Profile']];
   return `${topbar('', `<button class="ib" data-a="editSalon" data-id="${s.id}" aria-label="Edit salon">${ic('edit')}</button>`)}<div class="wrap" style="padding-top:0">
   <div class="hero"><span class="sw big" data-s="${esc(s.status || 'Lead')}"></span><div style="min-width:0"><h1>${esc(s.name)}</h1>
   <div class="small muted">${esc([s.area, s.emirate].filter(Boolean).join(', '))}${s.assignedTo ? `${s.area || s.emirate ? ', ' : ''}${esc(uName(s.assignedTo))}'s salon` : ''}</div>
   <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><button class="pill wine" data-a="statusSheet" data-id="${s.id}">${esc(s.status || 'Lead')} ${ic('edit', 'tiny').replace('class="i tiny"', 'class="i" style="width:13px;height:13px"')}</button>${s.priority ? `<span class="pill ${s.priority === 'Hot' ? 'bad' : s.priority === 'Warm' ? 'warn' : ''}">${esc(s.priority)}</span>` : ''}${s.priceTier ? `<span class="pill">${esc(s.priceTier)}</span>` : ''}</div></div></div>
   <div class="actions">
     ${actBtn('call', 'phone', 'Call')}${actBtn('wa', 'chat', 'WhatsApp')}${actBtn('directions', 'nav', 'Directions')}${actBtn('checkin', 'pin', 'Check in')}
-    ${actBtn('noteSheet', 'note', 'Note')}${actBtn('samplesSheet', 'gift', 'Samples')}${actBtn('fuSheet', 'cal', 'Follow-up')}${actBtn('newOrderFor', 'cart', 'New order')}
+    ${actBtn('noteSheet', 'note', 'Note')}${actBtn('samplesSheet', 'gift', 'Samples')}${actBtn('fuSheet', 'cal', 'Follow-up')}${actBtn('statusSheet', 'flag', 'Status')}
   </div>
   ${next ? `<div class="card ${fuBucket(next) === 'late' ? 'late' : fuBucket(next) === 'today' ? 'due' : ''}"><div style="display:flex;align-items:center;gap:10px"><div style="flex:1;min-width:0"><div class="small muted">Next follow-up${fus.length > 1 ? `, ${fus.length - 1} more open` : ''}</div><b>${rel(next.followupDate)}</b>${next.note ? ` <span class="muted">${esc(next.note)}</span>` : ''}</div><button class="btn sm" data-a="fuOpen" data-id="${next.id}">${ic('check')}Done</button></div></div>`
     : `<div class="card"><div style="display:flex;align-items:center;gap:10px"><div style="flex:1" class="muted">No follow-up planned</div><button class="btn sm line" data-a="fuSheet" data-id="${s.id}">Plan one</button></div></div>`}
   <div class="block"><div class="stats">
-    <div class="stat"><div class="v">${money0(n.ltv)}</div><div class="l">Total sales</div></div>
-    <div class="stat"><div class="v" style="${n.due > 0 ? 'color:var(--bad)' : ''}">${money0(n.due)}</div><div class="l">Waiting to be paid</div></div>
-    <div class="stat"><div class="v">${n.last ? ago(n.last) : 'None'}</div><div class="l">Last order</div></div>
+    <div class="stat"><div class="v">${n.visits}</div><div class="l">Visits</div></div>
     <div class="stat"><div class="v">${n.samples}</div><div class="l">Samples given</div></div>
+    <div class="stat"><div class="v">${s.lastContact ? ago(s.lastContact) : 'Never'}</div><div class="l">Last contact</div></div>
+    <div class="stat"><div class="v">${s.createdAt ? ago(s.createdAt) : '–'}</div><div class="l">Added</div></div>
   </div></div>
   <div class="seg">${tabs.map(([k, l]) => `<button class="${ui.salonTab === k ? 'on' : ''}" data-a="salonTab" data-id="${k}">${l}</button>`).join('')}</div>
-  ${ui.salonTab === 'orders' ? salonOrders(s) : ui.salonTab === 'profile' ? salonProfile(s) : salonTimeline(s)}
+  ${ui.salonTab === 'samples' ? salonSamples(s) : ui.salonTab === 'profile' ? salonProfile(s) : salonTimeline(s)}
   </div>`;
 }
 const actBtn = (a, i, l) => `<button class="act" data-a="${a}" data-id="${view().id}">${ic(i)}${l}</button>`;
 function salonTimeline(s) {
   const l = (X.acts[s.id] || []).filter(a => !isOpenFu(a));
   return `<div class="block">${l.map(a => actRow(a, false)).join('') || '<div class="empty"><b>No history yet</b>Check in, call or leave samples to start the timeline.</div>'}</div>`;
-}
-function salonOrders(s) {
-  const l = (X.orders[s.id] || []).slice().sort((a, b) => String(b.orderDate).localeCompare(String(a.orderDate)));
-  return `<div class="block">${l.map(orderRow).join('') || '<div class="empty"><b>No orders yet</b>Tap New order when the salon is ready to buy.</div>'}</div>
-  ${l.length ? `<button class="btn line block" data-a="newOrderFor" data-id="${s.id}">${ic('plus')}New order</button>` : ''}`;
 }
 function salonProfile(s) {
   const map = s.lat && s.lng && !DEMO ? `<iframe title="Map" loading="lazy" style="width:100%;height:200px;border:0;display:block" src="https://maps.google.com/maps?q=${encodeURIComponent(s.lat + ',' + s.lng)}&z=16&output=embed"></iframe>` : '';
@@ -858,8 +1057,7 @@ function salonProfile(s) {
     ${kv('Instagram', ig ? link('https://instagram.com/' + ig, '@' + ig) : '')}${kv('Email', s.email ? link('mailto:' + s.email, s.email) : '')}
     ${kv('Address', esc(s.address))}${kv('Hours', esc(s.hours))}
     ${kv('Chairs', esc(s.chairs))}${kv('Staff', esc(s.staff))}${kv('Brands they use', esc(s.brandsUsed))}${kv('Price level', esc(s.priceTier))}
-    ${kv('Tags', esc(s.tags))}${kv('Source', esc(s.source))}${kv('Billing name', esc(s.billingName))}${kv('TRN', esc(s.trn))}
-    ${kv('Payment terms', s.paymentTerms !== '' && s.paymentTerms !== undefined ? esc(s.paymentTerms) + ' days' : '')}${kv('Lost reason', esc(s.lostReason))}
+    ${kv('Tags', esc(s.tags))}${kv('Source', esc(s.source))}${kv('Lost reason', esc(s.lostReason))}
     ${kv('Added', esc(fmtD(s.createdAt, true) + (s.createdBy ? ' by ' + uName(s.createdBy) : '')))}
   </dl>${s.notes ? `<div style="padding:0 16px 16px;white-space:pre-wrap">${esc(s.notes)}</div>` : ''}</div>
   ${isAdminMe() ? `<button class="btn danger block" data-a="delSalon" data-id="${s.id}">${ic('trash')}Delete salon</button>` : ''}`;
@@ -869,7 +1067,7 @@ function salonProfile(s) {
 function vFollowups() {
   const all = openFus(ui.fuMine);
   const b = { late: all.filter(a => fuBucket(a) === 'late'), today: all.filter(a => fuBucket(a) === 'today'), next: all.filter(a => fuBucket(a) === 'next') };
-  const done = S.acts.filter(a => a.followupDate && isTrue(a.done) && X.salon[a.salonId]).sort((x, y) => String(y.at).localeCompare(String(x.at))).slice(0, 40);
+  const done = S.acts.filter(a => a.followupDate && isDone(a.done) && X.salon[a.salonId]).sort((x, y) => String(y.at).localeCompare(String(x.at))).slice(0, 40);
   const list = ui.fuSeg === 'done' ? done : b[ui.fuSeg];
   const stale = S.salons.filter(s => s.status !== 'Lost' && !s.nextFollowup && (!ui.fuMine || s.assignedTo === S.me.email));
   return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 10px">Follow-ups</h1>
@@ -883,203 +1081,6 @@ function vFollowups() {
 }
 
 /* ORDERS */
-function orderRow(o) {
-  const s = X.salon[o.salonId] || { name: 'Removed salon' }, ps = payState(o);
-  return `<button class="row" data-a="openOrder" data-id="${o.id}"><div class="main"><div class="t">${esc(s.name)}</div><div class="s">${esc(o.invoiceNo || 'Draft')}, ${fmtD(o.orderDate)}</div></div><div class="end"><b>${money(o.total)}</b><br><span class="pill ${ps.c} tiny">${ps.t}</span></div></button>`;
-}
-function vOrders() {
-  const t = today(), mo = t.slice(0, 7);
-  const f = {
-    All: () => true, Drafts: o => o.status === 'Draft', 'To deliver': o => o.status === 'Confirmed',
-    Unpaid: o => liveOrder(o) && balance(o) > 0.01, Overdue: o => liveOrder(o) && balance(o) > 0.01 && o.dueDate && localDate(o.dueDate) < t,
-    Paid: o => liveOrder(o) && balance(o) <= 0.01, Cancelled: o => o.status === 'Cancelled'
-  };
-  const q = ui.oq.trim().toLowerCase();
-  const l = S.orders.filter(f[ui.oFilter] || f.All).filter(o => !q || [o.invoiceNo, (X.salon[o.salonId] || {}).name].join(' ').toLowerCase().includes(q))
-    .sort((a, b) => String(b.orderDate).localeCompare(String(a.orderDate)) || String(b.createdAt).localeCompare(String(a.createdAt)));
-  const live = S.orders.filter(liveOrder);
-  const mRev = live.filter(o => localDate(o.orderDate).slice(0, 7) === mo).reduce((a, o) => a + num(o.total), 0);
-  const owed = live.reduce((a, o) => a + Math.max(0, balance(o)), 0);
-  const overdue = live.filter(f.Overdue).reduce((a, o) => a + balance(o), 0);
-  return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 12px">Orders</h1>
-  <div class="block"><div class="stats" style="grid-template-columns:1fr 1fr 1fr">
-  <div class="stat"><div class="v" style="font-size:16px">${money0(mRev)}</div><div class="l">This month</div></div>
-  <div class="stat"><div class="v" style="font-size:16px">${money0(owed)}</div><div class="l">To collect</div></div>
-  <div class="stat"><div class="v" style="font-size:16px;${overdue > 0 ? 'color:var(--bad)' : ''}">${money0(overdue)}</div><div class="l">Overdue</div></div></div></div>
-  <div class="search">${ic('search')}<input id="oq" data-in="oq" placeholder="Search salon or invoice number" value="${esc(ui.oq)}" autocomplete="off"></div>
-  <div class="chips">${Object.keys(f).map(k => `<button class="chip ${ui.oFilter === k ? 'on' : ''}" data-a="oFilter" data-id="${k}">${k}</button>`).join('')}</div>
-  <div id="olist"><div class="block">${l.map(orderRow).join('') || `<div class="empty"><b>No orders here</b>${S.orders.length ? 'Try another filter.' : 'Create the first order with the button below.'}</div>`}</div></div></div>
-  <button class="btn fab" data-a="newOrder">${ic('plus')}New order</button>`;
-}
-/* ORDER DETAIL */
-function vOrder(v) {
-  const o = X.order[v.id];
-  if (!o) return topbar('Order') + '<div class="wrap"><div class="empty"><b>This order was removed</b></div></div>';
-  const s = X.salon[o.salonId] || { name: 'Removed salon' }, items = X.items[o.id] || [], pays = (X.pays[o.id] || []).slice().sort((a, b) => String(a.at).localeCompare(String(b.at)));
-  const ps = payState(o), stepIdx = { Draft: 0, Confirmed: 1, Delivered: 2, Cancelled: -1 }[o.status];
-  const canEdit = o.status === 'Draft' || o.status === 'Confirmed' || isAdminMe();
-  let main = '';
-  if (o.status === 'Draft') main = `<button class="btn block" data-a="setOStatus" data-id="${o.id}" data-s="Confirmed">${ic('check')}Confirm order</button>`;
-  else if (o.status === 'Confirmed') main = `<button class="btn block" data-a="setOStatus" data-id="${o.id}" data-s="Delivered">${ic('truck')}Mark as delivered</button>`;
-  return `${topbar(o.invoiceNo || 'Draft order', canEdit && o.status !== 'Cancelled' ? `<button class="ib" data-a="editOrder" data-id="${o.id}" aria-label="Edit order">${ic('edit')}</button>` : '')}<div class="wrap" style="padding-top:0">
-  <button class="row" style="padding:6px 0 12px;background:none" data-a="openSalon" data-id="${s.id || ''}"><span class="sw" data-s="${esc(s.status || 'Lead')}"></span><div class="main"><div class="t" style="font-size:20px;font-family:'Bricolage Grotesque',system-ui,sans-serif">${esc(s.name)}</div><div class="s">Ordered ${fmtD(o.orderDate, true)} by ${esc(uName(o.createdBy))}</div></div></button>
-  ${stepIdx >= 0 ? `<div class="steps">${[0, 1, 2].map(i => `<div class="${i <= stepIdx ? 'on' : ''}"></div>`).join('')}</div><p class="small muted" style="margin:-8px 0 14px">${['Draft, not sent yet', 'Confirmed, waiting for delivery', 'Delivered' + (o.deliveredAt ? ' ' + fmtD(o.deliveredAt) : '')][stepIdx]}</p>` : '<p><span class="pill">Cancelled</span></p>'}
-  ${main}
-  <div class="block" style="margin-top:14px"><div style="padding:6px 16px">${items.map(i => `<div class="line"><div class="nm">${esc(i.product)}<div class="small muted">${esc(i.qty)} × ${money(i.price)}${i.sku ? ', ' + esc(i.sku) : ''}</div></div><b>${money(i.lineTotal)}</b></div>`).join('')}</div>
-  <div style="padding:12px 16px 16px;border-top:1px solid var(--line)">${totalsGrid(o)}</div></div>
-  ${liveOrder(o) ? `<div class="sec"><h2>Payment</h2><span class="pill ${ps.c}">${ps.t}</span></div>
-  <div class="block">${pays.map(p => `<div class="row" style="cursor:default"><div class="dot" style="width:32px;height:32px;border-radius:10px;background:var(--sunk);display:grid;place-items:center;color:var(--ok)">${ic('cash')}</div><div class="main"><div class="t">${money(p.amount)}</div><div class="s">${esc(p.method)}, ${fmtD(p.at)}, ${esc(uName(p.by))}${p.note ? ', ' + esc(p.note) : ''}</div></div>${isAdminMe() ? `<button class="ib" data-a="delPay" data-id="${p.id}" aria-label="Delete payment">${ic('trash')}</button>` : ''}</div>`).join('')}
-  <div class="row" style="cursor:default"><div class="main"><div class="t">${balance(o) > 0.01 ? 'Still to collect' : 'Fully paid'}</div><div class="s">${o.dueDate ? 'Due ' + fmtD(o.dueDate, true) : ''}</div></div><b style="${balance(o) > 0.01 ? 'color:var(--bad)' : 'color:var(--ok)'}">${money(Math.max(0, balance(o)))}</b></div></div>
-  ${balance(o) > 0.01 ? `<button class="btn line block" data-a="paySheet" data-id="${o.id}">${ic('cash')}Record payment</button>` : ''}` : ''}
-  ${o.notes ? `<div class="card" style="margin-top:14px;white-space:pre-wrap">${esc(o.notes)}</div>` : ''}
-  <div class="btns" style="margin-top:14px">
-    <button class="btn ghost" data-a="openInvoice" data-id="${o.id}">${ic('receipt')}${o.invoiceNo ? 'Invoice' : 'Preview'}</button>
-    <button class="btn ghost" data-a="shareOrder" data-id="${o.id}">${ic('chat')}Send</button>
-    <button class="btn ghost" data-a="reorder" data-id="${o.id}">${ic('copy')}Reorder</button>
-  </div>
-  <div class="btns" style="margin-top:8px">
-    ${o.status !== 'Cancelled' && o.status !== 'Draft' && (o.status !== 'Delivered' || isAdminMe()) ? `<button class="btn ghost sm" data-a="setOStatus" data-id="${o.id}" data-s="Cancelled">Cancel order</button>` : ''}
-    ${o.status === 'Draft' || isAdminMe() ? `<button class="btn danger sm" data-a="delOrder" data-id="${o.id}">${ic('trash')}Delete</button>` : ''}
-  </div></div>`;
-}
-function totalsGrid(o) {
-  return `<div class="tot"><span class="muted">Subtotal</span><span>${money(o.subtotal)}</span>
-  ${num(o.discount) ? `<span class="muted">Discount ${num(o.discountPct)}%</span><span>− ${money(o.discount)}</span>` : ''}
-  <span class="muted">Delivery</span><span>${num(o.delivery) ? money(o.delivery) : 'Free'}</span>
-  ${num(o.vatRate) ? `<span class="muted">VAT ${num(o.vatRate)}%</span><span>${money(o.vat)}</span>` : ''}
-  <span class="big">Total</span><span class="big">${money(o.total)}</span></div>`;
-}
-
-/* ORDER EDITOR */
-function startOrder(salonId, from) {
-  ED = { id: '', salonId, orderDate: today(), discountMode: 'auto', discountPct: '', deliveryMode: 'auto', delivery: '', notes: '', lines: [], q: '' };
-  if (from) {
-    Object.assign(ED, { id: from.id || '', orderDate: from.id ? localDate(from.orderDate) : today(), discountMode: from.discountMode || 'auto', discountPct: from.discountPct, deliveryMode: from.deliveryMode || 'auto', delivery: from.delivery, notes: from.id ? from.notes || '' : '' });
-    ED.lines = (X.items[from.id || from.srcId] || []).map(i => ({ sku: i.sku, product: i.product, qty: num(i.qty), price: from.id ? num(i.price) : num((X.prod[i.sku] || {}).price) || num(i.price) }));
-    ED.status = from.id ? from.status : 'Draft';
-  }
-  go('orderEdit');
-}
-function vOrderEdit() {
-  const s = X.salon[ED.salonId];
-  return `${topbar(ED.id ? 'Edit order' : 'New order')}<div class="wrap" style="padding-top:0;padding-bottom:40px">
-  <button class="row" style="padding:4px 0 14px;background:none" data-a="pickSalonForOrder"><span class="sw" data-s="${esc(s ? s.status : 'Lead')}"></span><div class="main"><div class="t" style="font-size:19px">${s ? esc(s.name) : 'Choose salon'}</div><div class="s">${s ? 'Tap to change salon' : 'Required'}</div></div>${ic('edit')}</button>
-  <div class="search">${ic('search')}<input id="edq" data-in="edq" placeholder="${S.products.length ? 'Add product: name, code or SKU' : 'Type a product name to add it'}" autocomplete="off" value="${esc(ED.q)}"></div>
-  <div id="ed-results"></div>
-  <div class="block"><div id="ed-lines" style="padding:4px 16px"></div></div>
-  <div class="grid2"><label class="f"><span>Discount</span><select data-ch="discountMode"><option value="auto" ${ED.discountMode !== 'manual' ? 'selected' : ''}>Automatic tier</option><option value="manual" ${ED.discountMode === 'manual' ? 'selected' : ''}>Custom %</option></select></label>
-  <label class="f" id="ed-dpct" style="${ED.discountMode === 'manual' ? '' : 'display:none'}"><span>Discount %</span><input type="number" inputmode="decimal" data-ch="discountPct" value="${esc(ED.discountPct)}"></label></div>
-  <div class="grid2"><label class="f"><span>Delivery</span><select data-ch="deliveryMode"><option value="auto" ${ED.deliveryMode === 'auto' ? 'selected' : ''}>Standard (${money(S.settings.deliveryFee, 0)})</option><option value="free" ${ED.deliveryMode === 'free' ? 'selected' : ''}>Free</option><option value="manual" ${ED.deliveryMode === 'manual' ? 'selected' : ''}>Custom amount</option></select></label>
-  <label class="f" id="ed-dfee" style="${ED.deliveryMode === 'manual' ? '' : 'display:none'}"><span>Delivery AED</span><input type="number" inputmode="decimal" data-ch="delivery" value="${esc(ED.delivery)}"></label></div>
-  <label class="f"><span>Order date</span><input type="date" data-ch="orderDate" value="${esc(ED.orderDate)}"></label>
-  <label class="f"><span>Notes for this order</span><textarea data-ch="notes" placeholder="Delivery instructions, promises made, etc.">${esc(ED.notes)}</textarea></label>
-  <div class="card"><div id="ed-totals"></div></div>
-  <div class="btns">${!ED.id || ED.status === 'Draft' ? `<button class="btn ghost" data-a="saveOrder" data-s="Draft">Save draft</button><button class="btn" data-a="saveOrder" data-s="Confirmed">${ic('check')}Confirm order</button>` : `<button class="btn" data-a="saveOrder" data-s="">${ic('check')}Save changes</button>`}</div>
-  </div>`;
-}
-function edPaint(skipLines) {
-  const L = $('#ed-lines'), T = $('#ed-totals'), R = $('#ed-results');
-  if (!L) return;
-  if (!skipLines) L.innerHTML = ED.lines.map((l, i) => `<div class="line"><div class="nm">${esc(l.product)}<div class="small muted">${money(num(l.qty) * num(l.price))}</div></div>
-    <input class="price" type="number" inputmode="decimal" step="0.01" data-li="${i}" data-f="price" value="${esc(l.price)}" aria-label="Unit price">
-    <div class="step"><button data-a="qty" data-id="${i}" data-d="-1" aria-label="Less">−</button><input type="number" inputmode="numeric" data-li="${i}" data-f="qty" value="${esc(l.qty)}" aria-label="Quantity"><button data-a="qty" data-id="${i}" data-d="1" aria-label="More">+</button></div></div>`).join('')
-    || '<div class="empty" style="padding:20px 6px"><b>No products yet</b>Search above to add products.</div>';
-  const t = calcTotals(ED.lines, S.settings, ED);
-  const units = ED.lines.reduce((a, l) => a + num(l.qty), 0);
-  const nextTier = num(S.settings.tier1Amount) > t.subtotal ? [num(S.settings.tier1Amount), S.settings.tier1Pct] : num(S.settings.tier2Amount) > t.subtotal ? [num(S.settings.tier2Amount), S.settings.tier2Pct] : null;
-  T.innerHTML = `${totalsGrid(Object.assign({}, t))}<p class="small muted" style="margin:10px 0 0">${units} units${ED.discountMode !== 'manual' && nextTier && t.subtotal > 0 ? `. Add ${money(nextTier[0] - t.subtotal, 0)} more for ${nextTier[1]}% off.` : ''}</p>
-  ${t.belowMin && ED.lines.length ? `<div class="warnbox">Below the ${money(S.settings.minOrder, 0)} minimum order.</div>` : ''}`;
-  const q = ED.q.trim().toLowerCase();
-  if (!q) { R.innerHTML = ''; return; }
-  const hits = S.products.filter(p => [p.sku, p.code, p.name, p.category].join(' ').toLowerCase().includes(q)).slice(0, 30);
-  R.innerHTML = `<div class="results">${hits.map(p => `<button class="row" data-a="addLine" data-id="${esc(p.sku)}"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${esc([p.code, p.sku, p.category].filter(Boolean).join(', '))}</div></div><b class="small">${money(p.price)}</b></button>`).join('')}
-  <button class="row" data-a="addCustom"><div class="main"><div class="t">Add "${esc(ED.q.trim())}" as a custom item</div><div class="s">Set the price yourself</div></div>${ic('plus')}</button></div>`;
-}
-
-/* INVOICE */
-function invoiceHTML(o) {
-  const st = S.settings, s = X.salon[o.salonId] || {}, items = X.items[o.id] || [];
-  const taxInv = isTrue(st.vatEnabled) && st.trn;
-  return `<div class="inv">
-  <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><div><h1>${esc(st.businessName)}</h1><div style="white-space:pre-wrap;color:#6d6270">${esc([st.legalName, st.address, st.phone, st.email].filter(Boolean).join('\n'))}${st.trn ? '\nTRN ' + esc(st.trn) : ''}</div></div>
-  <div style="text-align:right;margin-left:auto"><div style="font-size:20px;font-weight:700">${o.invoiceNo ? (taxInv ? 'Tax invoice' : 'Invoice') : 'Quotation'}</div><div>${esc(o.invoiceNo || 'Draft')}</div><div>Date ${esc(fmtD(o.orderDate, true))}</div>${o.invoiceNo && o.dueDate ? `<div>Due ${esc(fmtD(o.dueDate, true))}</div>` : ''}</div></div>
-  <div class="meta"><div><div style="color:#6d6270;font-size:12px">Bill to</div><b>${esc(s.billingName || s.name || '')}</b><div style="white-space:pre-wrap">${esc([s.address, [s.area, s.emirate].filter(Boolean).join(', '), s.phone].filter(Boolean).join('\n'))}</div>${s.trn ? `<div>TRN ${esc(s.trn)}</div>` : ''}</div></div>
-  <table><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Unit price</th><th class="r">Amount</th></tr></thead><tbody>
-  ${items.map(i => `<tr><td>${esc(i.product)}${i.sku ? `<div style="color:#6d6270;font-size:12px">${esc(i.sku)}</div>` : ''}</td><td class="r">${esc(i.qty)}</td><td class="r">${money(i.price)}</td><td class="r">${money(i.lineTotal)}</td></tr>`).join('')}
-  </tbody></table>
-  <div class="sum"><span>Subtotal</span><span class="r">${money(o.subtotal)}</span>
-  ${num(o.discount) ? `<span>Discount ${num(o.discountPct)}%</span><span class="r">− ${money(o.discount)}</span>` : ''}
-  <span>Delivery</span><span class="r">${money(o.delivery)}</span>
-  ${num(o.vatRate) ? `<span>Taxable amount</span><span class="r">${money(num(o.subtotal) - num(o.discount) + num(o.delivery))}</span><span>VAT ${num(o.vatRate)}%</span><span class="r">${money(o.vat)}</span>` : ''}
-  <span class="g">Total</span><span class="g r">${money(o.total)}</span>
-  ${num(o.paid) ? `<span>Paid</span><span class="r">${money(o.paid)}</span><span><b>Balance due</b></span><span class="r"><b>${money(Math.max(0, balance(o)))}</b></span>` : ''}</div>
-  ${st.bankDetails ? `<div style="margin-top:22px"><div style="color:#6d6270;font-size:12px">Payment details</div><div style="white-space:pre-wrap">${esc(st.bankDetails)}</div></div>` : ''}
-  ${st.invoiceFooter ? `<p style="margin-top:22px;color:#6d6270">${esc(st.invoiceFooter)}</p>` : ''}</div>`;
-}
-function vInvoice(v) {
-  const o = X.order[v.id];
-  if (!o) return topbar('Invoice');
-  return `${topbar(o.invoiceNo || 'Quotation', `<button class="ib" data-a="print" aria-label="Print or save as PDF">${ic('print')}</button>`)}<div class="wrap">${invoiceHTML(o)}
-  <div class="btns noprint" style="margin-top:16px"><button class="btn" data-a="print">${ic('print')}Print or save PDF</button><button class="btn ghost" data-a="shareOrder" data-id="${o.id}">${ic('chat')}Send on WhatsApp</button></div></div>`;
-}
-function orderText(o) {
-  const st = S.settings, s = X.salon[o.salonId] || {}, items = X.items[o.id] || [];
-  const L = [`*${st.businessName}*`, `${o.invoiceNo ? 'Invoice ' + o.invoiceNo : 'Quotation'}, ${fmtD(o.orderDate, true)}`, s.name || '', ''];
-  items.forEach(i => L.push(`${i.qty} × ${i.product} = ${money(i.lineTotal)}`));
-  L.push('', `Subtotal: ${money(o.subtotal)}`);
-  if (num(o.discount)) L.push(`Discount ${num(o.discountPct)}%: −${money(o.discount)}`);
-  L.push(`Delivery: ${num(o.delivery) ? money(o.delivery) : 'Free'}`);
-  if (num(o.vatRate)) L.push(`VAT ${num(o.vatRate)}%: ${money(o.vat)}`);
-  L.push(`*Total: ${money(o.total)}*`);
-  if (num(o.paid)) L.push(`Paid: ${money(o.paid)}`, `*Balance due: ${money(Math.max(0, balance(o)))}*`);
-  if (st.bankDetails) L.push('', st.bankDetails);
-  return L.join('\n');
-}
-
-/* MORE + REPORTS */
-function vMore() {
-  return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 16px">More</h1>
-  <div class="block"><div class="row" style="cursor:default"><div class="dot" style="width:40px;height:40px;border-radius:12px;background:var(--wine-soft);color:var(--wine);display:grid;place-items:center">${ic('user')}</div><div class="main"><div class="t">${esc(S.me.name)}</div><div class="s">${esc(S.me.email)}, ${S.me.role === 'admin' ? 'admin' : 'team member'}</div></div></div></div>
-  <div class="block">
-    <button class="row" data-a="reports">${ic('star')}<div class="main"><div class="t">Reports</div><div class="s">Sales by person, top salons, top products, money owed</div></div></button>
-    <button class="row" data-a="refresh">${ic('refresh')}<div class="main"><div class="t">Refresh data</div><div class="s">Pull the latest from the team</div></div></button>
-    <button class="row" data-a="installHelp">${ic('share')}<div class="main"><div class="t">Install on your phone</div><div class="s">Add to home screen for the full app</div></div></button>
-  </div>
-  <div class="sec"><h2>Invoice and pricing settings</h2></div>
-  <div class="block"><dl class="kv">
-    <dt>Business</dt><dd>${esc(S.settings.businessName)}</dd><dt>TRN</dt><dd>${esc(S.settings.trn || 'Not set')}</dd>
-    <dt>VAT</dt><dd>${isTrue(S.settings.vatEnabled) ? esc(S.settings.vatRate) + '%' : 'Off'}</dd><dt>Minimum order</dt><dd>${money(S.settings.minOrder, 0)}</dd>
-    <dt>Discount tiers</dt><dd>${esc(S.settings.tier1Pct)}% from ${money(S.settings.tier1Amount, 0)}<br>${esc(S.settings.tier2Pct)}% from ${money(S.settings.tier2Amount, 0)}</dd>
-    <dt>Delivery</dt><dd>${money(S.settings.deliveryFee, 0)}${num(S.settings.freeDeliveryOver) ? `, free from ${money(S.settings.freeDeliveryOver, 0)}` : ''}</dd>
-    <dt>Products</dt><dd>${S.products.length}</dd></dl>
-    <p class="small muted" style="padding:0 16px 14px;margin:0">${isAdminMe() ? 'Change these in the Settings and Products tabs of your Google Sheet, then tap Refresh data.' : 'Your admin manages these.'}</p></div>
-  ${DEMO ? `<button class="btn ghost block" data-a="resetDemo">Reset demo data</button>` : `<button class="btn ghost block" data-a="signOut">Sign out</button>`}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">Salon Sales 2.0, The Beauty Lab</p></div>`;
-}
-function vReports() {
-  const t = today(), mo = t.slice(0, 7), live = S.orders.filter(liveOrder);
-  const per = S.users.map(u => {
-    const acts = S.acts.filter(a => a.by === u.email && localDate(a.at).slice(0, 7) === mo);
-    const os = live.filter(o => o.createdBy === u.email && localDate(o.orderDate).slice(0, 7) === mo);
-    return { n: u.name, visits: acts.filter(a => a.type === 'visit').length, touch: acts.filter(a => ['call', 'whatsapp', 'email', 'meeting'].includes(a.type)).length, samples: S.samples.filter(x => x.by === u.email && localDate(x.at).slice(0, 7) === mo).reduce((a, x) => a + num(x.qty), 0), orders: os.length, rev: os.reduce((a, o) => a + num(o.total), 0) };
-  });
-  const bySalon = {}; live.forEach(o => bySalon[o.salonId] = (bySalon[o.salonId] || 0) + num(o.total));
-  const topS = Object.entries(bySalon).sort((a, b) => b[1] - a[1]).slice(0, 10);
-  const liveIds = new Set(live.map(o => o.id)), byP = {};
-  S.items.filter(i => liveIds.has(i.orderId)).forEach(i => { const k = i.product; byP[k] = byP[k] || { q: 0, v: 0 }; byP[k].q += num(i.qty); byP[k].v += num(i.lineTotal); });
-  const topP = Object.entries(byP).sort((a, b) => b[1].q - a[1].q).slice(0, 10);
-  const maxP = topP.length ? topP[0][1].q : 1;
-  const sampled = new Set(S.samples.map(x => x.salonId)), conv = [...sampled].filter(id => (X.orders[id] || []).some(liveOrder)).length;
-  const age = { 'Not due yet': 0, '1 to 30 days late': 0, '31 to 60 days late': 0, 'Over 60 days late': 0 };
-  live.filter(o => balance(o) > 0.01).forEach(o => { const late = o.dueDate ? daysBetween(o.dueDate, t) : 0; age[late <= 0 ? 'Not due yet' : late <= 30 ? '1 to 30 days late' : late <= 60 ? '31 to 60 days late' : 'Over 60 days late'] += balance(o); });
-  return `${topbar('Reports')}<div class="wrap" style="padding-top:0">
-  <div class="sec"><h2>This month by person</h2></div><div class="block">${per.map(r => `<div class="row" style="cursor:default"><div class="main"><div class="t">${esc(r.n)}</div><div class="s">${r.visits} visits, ${r.touch} calls/messages, ${r.samples} samples, ${r.orders} orders</div></div><b>${money0(r.rev)}</b></div>`).join('')}</div>
-  <div class="sec"><h2>Samples that turned into orders</h2></div><div class="card"><span class="disp" style="font-size:28px;font-weight:700">${sampled.size ? Math.round(conv / sampled.size * 100) : 0}%</span> <span class="muted">${conv} of ${sampled.size} sampled salons have ordered</span></div>
-  <div class="sec"><h2>Money owed</h2></div><div class="block">${Object.entries(age).map(([k, v]) => `<div class="row" style="cursor:default"><div class="main"><div class="t" style="font-weight:500">${k}</div></div><b style="${v > 0 && k !== 'Not due yet' ? 'color:var(--bad)' : ''}">${money(v, 0)}</b></div>`).join('')}</div>
-  <div class="sec"><h2>Top salons</h2></div><div class="block">${topS.map(([id, v]) => `<button class="row" data-a="openSalon" data-id="${id}"><span class="sw" data-s="${esc((X.salon[id] || {}).status || 'Customer')}"></span><div class="main"><div class="t">${esc((X.salon[id] || {}).name || 'Removed')}</div></div><b>${money0(v)}</b></button>`).join('') || '<div class="empty">No orders yet</div>'}</div>
-  <div class="sec"><h2>Top products</h2></div><div class="block">${topP.map(([n, d]) => `<div class="row" style="cursor:default;display:block"><div style="display:flex;justify-content:space-between;gap:10px"><span class="t" style="font-weight:600">${esc(n)}</span><span class="small">${d.q} units</span></div><div class="bar2"><span style="width:${d.q / maxP * 100}%"></span></div></div>`).join('') || '<div class="empty">No orders yet</div>'}</div>
-  </div>`;
-}
 /* ---------- sheets (bottom panels) ---------- */
 function openSheet(title, body, foot) {
   $('#sheet-root').innerHTML = `<div class="scrim" data-a="closeSheet"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="sh"><h2>${esc(title)}</h2><button class="ib" data-a="closeSheet" aria-label="Close">${ic('x')}</button></div><div class="sb">${body}</div>${foot ? `<div class="sf">${foot}</div>` : ''}</div>`;
@@ -1124,9 +1125,6 @@ function salonForm(s) {
   ${fld('Brands they use now', 'brandsUsed', s.brandsUsed, 'placeholder="OPI, Kiara Sky..."')}
   <div class="grid2">${sel('Price level', 'priceTier', ['', 'Budget', 'Mid', 'Premium', 'Luxury'], s.priceTier)}${fld('Opening hours', 'hours', s.hours, 'placeholder="10am to 10pm"')}</div>
   ${fld('Tags', 'tags', s.tags, 'placeholder="vegan-friendly, chain, home service"')}
-  <div class="fs">Billing</div>
-  ${fld('Name on invoice', 'billingName', s.billingName, 'placeholder="Legal name, if different"')}
-  <div class="grid2">${fld('Their TRN', 'trn', s.trn, 'inputmode="numeric"')}${fld('Pay within (days)', 'paymentTerms', s.paymentTerms, 'inputmode="numeric" placeholder="Default ' + esc(S.settings.paymentTermsDays) + '"')}</div>
   <label class="f"><span>Notes</span><textarea name="notes">${esc(s.notes)}</textarea></label>
   ${n ? `<div class="fs">First follow-up</div>${dateChips('followupDate', num(S.settings.cadenceLead) || 3, true)}` : ''}
   <input type="hidden" name="id" value="${esc(s.id || '')}">`,
@@ -1159,8 +1157,8 @@ function sPaint() {
   L.innerHTML = SAMP.lines.map((l, i) => `<div class="line"><div class="nm">${esc(l.product)}</div><div class="step"><button data-a="sqty" data-id="${i}" data-d="-1" aria-label="Less">−</button><input type="number" value="${l.qty}" data-sl="${i}" aria-label="Quantity"><button data-a="sqty" data-id="${i}" data-d="1" aria-label="More">+</button></div></div>`).join('') || '<div class="empty" style="padding:16px 4px">Search above and tap products to add them.</div>';
   const q = SAMP.q.trim().toLowerCase();
   if (!q) { R.innerHTML = ''; return; }
-  const hits = S.products.filter(p => [p.sku, p.code, p.name, p.category].join(' ').toLowerCase().includes(q)).slice(0, 25);
-  R.innerHTML = `<div class="results">${hits.map(p => `<button class="row" data-a="sAdd" data-id="${esc(p.sku)}"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${esc([p.code, p.sku].filter(Boolean).join(', '))}</div></div>${ic('plus')}</button>`).join('')}<button class="row" data-a="sAddCustom"><div class="main"><div class="t">Add "${esc(SAMP.q.trim())}"</div></div>${ic('plus')}</button></div>`;
+  const hits = S.products.filter(p => isActive(p) && [p.sku, p.code, p.name, p.category].join(' ').toLowerCase().includes(q)).slice(0, 25);
+  R.innerHTML = `<div class="results">${hits.map(p => `<button class="row" data-a="sAdd" data-id="${esc(p.sku)}"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${esc(p.sku)}${tracked(p) ? ', ' + Math.max(0, num(p.stock)) + ' on shelf' : ''}</div></div>${tracked(p) && num(p.stock) <= 0 ? '<span class="pill bad">Out</span>' : ic('plus')}</button>`).join('')}<button class="row" data-a="sAddCustom"><div class="main"><div class="t">Add "${esc(SAMP.q.trim())}" as other item</div><div class="s">Brochure, box, not from stock</div></div>${ic('plus')}</button></div>`;
 }
 function fuSheet(salonId) {
   const s = X.salon[salonId];
@@ -1193,7 +1191,6 @@ const TEMPLATES = [
   ['After samples', s => `Hi ${first(s.owner) || 'there'}, ${first(S.me.name)} from ${S.settings.businessName}. How did your team find the JOIA samples? Happy to bring more shades or share our price list.`],
   ['Price list', s => `Hi ${first(s.owner) || 'there'}, here are our salon terms: minimum order ${money(S.settings.minOrder, 0)}, ${S.settings.tier1Pct}% off from ${money(S.settings.tier1Amount, 0)} and ${S.settings.tier2Pct}% off from ${money(S.settings.tier2Amount, 0)}. Delivery ${money(S.settings.deliveryFee, 0)}. Shall I prepare an order for you?`],
   ['Reorder check', s => `Hi ${first(s.owner) || 'there'}, ${first(S.me.name)} here. How are you doing on JOIA stock? I can prepare your next order and deliver this week.`],
-  ['Payment reminder', s => { const due = (X.orders[s.id] || []).filter(o => liveOrder(o) && balance(o) > 0.01); const tot = due.reduce((a, o) => a + balance(o), 0); return `Hi ${first(s.owner) || 'there'}, a friendly reminder that ${money(tot)} is open on ${due.map(o => o.invoiceNo).join(', ') || 'your account'}. ${S.settings.bankDetails ? 'Payment details:\n' + S.settings.bankDetails : 'Let me know when suits you to settle it.'} Thank you!`; }],
   ['Empty message', () => '']
 ];
 function waSheet(salonId, fuId) {
@@ -1218,14 +1215,6 @@ function checkinSheet(salonId) {
     } else el.innerHTML = `<b>Location found</b><label style="display:flex;gap:8px;margin-top:8px;align-items:center"><input type="checkbox" name="savePin" checked>Save this as the salon's location</label>`;
   }, () => { const el = $('#ci-status'); if (el) el.textContent = 'Could not get your location. Allow location for this app in your phone settings. You can still save the visit.'; }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
 }
-function paySheet(orderId) {
-  const o = X.order[orderId];
-  openSheet('Record payment', `<p class="muted" style="margin:0 0 12px">${esc(o.invoiceNo || 'Draft')}, ${esc((X.salon[o.salonId] || {}).name)}</p>
-  ${fld('Amount received (AED)', 'amount', Math.max(0, balance(o)).toFixed(2), 'type="number" inputmode="decimal" step="0.01"')}
-  ${optChips('method', [['Cash', 'Cash'], ['Bank transfer', 'Bank transfer'], ['Card', 'Card'], ['Cheque', 'Cheque']], 'Cash')}
-  ${fld('Date', 'date', today(), 'type="date"')}${fld('Note', 'note', '', 'placeholder="Reference number"')}`,
-  `<button class="btn block" data-a="paySave" data-id="${orderId}">${ic('cash')}Save payment</button>`);
-}
 function pickSalonSheet(cb) {
   window.__pick = cb;
   openSheet('Choose salon', `<div class="search">${ic('search')}<input id="pq" data-in="pq" placeholder="Search salons" autocomplete="off"></div><div id="pick-list"></div>`);
@@ -1237,15 +1226,16 @@ function pickPaint(q) {
   $('#pick-list').innerHTML = `<div class="block">${l.map(s => `<button class="row" data-a="picked" data-id="${s.id}"><span class="sw" data-s="${esc(s.status || 'Lead')}"></span><div class="main"><div class="t">${esc(s.name)}</div><div class="s">${esc(s.area || '')}</div></div></button>`).join('') || '<div class="empty">No salons found</div>'}</div>`;
 }
 function installHelp() {
-  openSheet('Install on your phone', `<div class="fs">iPhone</div><p>Open this link in <b>Safari</b>, tap the Share button, then <b>Add to Home Screen</b>.</p>
-  <div class="fs">Android</div><p>Open this link in <b>Chrome</b>, tap the three dots menu, then <b>Install app</b> (or Add to home screen).</p>
-  <p class="muted small">It then opens full screen from its own icon, like any other app. Location works for check-ins once you allow it.</p>`);
+  const url = S.settings.appUrl || location.href.split('#')[0];
+  openSheet('Install on your phone', `<div class="fs">iPhone</div><p>Open <b>${esc(url)}</b> in <b>Safari</b>, tap the Share button, then <b>Add to Home Screen</b>.</p>
+  <div class="fs">Android</div><p>Open the link in <b>Chrome</b>, tap the three dots, then <b>Install app</b> (or Add to Home screen).</p>
+  <p class="muted small">It then opens full screen from the JOIA icon, like any other app. Allow location when asked, check-ins need it.</p>`);
 }
 /* ---------- actions ---------- */
 const H = {
   tab: id => tab(id), back: () => back(), closeSheet: () => closeSheet(),
-  refresh: () => refresh(false), reports: () => go('reports'), print: () => window.print(), installHelp: () => installHelp(),
-  signOut: () => { if (confirm('Sign out of Salon Sales?')) signOut(); },
+  refresh: () => refresh(false), reports: () => go('reports'), installHelp: () => installHelp(),
+  signOut: () => { if (confirm('Sign out of JOIA Sales?')) signOut(); },
   resetDemo: () => { if (confirm('Reset the demo data?')) { seedDemo(); Object.assign(S, JSON.parse(JSON.stringify(API.bootstrap(DEMO_ME)))); nav = { tab: 'today', stack: [] }; render(); toast('Demo reset'); } },
   async login() {
     const email = $('#lg-email').value.trim().toLowerCase(), pin = $('#lg-pin').value.trim();
@@ -1256,11 +1246,10 @@ const H = {
   },
   filterStatus: id => { ui.status = id; tab('salons'); },
   setStatusFilter: id => { ui.status = id; render(); }, toggleMine: () => { ui.mine = !ui.mine; render(); }, setSort: id => { ui.sort = id; render(); },
-  fuSeg: id => { ui.fuSeg = id; render(); }, fuMine: () => { ui.fuMine = !ui.fuMine; render(); }, oFilter: id => { ui.oFilter = id; render(); },
+  fuSeg: id => { ui.fuSeg = id; render(); }, fuMine: () => { ui.fuMine = !ui.fuMine; render(); },
   salonTab: id => { ui.salonTab = id; render(); },
   openSalon: id => { if (!id || !X.salon[id]) return; ui.salonTab = 'timeline'; go('salon', id); },
   openSalonFromSheet: id => { closeSheet(); H.openSalon(id); },
-  openOrder: id => go('order', id), openInvoice: id => go('invoice', id),
   newSalon: () => salonForm(), editSalon: id => salonForm(X.salon[id]),
   async saveSalon() {
     const v = vals();
@@ -1321,39 +1310,63 @@ const H = {
     try { await run('logActivity', { salonId: id, type: 'visit', note: v.note, lat: CI.lat || '', lng: CI.lng || '', distance: CI.distance === undefined ? '' : CI.distance, savePin: !!v.savePin, followupDate: v.followupDate }, 'Checked in'); closeSheet(); } catch (e) {}
   },
   async delAct(id) { if (!confirm('Delete this entry?')) return; try { await run('deleteActivity', { id }, 'Deleted'); } catch (e) {} },
-  newOrderFor: id => startOrder(id),
-  newOrder: () => pickSalonSheet(id => startOrder(id)),
-  pickSalonForOrder: () => pickSalonSheet(id => { ED.salonId = id; render(); }),
   picked: id => { const cb = window.__pick; closeSheet(); if (cb) cb(id); },
-  editOrder: id => { const o = X.order[id]; startOrder(o.salonId, o); },
-  reorder: id => { const o = X.order[id]; startOrder(o.salonId, { srcId: id, discountMode: 'auto', deliveryMode: 'auto' }); toast('Copied with current prices'); },
-  addLine(sku) { const p = X.prod[sku], ex = ED.lines.find(l => l.sku === sku && sku); if (ex) ex.qty = num(ex.qty) + 1; else ED.lines.push({ sku, product: p.name, qty: 1, price: num(p.price) }); ED.q = ''; $('#edq').value = ''; edPaint(); },
-  addCustom() { ED.lines.push({ sku: '', product: ED.q.trim(), qty: 1, price: 0 }); ED.q = ''; $('#edq').value = ''; edPaint(); },
-  qty(i, el) { const l = ED.lines[+i]; l.qty = Math.max(0, num(l.qty) + +el.dataset.d); if (!l.qty) ED.lines.splice(+i, 1); edPaint(); },
-  async saveOrder(_, el) {
-    if (!ED.salonId) { toast('Choose a salon first.', 'bad'); return; }
-    if (!ED.lines.length) { toast('Add at least one product.', 'bad'); return; }
-    const st = el.dataset.s, t = calcTotals(ED.lines, S.settings, ED);
-    if (st === 'Confirmed' && t.belowMin && !confirm(`This order is below the ${money(S.settings.minOrder, 0)} minimum. Confirm anyway?`)) return;
-    const order = { id: ED.id, salonId: ED.salonId, orderDate: ED.orderDate, discountMode: ED.discountMode, discountPct: ED.discountPct, deliveryMode: ED.deliveryMode, delivery: ED.delivery, notes: ED.notes };
-    if (st) order.status = st;
-    if (ED.id && X.order[ED.id] && localDate(X.order[ED.id].orderDate) === ED.orderDate) order.dueDate = X.order[ED.id].dueDate;
+  go: id => go(id),
+  stockFilter: id => { ui.sf = id; if (nav.tab !== 'stock' || nav.stack.length) tab('stock'); else render(); },
+  stockCat: id => { ui.scat = id; render(); },
+  openProduct: id => go('product', id),
+  editProduct: id => productForm(X.prod[id]),
+  async syncProducts() {
+    if (!confirm('Bring in new products and prices from the website?')) return;
+    try { const tx = await run('syncProducts', {}); const r = tx.summary || {}; toast(r.added || r.changed || r.hidden ? `${r.added} new, ${r.changed} updated, ${r.hidden} hidden` : 'Already up to date'); } catch (e) {}
+  },
+  async saveProduct(_, el) {
+    const v = vals(), isNew = !!el.dataset.new; v.active = v.active ? 'yes' : 'no';
+    if (!v.sku || !v.name) { toast('Add the SKU and name.', 'bad'); return; }
+    try { await run('saveProduct', { product: v, isNew }, isNew ? 'Product added' : 'Saved'); closeSheet(); if (isNew) go('product', v.sku); } catch (e) {}
+  },
+  adjust: (id, el) => adjustSheet(id, el.dataset.m),
+  async adjustSave(id, el) {
+    const v = vals(), m = el.dataset.m;
+    if (v.qty === '' || isNaN(+v.qty)) { toast('Enter a number.', 'bad'); return; }
+    try { await run('stockAdjust', { sku: id, mode: m, qty: v.qty, reason: m === 'set' ? 'count' : v.reason, note: v.note, ref: v.ref, salonId: v.salonId || '' }, 'Stock updated'); closeSheet(); } catch (e) {}
+  },
+  batch: id => { BT = { kind: id, lines: [], q: '', ref: '', note: '', salonId: '' }; go('batch'); },
+  batchSalon: () => pickSalonSheet(id => { BT.salonId = id; render(); }),
+  bAdd(sku) { const ex = BT.lines.find(l => l.sku === sku); if (ex) ex.qty = num(ex.qty) + 1; else BT.lines.push({ sku, qty: 1 }); BT.q = ''; render(); toast('Added ' + (X.prod[sku] || {}).name); },
+  bqty(i, el) { const l = BT.lines[+i]; l.qty = Math.max(0, num(l.qty) + +el.dataset.d); if (!l.qty) BT.lines.splice(+i, 1); render(); },
+  async batchSave() {
+    BT.lines = BT.lines.filter(l => num(l.qty) > 0);
+    if (!BT.lines.length) { toast('Add at least one product.', 'bad'); return; }
+    if (BT.kind === 'salon' && !BT.salonId) { toast('Choose the salon.', 'bad'); return; }
+    const units = BT.lines.reduce((a, l) => a + num(l.qty), 0);
+    try { await run('stockBatch', { kind: BT.kind, lines: BT.lines, ref: BT.ref, note: BT.note, salonId: BT.salonId }, (units === 1 ? '1 unit' : units + ' units') + (BT.kind === 'receive' ? ' added to stock' : ' taken out')); BT = null; back(); } catch (e) {}
+  },
+  countCat: id => { ui.ccat = id; render(); window.scrollTo(0, 0); },
+  async countSave() {
+    const lines = Object.entries(CNT).filter(([, v]) => v !== '' && !isNaN(+v) && +v >= 0).map(([sku, qty]) => ({ sku, qty: Math.round(+qty) }));
+    if (!lines.length) { toast('Type at least one count.', 'bad'); return; }
+    try { await run('stockBatch', { kind: 'count', lines }, lines.length + ' count' + (lines.length === 1 ? '' : 's') + ' saved'); CNT = {}; render(); } catch (e) {}
+  },
+  newUser: () => userForm(), editUser: id => userForm(S.team.find(u => u.email === id)),
+  async saveUser(_, el) {
+    const v = vals(), isNew = !!el.dataset.new;
+    const u = { email: v.email, name: v.name, role: v.role, pin: v.pin };
+    if (!isNew) u.active = v.active ? 'yes' : 'no';
     try {
-      const tx = await run('saveOrder', { order, items: ED.lines }, st === 'Confirmed' ? 'Order confirmed' : st === 'Draft' ? 'Draft saved' : 'Saved');
-      const saved = (tx.upsert.orders || []).slice(-1)[0];
-      const wasNew = !ED.id; ED = null; popView(); if (wasNew && saved) go('order', saved.id); else render();
+      await run('saveUser', { user: u, isNew }, isNew ? 'Added to the team' : 'Saved');
+      S.users = S.team.filter(x => x.active === 'yes').map(x => ({ email: x.email, name: x.name, role: x.role }));
+      render();
+      if (v.pin) {
+        const txt = loginText(v.name, v.email.toLowerCase(), v.pin);
+        openSheet('Send ' + first(v.name) + ' the login', `<p class="small muted" style="margin:0 0 10px">The PIN is shown once. Send it now.</p><div class="msg">${esc(txt)}</div>`,
+          `<div class="btns"><a class="btn" style="flex:1" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">${ic('chat')}WhatsApp</a><button class="btn line" style="flex:1" data-a="copyMsg">${ic('copy')}Copy</button></div>`);
+      } else closeSheet();
     } catch (e) {}
   },
-  async setOStatus(id, el) {
-    const s = el.dataset.s;
-    if (s === 'Cancelled' && !confirm('Cancel this order? It stays on record as cancelled.')) return;
-    try { await run('setOrderStatus', { id, status: s }, s === 'Confirmed' ? 'Order confirmed' : s === 'Delivered' ? 'Marked as delivered' : 'Order cancelled'); } catch (e) {}
-  },
-  paySheet: id => paySheet(id),
-  async paySave(id) { const v = vals(); try { await run('addPayment', { orderId: id, amount: v.amount, method: v.method, date: v.date, note: v.note }, 'Payment saved'); closeSheet(); } catch (e) {} },
-  async delPay(id) { if (!confirm('Delete this payment?')) return; try { await run('deletePayment', { id }, 'Payment deleted'); } catch (e) {} },
-  async delOrder(id) { if (!confirm('Delete this order completely?')) return; try { await run('deleteOrder', { id }, 'Order deleted'); back(); } catch (e) {} },
-  shareOrder(id) { const o = X.order[id], s = X.salon[o.salonId] || {}; const n = waNum(s.whatsapp || s.phone); window.open('https://wa.me/' + n + '?text=' + encodeURIComponent(orderText(o)), '_blank'); }
+  copyMsg() { const t = $('.sheet .msg'); if (!t) return; try { navigator.clipboard.writeText(t.textContent).then(() => toast('Copied')); } catch (e) { toast('Copy did not work, select the text instead.', 'bad'); } },
+  pinSheet: () => pinSheet(),
+  async pinSave() { const v = vals(); try { await run('changePin', { oldPin: v.oldPin, newPin: v.newPin }, 'PIN changed'); closeSheet(); } catch (e) {} },
 };
 
 /* ---------- events ---------- */
@@ -1365,25 +1378,27 @@ document.addEventListener('click', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'lg-pin') H.login(); if (e.key === 'Escape' && $('.sheet')) closeSheet(); });
 document.addEventListener('input', e => {
   const t = e.target, k = t.dataset.in;
-  if (k === 'q' || k === 'oq') { ui[k] = t.value; const pos = t.selectionStart; render(); const n = document.getElementById(k); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } return; }
-  if (k === 'edq') { ED.q = t.value; edPaint(); return; }
+  if (k === 'stq') { ui.sq = t.value; const L = $('#slist'); if (L) L.innerHTML = stockRows(stockList()); return; }
+  if (k === 'q') { ui[k] = t.value; const pos = t.selectionStart; render(); const n = document.getElementById(k); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } return; }
+  if (k === 'bq') { BT.q = t.value; bPaint(); return; }
+  if (k === 'bref' || k === 'bnote') { BT[k === 'bref' ? 'ref' : 'note'] = t.value; return; }
+  if (t.dataset.bl !== undefined && BT) { BT.lines[+t.dataset.bl].qty = num(t.value); return; }
+  if (t.dataset.cnt !== undefined) { if (t.value === '') delete CNT[t.dataset.cnt]; else CNT[t.dataset.cnt] = t.value; const b = $('#cntbtn'), n = Object.keys(CNT).length; if (b) b.lastChild.textContent = 'Save ' + n + ' count' + (n === 1 ? '' : 's'); return; }
   if (k === 'sq') { SAMP.q = t.value; sPaint(); return; }
   if (k === 'pq') { pickPaint(t.value); return; }
-  if (t.dataset.ch && ED) { ED[t.dataset.ch] = t.value; $('#ed-dpct').style.display = ED.discountMode === 'manual' ? '' : 'none'; $('#ed-dfee').style.display = ED.deliveryMode === 'manual' ? '' : 'none'; edPaint(); return; }
-  if (t.dataset.li !== undefined && ED) { ED.lines[+t.dataset.li][t.dataset.f] = t.value; edPaint(true); return; }
   if (t.dataset.sl !== undefined && SAMP) { SAMP.lines[+t.dataset.sl].qty = num(t.value); return; }
 });
 document.addEventListener('change', e => {
   const t = e.target;
   if (t.dataset.maps) { const p = parseMaps(t.value), f = $('.sheet'); if (p && f) { f.querySelector('[name=lat]').value = p.lat; f.querySelector('[name=lng]').value = p.lng; toast('Location taken from the link'); } }
-  if (t.dataset.ch && ED) { ED[t.dataset.ch] = t.value; edPaint(); }
-  if (t.dataset.li !== undefined && ED) { const l = ED.lines[+t.dataset.li]; if (l && t.dataset.f === 'qty' && num(l.qty) <= 0) ED.lines.splice(+t.dataset.li, 1); edPaint(); }
+  if (t.dataset.bl !== undefined && BT) { if (num(t.value) <= 0) BT.lines.splice(+t.dataset.bl, 1); render(); }
 });
 document.addEventListener('visibilitychange', () => { if (!document.hidden && S.me && !DEMO && Date.now() - (window.__last || 0) > 120000) { window.__last = Date.now(); refresh(true); } });
 /* ---------- demo mode: same logic, data kept on this device ---------- */
 let MEM = {};
-const DEMO_ME = { email: 'maged@thebeautylab.ae', name: 'Maged', role: 'admin' };
+const DEMO_ME = { email: 'info@beautylabuae.com', name: 'Peter', role: 'admin' };
 if (DEMO) {
+  API.syncProducts = () => fail('Sync works in the live app. It reads the website product list.');
   window.DB = {
     uid: () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-3),
     all: t => MEM[t] || (MEM[t] = []),
@@ -1391,56 +1406,38 @@ if (DEMO) {
     remove(t, p) { const k = TABLES[t].key, a = DB.all(t), ids = a.filter(p).map(r => r[k]); MEM[t] = a.filter(r => !p(r)); return ids; }
   };
 }
-function saveDemo() { LS.set('tbl_demo_v2', MEM); }
-function initDemo() { const m = LS.get('tbl_demo_v2', null); if (m && m.salons) MEM = m; else seedDemo(); }
+function saveDemo() { LS.set('tbl_demo_v3', MEM); }
+function initDemo() { const m = LS.get('tbl_demo_v3', null); if (m && m.salons && m.products) MEM = m; else seedDemo(); }
+const DEMO_PRODUCTS = [["TBL#1","001","Gel Polish 001","Gel Polish","6 ml",24.0],["TBL#3","003","Gel Polish 003","Gel Polish","6 ml",24.0],["TBL#5","005","Gel Polish 005","Gel Polish","6 ml",24.0],["TBL#7","007","Gel Polish 007","Gel Polish","6 ml",24.0],["TBL#9","010","Gel Polish 010","Gel Polish","6 ml",24.0],["TBL#11","012","Gel Polish 012","Gel Polish","6 ml",24.0],["TBL#13","014","Gel Polish 014","Gel Polish","6 ml",24.0],["TBL#15","016","Gel Polish 016","Gel Polish","6 ml",24.0],["TBL#17","018","Gel Polish 018","Gel Polish","6 ml",24.0],["TBL#19","021","Gel Polish 021","Gel Polish","6 ml",24.0],["TBL#21","023","Gel Polish 023","Gel Polish","6 ml",24.0],["TBL#23","025","Gel Polish 025","Gel Polish","6 ml",24.0],["TBL#121","148","Gel Polish 148","Gel Polish","6 ml",24.0],["TBL#127","154","Gel Polish 154","Gel Polish","6 ml",24.0],["TBL#133","160","Gel Polish 160","Gel Polish","6 ml",24.0],["TBL#139","166","Gel Polish 166","Gel Polish","6 ml",24.0],["TBL#145","172","Gel Polish 172","Gel Polish","6 ml",24.0],["TBL#190","","Latex Base","Bases","8 ml",25.03],["TBL#220","","Latex Base","Bases","15 ml",47.0],["TBL#234","","Latex Base","Bases","50 ml",135.0],["TBL#239","","Smart Top No Wipe","Tops","8 ml",27.0],["TBL#240","","Aqua Gloss Top No Wipe","Tops","8 ml",25.0],["TBL#250","","Aqua Gloss Top No Wipe","Tops","15 ml",46.0],["TBL#255","","PolyLiquid Gel 04 Second Skin","Builder Gels","8 ml",33.0],["TBL#256","","PolyLiquid Gel 06 Pink Lace","Builder Gels","8 ml",33.0],["TBL#257","","PolyLiquid Gel 07 Delicate Blush","Builder Gels","8 ml",33.0],["TBL#384","","Velvet Touch Cream, Toffee Latte","Nail & Cuticle Care","150 ml",60.0],["TBL#390","","Brut Oil 24C","Nail & Cuticle Care","8 ml",14.0],["TBL#391","","Brut Oil 24C","Nail & Cuticle Care","15 ml",23.0],["TBL#180","","Nail Care Polish 4in1 01 Ideal White","Nail Care Polish 4in1","8 ml",25.0],["TBL#181","","Nail Care Polish 4in1 02 Baby Pink","Nail Care Polish 4in1","8 ml",25.0],["TBL#182","","Nail Care Polish 4in1 03 Caramel Veil","Nail Care Polish 4in1","8 ml",25.0],["TBL#379","","Nail Primer","Prep & Liquids","8 ml",13.0],["TBL#380","","Nail Primer","Prep & Liquids","15 ml",19.0],["TBL#381","","Nail Dryer","Prep & Liquids","8 ml",13.0],["TBL#414","","Gel Polish + Nail Care Duo Kit 001: GP 001 + 01 Ideal White","Kits","2 items",47.0],["TBL#415","","Gel Polish + Nail Care Duo Kit 002: GP 007 + 02 Baby Pink","Kits","2 items",47.0],["TBL#416","","Gel Polish + Nail Care Duo Kit 003: GP 005 + 03 Caramel Veil","Kits","2 items",47.0],["TBL#174","","Cat Eye Gel Polish 01CE Threshold Glow","Cat Eye","6 ml",30.0],["TBL#175","","Cat Eye Gel Polish 02CE Petal Mist","Cat Eye","6 ml",30.0],["TBL#176","","Cat Eye Gel Polish 03CE Worldshift Pulse","Cat Eye","6 ml",30.0]];
 function seedDemo() {
   MEM = {};
-  const U = [{ email: 'maged@thebeautylab.ae', name: 'Maged', role: 'admin', active: 'yes' }, { email: 'rana@thebeautylab.ae', name: 'Rana', role: 'user', active: 'yes' }, { email: 'youssef@thebeautylab.ae', name: 'Youssef', role: 'user', active: 'yes' }];
-  U.forEach(u => DB.upsert('users', u));
-  const over = { trn: '100000000000003', address: 'Dubai, United Arab Emirates', phone: '+971 50 000 0000', email: 'hello@thebeautylab.ae', bankDetails: 'Demo Bank, The Beauty Lab\nIBAN AE00 0000 0000 0000 0000 000' };
-  DEFAULT_SETTINGS.forEach(d => DB.upsert('settings', { key: d[0], value: over[d[0]] !== undefined ? over[d[0]] : d[1], help: d[2] }));
-  const shades = [['101', 'Nude Veil'], ['112', 'Ballet Slipper'], ['124', 'Cashmere Beige'], ['137', 'Desert Rose'], ['145', 'Classic Red'], ['152', 'Wine Velvet'], ['163', 'Forest Green'], ['171', 'Snow White'], ['188', 'Milky Rose'], ['193', 'Mocha Latte'], ['204', 'Midnight Plum'], ['215', 'Gold Glitter']];
-  shades.forEach(([c, n]) => DB.upsert('products', { sku: 'TBL' + c, code: c, name: 'Gel polish ' + c + ' ' + n, category: 'Gel polish', price: 38, active: 'yes' }));
-  [['TBL-BASE', 'Base coat', 45], ['TBL-TOP', 'No-wipe top coat', 45], ['TBL-RUB', 'Rubber base', 55], ['TBL-BLD', 'Builder gel clear', 85], ['TBL-OIL', 'Cuticle oil', 25], ['TBL-REM', 'Gel remover 500ml', 30]]
-    .forEach(([s, n, p]) => DB.upsert('products', { sku: s, code: '', name: n, category: 'Care and prep', price: p, active: 'yes' }));
-  const me = i => pubUser(U[i]), _now = nowISO, _today = todayStr, T = todayStr();
-  const at = d => { nowISO = () => new Date(Date.now() - d * 86400000 + 3600000 * 3).toISOString(); todayStr = () => addDays(T, -d); };
-  const mk = (u, s) => API.saveSalon(me(u), { salon: s }).upsert.salons[0].id;
-  const log = (u, id, p) => API.logActivity(me(u), Object.assign({ salonId: id }, p));
-  const P = k => ({ sku: k, product: DB.all('products').find(p => p.sku === k).name, price: DB.all('products').find(p => p.sku === k).price });
-  const order = (u, id, lines, status) => { const tx = API.saveOrder(me(u), { order: { salonId: id, status }, items: lines.map(([k, q]) => Object.assign(P(k), { qty: q })) }); return tx.upsert.orders.slice(-1)[0].id; };
+  [{ email: 'info@beautylabuae.com', name: 'Peter', role: 'admin', active: 'yes', pin: '1234' }, { email: 'georgekassab1@gmail.com', name: 'George Kassab', role: 'user', active: 'yes', pin: '1111' }, { email: 'fayrouz.demyan8090@gmail.com', name: 'Fayrouz Demyan', role: 'user', active: 'yes', pin: '2222' }].forEach(u => DB.upsert('users', u));
+  DB.upsert('settings', { key: 'appUrl', value: 'https://thebeautylab-sys.github.io/Salon-sales/' });
+  DEMO_PRODUCTS.forEach((r, i) => DB.upsert('products', { sku: r[0], code: r[1], name: r[2], category: r[3], size: r[4], price: r[5], active: 'yes', stock: 0, lowAt: '' }));
+  const me = i => pubUser(MEM.users[i]);
+  const T = todayStr(), _now = nowISO, _today = todayStr; let off = 0;
+  const at = d => { off = d; };
+  nowISO = () => new Date(Date.now() - off * 86400000).toISOString(); todayStr = () => addDays(_today(), -off);
   try {
-    at(42); const a = mk(1, { name: 'Velvet Nail Studio', owner: 'Hala Mansour', phone: '+971501234567', instagram: '@velvetnails.dxb', emirate: 'Dubai', area: 'JLT', lat: '25.0693', lng: '55.1416', priority: 'Warm', chairs: '8', staff: '6', brandsUsed: 'OPI, Kiara Sky', priceTier: 'Premium', source: 'Instagram', paymentTerms: '14' });
-    at(40); log(1, a, { type: 'visit', note: 'Met Hala. She loves the nude range, wants vegan for her clients.', samples: [{ sku: 'TBL101', product: 'Gel polish 101 Nude Veil', qty: 2 }, { sku: 'TBL188', product: 'Gel polish 188 Milky Rose', qty: 2 }, { sku: 'TBL-TOP', product: 'No-wipe top coat', qty: 1 }] });
-    at(31); log(1, a, { type: 'call', note: 'Team tested for a week, very happy with wear time. Ready to order.' });
-    at(30); const o1 = order(1, a, [['TBL101', 12], ['TBL188', 12], ['TBL112', 8], ['TBL124', 6], ['TBL137', 6], ['TBL-BASE', 4], ['TBL-TOP', 4]], 'Confirmed');
-    at(28); API.setOrderStatus(me(1), { id: o1, status: 'Delivered' });
-    at(16); API.addPayment(me(1), { orderId: o1, amount: 1000, method: 'Bank transfer' });
-    at(6); API.addPayment(me(1), { orderId: o1, amount: 615.32, method: 'Bank transfer' });
-
-    at(30); const b = mk(0, { name: 'Lumière Beauty Lounge', owner: 'Nour Haddad', phone: '0552223344', emirate: 'Abu Dhabi', area: 'Al Reem Island', lat: '24.4983', lng: '54.4060', priority: 'Hot', chairs: '12', staff: '9', brandsUsed: 'CND Shellac', priceTier: 'Luxury', source: 'Referral', decisionMaker: 'Nour Haddad', decisionRole: 'Owner' });
-    at(24); log(0, b, { type: 'sample', note: 'Left the winter reds for their festive menu.', samples: [{ sku: 'TBL145', product: 'Gel polish 145 Classic Red', qty: 2 }, { sku: 'TBL152', product: 'Gel polish 152 Wine Velvet', qty: 2 }, { sku: 'TBL163', product: 'Gel polish 163 Forest Green', qty: 1 }], followupDate: addDays(T, -2), followupNote: 'Ask about the festive menu order' });
-
-    at(21); const c = mk(2, { name: 'Sage and Silk Salon', owner: 'Mariam', phone: '0567778899', emirate: 'Dubai', area: 'Al Barsha', priceTier: 'Mid', source: 'Walk-in', chairs: '5' });
-    at(20); log(2, c, { type: 'visit', note: 'Owner away. Spoke to the manager, left a price list.', followupDate: T, followupNote: 'Call Mariam directly' });
-
-    at(19); const d = mk(0, { name: 'The Polish Room', owner: 'Dana', phone: '0501112233', emirate: 'Dubai', area: 'Business Bay', priority: 'Hot', priceTier: 'Premium', source: 'Instagram' });
-    at(15); log(0, d, { type: 'sample', note: 'Wants the Christmas and National Day shades.', samples: [{ sku: 'TBL145', product: 'Gel polish 145 Classic Red', qty: 2 }, { sku: 'TBL163', product: 'Gel polish 163 Forest Green', qty: 2 }, { sku: 'TBL171', product: 'Gel polish 171 Snow White', qty: 2 }] });
-    at(9); const o2 = order(0, d, [['TBL145', 40], ['TBL163', 30], ['TBL171', 30], ['TBL152', 20], ['TBL215', 10], ['TBL-RUB', 6], ['TBL-TOP', 6]], 'Confirmed');
-    at(3); API.addPayment(me(0), { orderId: o2, amount: 2000, method: 'Cheque', note: 'Cheque 004512' });
-
-    at(12); const e = mk(1, { name: 'Pearl Nails Spa', owner: 'Asma', phone: '0509998877', emirate: 'Sharjah', area: 'Al Majaz', priceTier: 'Budget', source: 'Google Maps' });
-    at(12); log(1, e, { type: 'call', note: 'Interested but price sensitive. Visit with samples.', followupDate: addDays(T, 3), followupNote: 'Visit with samples' });
-
-    at(8); const f = mk(2, { name: 'Dalia Ladies Salon', owner: 'Dalia', phone: '0524445566', emirate: 'Abu Dhabi', area: 'Khalifa City', priceTier: 'Mid', source: 'Walk-in' });
-    at(7); log(2, f, { type: 'sample', samples: [{ sku: 'TBL188', product: 'Gel polish 188 Milky Rose', qty: 1 }, { sku: 'TBL193', product: 'Gel polish 193 Mocha Latte', qty: 1 }] });
-    at(2); order(2, f, [['TBL188', 10], ['TBL193', 6], ['TBL-BASE', 2]], 'Draft');
-
-    at(6); const g = mk(0, { name: 'Nail Theory', owner: 'Lina', instagram: '@nailtheory', phone: '0543332211', emirate: 'Dubai', area: 'Jumeirah', priceTier: 'Premium', source: 'Event' });
-    at(5); API.saveSalon(me(0), { salon: { id: g, status: 'Lost' }, statusReason: 'Locked into a 1-year contract with another brand' });
-    at(4); const h = mk(1, { name: 'Rosewater Beauty', owner: 'Reem', phone: '0558887766', emirate: 'Abu Dhabi', area: 'Saadiyat', priority: 'Warm', priceTier: 'Luxury', source: 'Referral' });
-    at(1); const i = mk(0, { name: 'Glow Bar', phone: '0561239876', emirate: 'Dubai', area: 'Dubai Marina', source: 'Instagram', priority: 'Cold' });
-    at(0); API.scheduleFollowup(me(0), { salonId: i, date: addDays(T, 5), note: 'Send intro on WhatsApp' });
+    at(20); const counts = [24, 12, 2, 0, 18, 30, 5, 9, 1, 14];
+    API.stockBatch(me(0), { kind: 'count', lines: DEMO_PRODUCTS.map((r, i) => ({ sku: r[0], qty: i % 11 === 7 ? '' : counts[i % counts.length] })).filter(l => l.qty !== '') });
+    at(15); API.stockBatch(me(0), { kind: 'receive', ref: 'JOIA-INV-2026-118', lines: DEMO_PRODUCTS.slice(0, 8).map(r => ({ sku: r[0], qty: 6 })) });
+    const mk = (i, s) => API.saveSalon(me(i), { salon: s }).upsert.salons[0].id;
+    at(18); const a = mk(1, { name: 'Bedazzled', owner: 'Khadiga', phone: '+971 58 655 1975', emirate: 'Dubai', area: 'Al Barsha', lat: '25.08764', lng: '55.311238', priority: 'Warm', source: 'Walk-in' });
+    at(18); const b = mk(1, { name: 'The Nail Pavilion', owner: 'Eman', phone: '+971 56 982 1084', emirate: 'Dubai', area: 'Al Quoz', lat: '25.099308', lng: '55.316364' });
+    at(17); const c = mk(2, { name: 'Belle Femme', phone: '+971 58 276 2652', emirate: 'Dubai', area: 'Business Bay', priority: 'Hot', source: 'Instagram' });
+    at(16); const d = mk(2, { name: 'Nooshe\u2019s Beauty', phone: '+971 55 881 7719', emirate: 'Dubai', area: 'Bay Square', source: 'Referral' });
+    at(9); const e = mk(1, { name: 'Tips and Toes', phone: '600 586848', emirate: 'Dubai', area: 'JLT' });
+    at(3); const f = mk(2, { name: 'Sisters Beauty Lounge', phone: '800 7478377', emirate: 'Dubai', area: 'Al Wasl', source: 'Google Maps' });
+    at(1); mk(0, { name: 'Glow Bar', phone: '056 123 9876', emirate: 'Abu Dhabi', area: 'Al Reem', source: 'Instagram', priority: 'Cold' });
+    at(17); API.logActivity(me(1), { salonId: a, type: 'visit', note: 'Met Khadiga, they use OPI now. Interested in vegan line.', lat: '25.08770', lng: '55.31120', distance: 9 });
+    at(17); API.logActivity(me(1), { salonId: a, type: 'sample', samples: [{ sku: DEMO_PRODUCTS[0][0], product: DEMO_PRODUCTS[0][2], qty: 2 }, { sku: DEMO_PRODUCTS[12][0], product: DEMO_PRODUCTS[12][2], qty: 1 }], note: 'Left with senior tech', followupDate: addDays(T, -1), followupNote: 'Ask how the samples went' });
+    at(16); API.logActivity(me(2), { salonId: c, type: 'sample', samples: [{ sku: DEMO_PRODUCTS[2][0], product: DEMO_PRODUCTS[2][2], qty: 1 }], followupDate: T, followupNote: 'Check samples, offer price list' });
+    at(15); API.logActivity(me(2), { salonId: d, type: 'whatsapp', note: 'Sent intro', followupDate: addDays(T, 3) });
+    at(10); API.stockBatch(me(0), { kind: 'salon', salonId: b, ref: 'INV-0007', lines: [{ sku: DEMO_PRODUCTS[1][0], qty: 3 }, { sku: DEMO_PRODUCTS[5][0], qty: 4 }] });
+    at(8); API.logActivity(me(1), { salonId: e, type: 'call', note: 'Manager on leave, call back', followupDate: addDays(T, -3) });
+    at(2); API.logActivity(me(2), { salonId: f, type: 'visit', note: 'Checked in, left brochure', lat: '25.20', lng: '55.25', distance: 120 });
+    at(0); API.scheduleFollowup(me(1), { salonId: b, date: addDays(T, 21), note: 'Reorder check' });
   } finally { nowISO = _now; todayStr = _today; }
   saveDemo();
 }
@@ -1452,7 +1449,7 @@ async function boot() {
   if (!token) { render(); return; }
   const c = LS.get('tbl_cache', null);
   if (c && c.me) { S = Object.assign(S, c); render(); window.__last = Date.now(); refresh(true); }
-  else { $('#app').innerHTML = '<div class="login"><div class="sw big" data-s="Sampled"></div><h1>Salon Sales</h1><p class="muted">Loading your salons…</p></div>'; window.__last = Date.now(); await refresh(true); if (!S.me) render(); }
+  else { $('#app').innerHTML = '<div class="login"><div class="brand"><img src="joia-logo-white.png" alt="JOIA Vegan"></div><h1>JOIA Sales</h1><p class="muted">Loading…</p></div>'; window.__last = Date.now(); await refresh(true); if (!S.me) render(); }
 }
 boot();
 
