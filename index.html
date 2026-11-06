@@ -215,6 +215,56 @@ a.btn{text-decoration:none}
   :root{padding:0}
 }
 
+svg.i.sm{width:15px;height:15px;vertical-align:-3px}
+.hist{padding:2px 14px 6px}
+.day{font-size:13px;font-weight:700;color:var(--muted);padding:14px 2px 4px}
+.hi{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.day+.hi,.hist>.hi:first-child{border-top:0}
+.hi .dot{width:34px;height:34px;border-radius:11px;background:var(--sunk);display:grid;place-items:center;flex:none;color:var(--wine)}
+.hi .dot svg.i{width:17px;height:17px}
+.hi.t-visit .dot{background:var(--ok-soft);color:var(--ok)}
+.hi.t-samples .dot{background:var(--wine-soft);color:var(--wine)}
+.hi.t-followup .dot{background:var(--warn-soft);color:var(--warn)}
+.hi.t-status .dot{background:var(--ink);color:var(--bg)}
+.hi .body{flex:1;min-width:0}
+.hi .hm{font-size:13px;color:var(--muted);margin-top:2px;display:flex;align-items:center;flex-wrap:wrap;gap:2px 6px}
+.hi .hm a{display:inline-flex;align-items:center;gap:3px;text-decoration:none;font-weight:600}
+.hi p{margin:6px 0 0;white-space:pre-wrap;word-break:break-word;font-size:15px}
+.hx{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;align-items:center}
+.hx .pill{font-weight:500;white-space:normal}
+.fuline{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;border-radius:12px;background:var(--sunk);font-size:14px}
+.fuline>div{flex:1}
+.fuline.late{background:var(--bad-soft);color:var(--bad)} .fuline.today{background:var(--warn-soft);color:var(--warn)}
+.fuline.done{background:var(--ok-soft);color:var(--ok)} .fuline.done div div{color:var(--ink);margin-top:2px}
+.lb{padding:4px 16px 10px}
+.lh,.lr{display:grid;grid-template-columns:minmax(0,1fr) 44px 44px 58px 40px;align-items:center;gap:4px;text-align:center}
+.lh{font-size:12px;color:var(--muted);padding:8px 0 4px}
+.lr{padding:9px 0;border-top:1px solid var(--line)}
+.lr .nm{text-align:left;font-weight:600;display:flex;align-items:center;min-width:0;white-space:nowrap;overflow:hidden}
+.otl{padding:8px 16px}
+.ost{display:flex;gap:12px;align-items:flex-start;padding:8px 0;position:relative}
+.ost>span{width:12px;height:12px;border-radius:50%;border:2px solid var(--line);background:var(--surface);margin-top:5px;flex:none}
+.ost.on>span{background:var(--wine);border-color:var(--wine)}
+.ost:not(:last-child)::after{content:"";position:absolute;left:5px;top:22px;bottom:-6px;width:2px;background:var(--line)}
+.net{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;display:flex;align-items:center;gap:8px;justify-content:center;padding:8px 14px;background:var(--warn-soft);color:var(--warn);font-size:14px;font-weight:600}
+.net.sync{background:var(--wine-soft);color:var(--wine)}
+.tick{width:30px;height:30px;border-radius:9px;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center;flex:none;cursor:pointer;color:var(--on-wine);padding:0}
+.tick.on{background:var(--wine);border-color:var(--wine)}
+.tick[disabled]{opacity:.35}
+.tick svg.i{width:18px;height:18px}
+.planbar{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px;background:var(--surface);padding:10px 12px 10px 16px;border-radius:18px;box-shadow:0 10px 30px -10px rgba(36,26,38,.35);margin-top:8px}
+.planbar>span{flex:1}
+.tg{margin:4px 0 10px}
+.tgh{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.mnav{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 8px}
+.tgrid .f input{padding:10px}
+.chk{display:flex;gap:10px;align-items:center;margin:-6px 0 14px;font-size:14.5px;font-weight:600}
+.chk input{width:20px;height:20px;accent-color:var(--wine)}
+.hm .av,.lr .av,.pill .av{display:inline-grid;place-items:center;border-radius:50%;background:var(--wine-soft);color:var(--wine);font-weight:700;flex:none;vertical-align:middle}
+.tabbar.six button{font-size:10.5px;padding-left:0;padding-right:0}
+.tabbar.six svg.i{width:21px;height:21px}
+
 </style>
 <script src="config.js"></script>
 </head>
@@ -561,6 +611,229 @@ var API = {
   }
 };
 
+
+/* ============================================================
+ * JOIA Sales 3.2 additions: orders (with stock), Zoho hook, targets,
+ * commission, offline replay, richer follow-up history.
+ * ============================================================ */
+APP_VERSION = '3.2';
+var NOW_OVERRIDE = '';
+function nowISO() { return NOW_OVERRIDE || new Date().toISOString(); }
+
+TABLES.salons.head = TABLES.salons.head.concat(['billingName', 'trn', 'zohoContactId']);
+TABLES.acts.head = TABLES.acts.head.concat(['doneBy']);
+TABLES.products.head = TABLES.products.head.concat(['zohoItemId']);
+TABLES.orders = { sheet: 'Orders', key: 'id', head: ['id','orderNo','salonId','status','orderDate','deliveryDate','deliverySlot','deliveryAddress','deliveryArea','deliveryEmirate','contactName','contactPhone','paymentMethod','poRef','zohoInvoice',
+  'units','subtotal','discountMode','discountPct','discount','deliveryMode','delivery','vatRate','vat','total','notes','createdAt','createdBy','updatedAt','submittedAt','submittedBy','invoicedAt','invoicedBy','deliveredAt','deliveredBy','cancelledAt','cancelReason','stockOut',
+  'zohoInvoiceId','zohoStatus','zohoBalance','zohoTotal','zohoError','zohoSyncedAt'] };
+TABLES.items = { sheet: 'OrderItems', key: 'id', head: ['id','orderId','sku','product','qty','price','lineTotal'] };
+TABLES.targets = { sheet: 'Targets', key: 'id', head: ['id','month','email','visits','newSalons','orders','units','value'] };
+
+DEFAULT_SETTINGS = DEFAULT_SETTINGS.concat([
+  ['orderPrefix', 'SO-', 'Sales order number prefix'],
+  ['opsWhatsApp', '', 'WhatsApp number that receives new orders (the person who invoices in Zoho)'],
+  ['freeDeliveryOver', '', 'Free delivery from this amount. Empty = always charge'],
+  ['vatEnabled', 'yes', 'yes or no'],
+  ['vatRate', '5', 'VAT %'],
+  ['checkinRadius', '150', 'Metres from the salon pin that count as at the salon'],
+  ['commissionPct', '', 'Commission % of delivered order value before VAT. Empty = off'],
+  ['commissionPerUnit', '', 'Or commission in AED per delivered unit. Empty = off'],
+  ['zohoAutoInvoice', 'yes', 'yes = create the Zoho invoice automatically when an order is submitted'],
+  ['zohoInvoiceAs', 'draft', 'draft or sent. Draft lets the office review before sending'],
+  ['zohoTaxId', '', 'Zoho tax_id of your 5% VAT (run zohoListTaxes in Apps Script)'],
+  ['zohoAccounts', 'https://accounts.zoho.com', 'Your Zoho login domain, e.g. https://accounts.zoho.com'],
+  ['zohoClientId', '', 'From api-console.zoho.com Self Client. Cleared after connecting'],
+  ['zohoClientSecret', '', 'From the Self Client. Cleared after connecting'],
+  ['zohoGrantCode', '', 'Generated code, valid 10 minutes. Then run zohoConnect']
+]);
+
+function publicSettings(S) { var o = {}; for (var k in S) if (!/^zoho(ClientId|ClientSecret|GrantCode)$/.test(k)) o[k] = S[k]; return o; }
+function lc(e) { return String(e || '').trim().toLowerCase(); }
+function calcTotals(items, S, o) {
+  o = o || {};
+  var sub = 0, units = 0;
+  (items || []).forEach(function (i) { sub += num(i.qty) * num(i.price); units += num(i.qty); });
+  sub = r2(sub);
+  var t2 = num(S.tier2Amount), t1 = num(S.tier1Amount);
+  var tier = (t2 > 0 && sub >= t2) ? num(S.tier2Pct) : (t1 > 0 && sub >= t1) ? num(S.tier1Pct) : 0;
+  var pct = o.discountMode === 'manual' ? num(o.discountPct) : tier;
+  var discount = r2(sub * pct / 100), net = r2(sub - discount);
+  var fee = num(S.deliveryFee), freeOver = num(S.freeDeliveryOver);
+  var delivery = !(items || []).length || sub === 0 ? 0 : o.deliveryMode === 'free' ? 0 : (freeOver > 0 && net >= freeOver ? 0 : fee);
+  var vatRate = isTrue(S.vatEnabled) ? num(S.vatRate) : 0;
+  var vat = r2((net + delivery) * vatRate / 100);
+  return { units: units, subtotal: sub, tierPct: tier, discountPct: pct, discount: discount, delivery: r2(delivery), vatRate: vatRate, vat: vat, total: r2(net + delivery + vat), belowMin: sub > 0 && sub < num(S.minOrder) };
+}
+
+/* bootstrap and delete also cover orders */
+(function () {
+  var boot = API.bootstrap;
+  API.bootstrap = function (me) {
+    var o = boot(me);
+    o.orders = DB.all('orders'); o.items = DB.all('items'); o.targets = DB.all('targets');
+    o.settings = publicSettings(o.settings);
+    return o;
+  };
+  var del = API.deleteSalon;
+  API.deleteSalon = function (me, p) {
+    needAdmin(me);
+    var id = String(p.id), tx = newTx();
+    var oids = DB.all('orders').filter(function (o) { return String(o.salonId) === id; }).map(function (o) { return String(o.id); });
+    drop(tx, 'items', function (r) { return oids.indexOf(String(r.orderId)) >= 0; });
+    drop(tx, 'orders', function (r) { return String(r.salonId) === id; });
+    var t2 = del(me, p);
+    for (var k in t2.remove) tx.remove[k] = (tx.remove[k] || []).concat(t2.remove[k]);
+    return tx;
+  };
+})();
+
+/* follow-ups remember who closed them and when */
+API.completeFollowup = function (me, p) {
+  var tx = newTx(), fu = findRow('acts', p.id);
+  if (!fu) fail('Follow-up not found.');
+  put(tx, 'acts', { id: fu.id, done: nowISO(), doneBy: me.email, outcome: (p.outcomeType && p.outcomeType !== 'skip' ? p.outcomeType + ': ' : '') + (p.note || '') });
+  var patch = {};
+  if (p.outcomeType && p.outcomeType !== 'skip') {
+    var a = addAct(tx, me, fu.salonId, { type: p.outcomeType, note: p.note || '' });
+    if (CONTACT_TYPES.indexOf(p.outcomeType) >= 0) patch.lastContact = a.at;
+  }
+  if (p.nextDate) addAct(tx, me, fu.salonId, { type: 'followup', note: p.nextNote || '', followupDate: p.nextDate });
+  if (p.status) { var s = findRow('salons', fu.salonId); if (s) changeStatus(tx, me, s, p.status, p.statusReason); if (p.status === 'Lost' && p.statusReason) patch.lostReason = p.statusReason; }
+  refreshSalon(tx, fu.salonId, patch);
+  return tx;
+};
+
+/* ---------- sales orders (invoiced in Zoho Books) ----------
+ * Draft -> Submitted -> Invoiced -> Delivered (stock goes out here), or Cancelled (stock comes back) */
+var ORDER_FLOW = ['Draft', 'Submitted', 'Invoiced', 'Delivered'];
+function nextOrderNo(S) {
+  var pre = S.orderPrefix || 'SO-', max = 0;
+  DB.all('orders').forEach(function (o) { var n = String(o.orderNo || ''); if (n.indexOf(pre) === 0) { var v = parseInt(n.slice(pre.length), 10); if (!isNaN(v) && v > max) max = v; } });
+  var next = String(max + 1); while (next.length < 4) next = '0' + next;
+  return pre + next;
+}
+function orderStock(tx, me, o, dir) {
+  var salon = findRow('salons', o.salonId) || {};
+  DB.all('items').filter(function (i) { return String(i.orderId) === String(o.id) && i.sku; }).forEach(function (i) {
+    stockMove(tx, me, i.sku, dir * Math.round(num(i.qty)), dir < 0 ? 'salon' : 'returned', { ref: o.orderNo || o.id, salonId: o.salonId, note: salon.name || '' });
+  });
+}
+function afterOrderStatus(tx, me, o, prev, S, extra) {
+  extra = extra || {};
+  if (prev === o.status) return;
+  var st = o.status; /* o can change under us when Zoho invoices it */
+  var t = nowISO(), patch = { id: o.id, updatedAt: t };
+  var money = num(o.total) ? ', AED ' + num(o.total).toFixed(2) : '';
+  if (st !== 'Draft' && st !== 'Cancelled' && !o.orderNo) { o.orderNo = nextOrderNo(S); patch.orderNo = o.orderNo; }
+  if (ORDER_FLOW.indexOf(st) >= 1 && !o.submittedAt) { patch.submittedAt = t; patch.submittedBy = me.email; }
+  if (st === 'Invoiced' || st === 'Delivered') { if (!o.invoicedAt && st === 'Invoiced') { patch.invoicedAt = t; patch.invoicedBy = me.email; } if (extra.zohoInvoice) patch.zohoInvoice = extra.zohoInvoice; }
+  if (st === 'Delivered' && !o.deliveredAt) { patch.deliveredAt = t; patch.deliveredBy = me.email; }
+  if (st === 'Cancelled') { patch.cancelledAt = t; patch.cancelReason = extra.reason || ''; }
+  if (st === 'Delivered' && !isTrue(o.stockOut)) { orderStock(tx, me, o, -1); patch.stockOut = 'yes'; }
+  if (st === 'Cancelled' && isTrue(o.stockOut)) { orderStock(tx, me, o, 1); patch.stockOut = 'no'; }
+  put(tx, 'orders', patch);
+  var lbl = o.orderNo || 'Draft order';
+  if (ORDER_FLOW.indexOf(prev) < 1 && ORDER_FLOW.indexOf(st) >= 1) {
+    addAct(tx, me, o.salonId, { type: 'order', note: lbl + ' submitted, ' + num(o.units) + ' units' + money + (o.deliveryDate ? '. Delivery ' + o.deliveryDate + (o.deliverySlot ? ' ' + o.deliverySlot : '') : '') });
+    var salon = findRow('salons', o.salonId);
+    if (salon && salon.status !== 'Customer') changeStatus(tx, me, salon, 'Customer', 'order ' + lbl);
+    DB.all('acts').filter(function (a) { return String(a.salonId) === String(o.salonId) && isOpenFu(a) && /^Reorder check/i.test(String(a.note || '')); })
+      .forEach(function (a) { put(tx, 'acts', { id: a.id, done: nowISO(), doneBy: me.email, outcome: 'Ordered: ' + lbl }); });
+    var hasOpen = DB.all('acts').some(function (a) { return String(a.salonId) === String(o.salonId) && isOpenFu(a); });
+    if (!hasOpen) addAct(tx, me, o.salonId, { type: 'followup', note: 'Reorder check after ' + lbl, followupDate: addDays(o.deliveryDate || todayStr(), cadenceFor('Customer', S)) });
+    if (st === 'Submitted' && typeof ZOHO_HOOK === 'function' && isTrue(S.zohoAutoInvoice)) ZOHO_HOOK(tx, me, findRow('orders', o.id), S);
+  }
+  if (st === 'Invoiced' && prev !== 'Invoiced') addAct(tx, me, o.salonId, { type: 'order', note: lbl + ' invoiced in Zoho' + (patch.zohoInvoice || o.zohoInvoice ? ' (' + (patch.zohoInvoice || o.zohoInvoice) + ')' : '') });
+  if (st === 'Delivered') addAct(tx, me, o.salonId, { type: 'delivery', note: lbl + ' delivered, ' + num(o.units) + ' units out of stock' });
+  if (st === 'Cancelled') addAct(tx, me, o.salonId, { type: 'order', note: lbl + ' cancelled' + (extra.reason ? ': ' + extra.reason : '') + (isTrue(o.stockOut) ? '. Stock put back' : '') });
+  refreshSalon(tx, o.salonId, st === 'Delivered' ? { lastContact: t } : null);
+}
+API.saveOrder = function (me, p) {
+  var tx = newTx(), S = S_(), o = pick(p.order || {}, TABLES.orders.head), t = nowISO();
+  var salon = findRow('salons', o.salonId);
+  if (!salon) fail('Pick a salon for this order.');
+  var lines = (p.items || []).filter(function (i) { return i && String(i.product || '').trim() && num(i.qty) > 0; });
+  if (!lines.length) fail('Add at least one product.');
+  var ex = o.id ? findRow('orders', o.id) : null;
+  if (o.id && !ex) fail('Order not found.');
+  if (ex && ['Invoiced', 'Delivered', 'Cancelled'].indexOf(ex.status) >= 0 && !isAdmin(me)) fail('This order is ' + ex.status.toLowerCase() + '. Ask an admin to change it.');
+  if (ex && isTrue(ex.stockOut)) fail('This order already left the stock. Cancel it (stock comes back) and make a new one.');
+  var prev = ex ? ex.status : '';
+  ['orderNo', 'createdAt', 'createdBy', 'submittedAt', 'submittedBy', 'invoicedAt', 'invoicedBy', 'deliveredAt', 'deliveredBy', 'cancelledAt', 'stockOut', 'zohoInvoiceId', 'zohoStatus', 'zohoBalance', 'zohoTotal', 'zohoError', 'zohoSyncedAt', 'zohoInvoice'].forEach(function (k) { delete o[k]; });
+  if (!ex) { o.id = DB.uid(); o.createdAt = t; o.createdBy = me.email; }
+  o.status = o.status || (ex ? ex.status : 'Draft');
+  if (o.status !== 'Draft' && !String(o.deliveryDate || '').trim()) fail('Pick a preferred delivery date.');
+  if (o.status !== 'Draft' && !String(o.deliveryAddress || '').trim()) fail('Add the delivery address.');
+  o.orderDate = String(o.orderDate || (ex && ex.orderDate) || todayStr()).slice(0, 10);
+  var T = calcTotals(lines, S, o);
+  o.units = T.units; o.subtotal = T.subtotal; o.discountPct = T.discountPct; o.discount = T.discount; o.delivery = T.delivery; o.vatRate = T.vatRate; o.vat = T.vat; o.total = T.total;
+  o.discountMode = o.discountMode === 'manual' ? 'manual' : 'auto';
+  o.deliveryMode = o.deliveryMode === 'free' ? 'free' : 'auto';
+  o.updatedAt = t;
+  drop(tx, 'items', function (r) { return String(r.orderId) === String(o.id); });
+  lines.forEach(function (i) { put(tx, 'items', { id: DB.uid(), orderId: o.id, sku: i.sku || '', product: String(i.product).trim(), qty: Math.round(num(i.qty)), price: r2(num(i.price)), lineTotal: r2(num(i.qty) * num(i.price)) }); });
+  put(tx, 'orders', o);
+  if (o.deliveryAddress && (p.updateSalonAddress || !String(salon.address || '').trim())) put(tx, 'salons', { id: salon.id, address: o.deliveryAddress, area: o.deliveryArea || salon.area || '', emirate: o.deliveryEmirate || salon.emirate || '' });
+  if (p.updateSalonAddress && o.deliveryAddress) addAct(tx, me, salon.id, { type: 'note', note: 'Address updated from order: ' + [o.deliveryAddress, o.deliveryArea, o.deliveryEmirate].filter(Boolean).join(', ') });
+  afterOrderStatus(tx, me, findRow('orders', o.id), prev, S);
+  return tx;
+};
+API.setOrderStatus = function (me, p) {
+  var tx = newTx(), S = S_(), o = findRow('orders', p.id);
+  if (!o) fail('Order not found.');
+  if (['Draft', 'Submitted', 'Invoiced', 'Delivered', 'Cancelled'].indexOf(p.status) < 0) fail('Unknown status.');
+  if ((o.status === 'Delivered' || o.status === 'Cancelled') && !isAdmin(me)) fail('Only an admin can change a ' + o.status.toLowerCase() + ' order.');
+  if (p.status === 'Draft' && o.orderNo && !isAdmin(me)) fail('This order was already submitted. Cancel it instead.');
+  if (p.status !== 'Draft' && p.status !== 'Cancelled' && (!o.deliveryDate || !o.deliveryAddress)) fail('Add the delivery date and address first.');
+  var prev = o.status;
+  put(tx, 'orders', { id: o.id, status: p.status, updatedAt: nowISO() });
+  afterOrderStatus(tx, me, findRow('orders', o.id), prev, S, { zohoInvoice: p.zohoInvoice, reason: p.reason });
+  return tx;
+};
+API.deleteOrder = function (me, p) {
+  var o = findRow('orders', p.id);
+  if (!o) fail('Order not found.');
+  if (o.status !== 'Draft' && !isAdmin(me)) fail('Only drafts can be deleted. Cancel it instead.');
+  if (o.status === 'Draft' && lc(o.createdBy) !== me.email && !isAdmin(me)) fail('You can only delete your own drafts.');
+  var tx = newTx();
+  if (isTrue(o.stockOut)) orderStock(tx, me, o, 1);
+  drop(tx, 'items', function (r) { return String(r.orderId) === String(o.id); });
+  drop(tx, 'orders', function (r) { return String(r.id) === String(o.id); });
+  return tx;
+};
+
+/* ---------- targets and commission ---------- */
+API.saveTargets = function (me, p) {
+  needAdmin(me);
+  if (!/^\d{4}-\d{2}$/.test(String(p.month || ''))) fail('Pick a month.');
+  var tx = newTx();
+  (p.rows || []).forEach(function (r) {
+    var email = lc(r.email); if (!email) return;
+    put(tx, 'targets', { id: p.month + '|' + email, month: p.month, email: email, visits: num(r.visits) || '', newSalons: num(r.newSalons) || '', orders: num(r.orders) || '', units: num(r.units) || '', value: num(r.value) || '' });
+  });
+  return tx;
+};
+function monthActuals(email, month, data) {
+  var inM = function (d) { return String(d || '').slice(0, 7) === month; };
+  var mine = function (v) { return lc(v) === email; };
+  var live = (data.orders || []).filter(function (o) { return ['Submitted', 'Invoiced', 'Delivered'].indexOf(o.status) >= 0 && mine(o.submittedBy || o.createdBy) && inM(o.submittedAt || o.orderDate); });
+  var delivered = (data.orders || []).filter(function (o) { return o.status === 'Delivered' && mine(o.createdBy) && inM(o.deliveredAt); });
+  return {
+    visits: (data.acts || []).filter(function (a) { return a.type === 'visit' && mine(a.by) && inM(a.at); }).length,
+    newSalons: (data.salons || []).filter(function (s) { return mine(s.createdBy) && inM(s.createdAt); }).length,
+    orders: live.length,
+    units: live.reduce(function (t, o) { return t + num(o.units); }, 0),
+    value: r2(live.reduce(function (t, o) { return t + num(o.subtotal) - num(o.discount); }, 0)),
+    deliveredValue: r2(delivered.reduce(function (t, o) { return t + num(o.subtotal) - num(o.discount); }, 0)),
+    deliveredUnits: delivered.reduce(function (t, o) { return t + num(o.units); }, 0)
+  };
+}
+function commissionFor(act, S) {
+  var c = 0;
+  if (num(S.commissionPct) > 0) c += act.deliveredValue * num(S.commissionPct) / 100;
+  if (num(S.commissionPerUnit) > 0) c += act.deliveredUnits * num(S.commissionPerUnit);
+  return r2(c);
+}
 </script>
 <script>
 /* ============================================================
@@ -573,12 +846,13 @@ const LS = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
   del(k) { try { localStorage.removeItem(k); } catch (e) {} }
 };
-const KEYS = { salons: 'id', acts: 'id', samples: 'id', products: 'sku', moves: 'id', team: 'email' };
-let S = { me: null, users: [], names: {}, team: [], salons: [], acts: [], samples: [], products: [], moves: [], settings: {} };
+const KEYS = { salons: 'id', acts: 'id', samples: 'id', products: 'sku', moves: 'id', team: 'email', users: 'email', orders: 'id', items: 'id', targets: 'id' };
+let S = { me: null, users: [], names: {}, team: [], salons: [], acts: [], samples: [], products: [], moves: [], orders: [], items: [], targets: [], settings: {} };
 let X = {}; // indexes
 let token = LS.get('tbl_token', null);
 let nav = { tab: 'today', stack: [] };
-let ui = { q: '', status: 'All', mine: false, sort: 'next', fuSeg: 'late', fuMine: false, salonTab: 'timeline', sq: '', sf: 'All', scat: 'All', ccat: '' };
+let ui = { q: '', status: 'All', mine: false, sort: 'next', fuSeg: 'late', fuMine: false, salonTab: 'timeline', sq: '', sf: 'All', scat: 'All', ccat: '', hType: 'all', logUser: 'all', logType: 'all', oFilter: 'open', oMine: false, oq: '', pos: null, planArea: 'near', planPick: LS.get('tbl_plan_' + new Date().toISOString().slice(0, 10), []), tMonth: new Date().toISOString().slice(0, 7) };
+let ED = null;
 
 /* ---------- helpers ---------- */
 const $ = (s, r = document) => r.querySelector(s);
@@ -596,6 +870,7 @@ const P = {
   clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2', trash: 'M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13', cash: 'M3 7h18v10H3zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
   truck: 'M3 6h11v10H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z', user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0',
   refresh: 'M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7', flag: 'M5 21V4h11l-2 4 2 4H5', star: 'M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z',
+  cloud: 'M7 18a5 5 0 1 1 1-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 8z', route: 'M6 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM6 15V9a4 4 0 0 1 4-4h6M18 9v6a4 4 0 0 1-4 4H8', target: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01', radar: 'M12 21a9 9 0 1 1 9-9M12 12l6-6M12 16a4 4 0 1 1 4-4',
   copy: 'M8 8h12v12H8zM4 16V4h12', minus: 'M5 12h14', box: 'M3 7.5 12 3l9 4.5v9L12 21l-9-4.5zM3 7.5l9 4.5 9-4.5M12 12v9',
   arrowIn: 'M12 3v12M7 10l5 5 5-5M4 19h16', list: 'M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01', key: 'M14 10a4 4 0 1 0-3.9 4.9L9 16H7v2H5v2H3v-3l6.1-6.1A4 4 0 0 0 14 10zM16 8h.01'
 };
@@ -1373,7 +1648,7 @@ const H = {
 document.addEventListener('click', e => {
   const el = e.target.closest('[data-a]'); if (!el) return;
   const fn = H[el.dataset.a]; if (!fn) return;
-  e.preventDefault(); fn(el.dataset.id, el);
+  if (el.type !== 'checkbox') e.preventDefault(); fn(el.dataset.id, el);
 });
 document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'lg-pin') H.login(); if (e.key === 'Escape' && $('.sheet')) closeSheet(); });
 document.addEventListener('input', e => {
@@ -1406,8 +1681,8 @@ if (DEMO) {
     remove(t, p) { const k = TABLES[t].key, a = DB.all(t), ids = a.filter(p).map(r => r[k]); MEM[t] = a.filter(r => !p(r)); return ids; }
   };
 }
-function saveDemo() { LS.set('tbl_demo_v3', MEM); }
-function initDemo() { const m = LS.get('tbl_demo_v3', null); if (m && m.salons && m.products) MEM = m; else seedDemo(); }
+function saveDemo() { LS.set('tbl_demo_v32', MEM); }
+function initDemo() { const m = LS.get('tbl_demo_v32', null); if (m && m.salons && m.products) MEM = m; else seedDemo(); }
 const DEMO_PRODUCTS = [["TBL#1","001","Gel Polish 001","Gel Polish","6 ml",24.0],["TBL#3","003","Gel Polish 003","Gel Polish","6 ml",24.0],["TBL#5","005","Gel Polish 005","Gel Polish","6 ml",24.0],["TBL#7","007","Gel Polish 007","Gel Polish","6 ml",24.0],["TBL#9","010","Gel Polish 010","Gel Polish","6 ml",24.0],["TBL#11","012","Gel Polish 012","Gel Polish","6 ml",24.0],["TBL#13","014","Gel Polish 014","Gel Polish","6 ml",24.0],["TBL#15","016","Gel Polish 016","Gel Polish","6 ml",24.0],["TBL#17","018","Gel Polish 018","Gel Polish","6 ml",24.0],["TBL#19","021","Gel Polish 021","Gel Polish","6 ml",24.0],["TBL#21","023","Gel Polish 023","Gel Polish","6 ml",24.0],["TBL#23","025","Gel Polish 025","Gel Polish","6 ml",24.0],["TBL#121","148","Gel Polish 148","Gel Polish","6 ml",24.0],["TBL#127","154","Gel Polish 154","Gel Polish","6 ml",24.0],["TBL#133","160","Gel Polish 160","Gel Polish","6 ml",24.0],["TBL#139","166","Gel Polish 166","Gel Polish","6 ml",24.0],["TBL#145","172","Gel Polish 172","Gel Polish","6 ml",24.0],["TBL#190","","Latex Base","Bases","8 ml",25.03],["TBL#220","","Latex Base","Bases","15 ml",47.0],["TBL#234","","Latex Base","Bases","50 ml",135.0],["TBL#239","","Smart Top No Wipe","Tops","8 ml",27.0],["TBL#240","","Aqua Gloss Top No Wipe","Tops","8 ml",25.0],["TBL#250","","Aqua Gloss Top No Wipe","Tops","15 ml",46.0],["TBL#255","","PolyLiquid Gel 04 Second Skin","Builder Gels","8 ml",33.0],["TBL#256","","PolyLiquid Gel 06 Pink Lace","Builder Gels","8 ml",33.0],["TBL#257","","PolyLiquid Gel 07 Delicate Blush","Builder Gels","8 ml",33.0],["TBL#384","","Velvet Touch Cream, Toffee Latte","Nail & Cuticle Care","150 ml",60.0],["TBL#390","","Brut Oil 24C","Nail & Cuticle Care","8 ml",14.0],["TBL#391","","Brut Oil 24C","Nail & Cuticle Care","15 ml",23.0],["TBL#180","","Nail Care Polish 4in1 01 Ideal White","Nail Care Polish 4in1","8 ml",25.0],["TBL#181","","Nail Care Polish 4in1 02 Baby Pink","Nail Care Polish 4in1","8 ml",25.0],["TBL#182","","Nail Care Polish 4in1 03 Caramel Veil","Nail Care Polish 4in1","8 ml",25.0],["TBL#379","","Nail Primer","Prep & Liquids","8 ml",13.0],["TBL#380","","Nail Primer","Prep & Liquids","15 ml",19.0],["TBL#381","","Nail Dryer","Prep & Liquids","8 ml",13.0],["TBL#414","","Gel Polish + Nail Care Duo Kit 001: GP 001 + 01 Ideal White","Kits","2 items",47.0],["TBL#415","","Gel Polish + Nail Care Duo Kit 002: GP 007 + 02 Baby Pink","Kits","2 items",47.0],["TBL#416","","Gel Polish + Nail Care Duo Kit 003: GP 005 + 03 Caramel Veil","Kits","2 items",47.0],["TBL#174","","Cat Eye Gel Polish 01CE Threshold Glow","Cat Eye","6 ml",30.0],["TBL#175","","Cat Eye Gel Polish 02CE Petal Mist","Cat Eye","6 ml",30.0],["TBL#176","","Cat Eye Gel Polish 03CE Worldshift Pulse","Cat Eye","6 ml",30.0]];
 function seedDemo() {
   MEM = {};
@@ -1438,6 +1713,7 @@ function seedDemo() {
     at(8); API.logActivity(me(1), { salonId: e, type: 'call', note: 'Manager on leave, call back', followupDate: addDays(T, -3) });
     at(2); API.logActivity(me(2), { salonId: f, type: 'visit', note: 'Checked in, left brochure', lat: '25.20', lng: '55.25', distance: 120 });
     at(0); API.scheduleFollowup(me(1), { salonId: b, date: addDays(T, 21), note: 'Reorder check' });
+    seedExtra(me, at, T, { a, b, c, d, e, f });
   } finally { nowISO = _now; todayStr = _today; }
   saveDemo();
 }
@@ -1451,8 +1727,801 @@ async function boot() {
   if (c && c.me) { S = Object.assign(S, c); render(); window.__last = Date.now(); refresh(true); }
   else { $('#app').innerHTML = '<div class="login"><div class="brand"><img src="joia-logo-white.png" alt="JOIA Vegan"></div><h1>JOIA Sales</h1><p class="muted">Loading…</p></div>'; window.__last = Date.now(); await refresh(true); if (!S.me) render(); }
 }
-boot();
 
+
+/* ============================================================
+ * JOIA Sales 3.2 overlay: orders, Zoho, reorder radar, plan my day,
+ * targets and commission, offline mode, richer history.
+ * Function declarations here replace the 3.0 ones of the same name.
+ * ============================================================ */
+const initials = n => String(n || '?').split(/[\s.@]+/).filter(Boolean).map(x => x[0]).join('').slice(0, 2).toUpperCase();
+const avatar = (email, size = 26) => `<span class="av" style="width:${size}px;height:${size}px;font-size:${Math.round(size * .4)}px;margin-right:6px">${esc(initials(uName(email)))}</span>`;
+const typeOf = a => a.type === 'sample' ? 'samples' : a.type === 'checkin' ? 'visit' : a.type;
+const liveOrd = o => ['Submitted', 'Invoiced', 'Delivered'].includes(o.status);
+const showMoney = () => S.products.some(p => num(p.price) > 0) || S.orders.some(o => num(o.subtotal) > 0);
+const pLabel = p => p ? p.name + (p.size ? ', ' + p.size : '') : '';
+
+function reindex() {
+  X = { salon: {}, acts: {}, samplesBySalon: {}, samplesByAct: {}, prod: {}, moves: {}, order: {}, orders: {}, items: {} };
+  S.salons.forEach(s => X.salon[s.id] = s);
+  S.acts.forEach(a => (X.acts[a.salonId] = X.acts[a.salonId] || []).push(a));
+  S.samples.forEach(x => { (X.samplesBySalon[x.salonId] = X.samplesBySalon[x.salonId] || []).push(x); (X.samplesByAct[x.activityId] = X.samplesByAct[x.activityId] || []).push(x); });
+  S.products.forEach(p => X.prod[p.sku] = p);
+  S.moves.forEach(m => (X.moves[m.sku] = X.moves[m.sku] || []).push(m));
+  S.orders.forEach(o => { X.order[o.id] = o; (X.orders[o.salonId] = X.orders[o.salonId] || []).push(o); });
+  S.items.forEach(i => (X.items[i.orderId] = X.items[i.orderId] || []).push(i));
+  Object.values(X.acts).forEach(l => l.sort((a, b) => String(b.at).localeCompare(String(a.at))));
+  Object.values(X.moves).forEach(l => l.sort((a, b) => String(a.at).localeCompare(String(b.at))));
+  Object.values(X.orders).forEach(l => l.sort((a, b) => String(b.orderDate || b.createdAt).localeCompare(String(a.orderDate || a.createdAt)) || String(b.createdAt).localeCompare(String(a.createdAt))));
+}
+function salonNums(id) {
+  const acts = X.acts[id] || [], sm = X.samplesBySalon[id] || [], os = (X.orders[id] || []).filter(liveOrd);
+  return {
+    visits: acts.filter(a => typeOf(a) === 'visit').length,
+    touches: acts.filter(a => ['call', 'whatsapp', 'email', 'meeting'].includes(typeOf(a))).length,
+    samples: sm.reduce((t, x) => t + num(x.qty), 0), products: new Set(sm.map(x => x.product)).size,
+    fuDone: acts.filter(a => a.followupDate && isDone(a.done)).length,
+    orders: os.length, orderUnits: os.reduce((t, o) => t + num(o.units), 0), orderValue: os.reduce((t, o) => t + num(o.total), 0), lastOrder: (os[0] || {}).orderDate || ''
+  };
+}
+
+/* ---------- API with offline mode ---------- */
+async function api(action, payload = {}) {
+  if (DEMO) { await sleep(150); const out = JSON.parse(JSON.stringify(API[action](DEMO_ME, payload))); saveDemo(); return out; }
+  let res;
+  try { res = await fetch(CFG.API_URL, { method: 'POST', body: JSON.stringify(Object.assign({}, payload, { action, token })) }); }
+  catch (e) { const er = new Error('No connection. Check your internet and try again.'); er.offline = true; throw er; }
+  const j = await res.json().catch(() => ({ ok: false, error: 'The server reply was not readable. Check the API link in config.js.' }));
+  if (!j.ok) { if (j.auth) { signOut(true); } throw new Error(j.error || 'Something went wrong.'); }
+  return j.data;
+}
+const QUEUE_OK = ['logActivity', 'scheduleFollowup', 'completeFollowup', 'snoozeFollowup', 'saveSalon', 'saveOrder', 'setOrderStatus'];
+let Q = LS.get('tbl_queue', []), flushing = false;
+if (!DEMO) window.DB = {
+  uid() { const id = (Date.now().toString(36) + Math.random().toString(36).slice(2, 9)).slice(-14); if (window.__ids) window.__ids.push(id); return id; },
+  all(t) { if (t === 'settings') return Object.entries(S.settings).map(([key, value]) => ({ key, value })); if (t === 'users') return S.team && S.team.length ? S.team : S.users; return S[t] || (S[t] = []); },
+  upsert(t, o) { if (t === 'settings' || t === 'users') return o; const k = TABLES[t].key, a = DB.all(t), ex = a.find(r => String(r[k]) === String(o[k])); if (ex) { Object.assign(ex, o); return Object.assign({}, ex); } const n = Object.assign({}, o); a.push(n); return Object.assign({}, n); },
+  remove(t, p) { const k = TABLES[t].key, a = DB.all(t), ids = a.filter(p).map(r => r[k]); S[t] = a.filter(r => !p(r)); return ids; }
+};
+function queueLocal(action, payload, okMsg) {
+  const now = new Date().toISOString();
+  window.__ids = []; NOW_OVERRIDE = now;
+  let tx;
+  try { tx = API[action](S.me, JSON.parse(JSON.stringify(payload))); }
+  finally { NOW_OVERRIDE = ''; }
+  Q.push({ action, payload, _ids: window.__ids, _now: now }); window.__ids = null;
+  LS.set('tbl_queue', Q);
+  apply(tx);
+  toast((okMsg || 'Saved') + ' on this phone. It syncs when you are back online.');
+  return tx;
+}
+async function flush() {
+  if (DEMO || flushing || !Q.length || !token || !navigator.onLine) return;
+  flushing = true; render();
+  let synced = 0;
+  try {
+    while (Q.length) {
+      const it = Q[0];
+      try { const tx = await api(it.action, Object.assign({}, it.payload, { _ids: it._ids, _now: it._now })); Q.shift(); LS.set('tbl_queue', Q); apply(tx); synced++; }
+      catch (e) { if (e.offline) break; Q.shift(); LS.set('tbl_queue', Q); toast('One offline change could not be saved: ' + e.message, 'bad'); }
+    }
+  } finally { flushing = false; }
+  if (!Q.length) { await refresh(true); if (synced) toast(synced + ' offline change' + (synced === 1 ? '' : 's') + ' synced'); } else render();
+}
+window.addEventListener('online', () => { render(); flush(); });
+window.addEventListener('offline', () => render());
+setInterval(flush, 30000);
+function netBanner() {
+  if (DEMO || (!Q.length && navigator.onLine)) return '';
+  const n = Q.length, w = n + ' change' + (n === 1 ? '' : 's');
+  return `<div class="net ${flushing ? 'sync' : ''}">${ic(flushing ? 'refresh' : 'cloud')}<span>${flushing ? 'Syncing ' + w + '…' : !navigator.onLine ? 'Offline. ' + (n ? w + ' saved on this phone' : 'Keep working, changes sync later') : w + ' waiting to sync'}</span>${navigator.onLine && n && !flushing ? '<button class="link" data-a="flush" style="color:inherit">Sync now</button>' : ''}</div>`;
+}
+async function run(action, payload, okMsg) {
+  busy(true);
+  try {
+    if (!DEMO && QUEUE_OK.includes(action) && (Q.length || !navigator.onLine)) return queueLocal(action, payload, okMsg);
+    const tx = await api(action, payload); apply(tx); if (okMsg) toast(okMsg); return tx;
+  } catch (e) {
+    if (!DEMO && e.offline && QUEUE_OK.includes(action)) return queueLocal(action, payload, okMsg);
+    toast(e.message, 'bad'); throw e;
+  } finally { busy(false); }
+}
+function apply(tx) {
+  Object.entries(tx.upsert || {}).forEach(([t, rows]) => {
+    const k = KEYS[t]; if (!k || !S[t]) return;
+    rows.forEach(r => { const i = S[t].findIndex(x => String(x[k]) === String(r[k])); if (i >= 0) S[t][i] = Object.assign({}, S[t][i], r); else S[t].push(r); });
+  });
+  Object.entries(tx.remove || {}).forEach(([t, ids]) => { const k = KEYS[t]; if (!k || !S[t]) return; const set = new Set(ids.map(String)); S[t] = S[t].filter(x => !set.has(String(x[k]))); });
+  cache(); render();
+}
+async function refresh(quiet) {
+  if (!DEMO && Q.length) { if (navigator.onLine) await flush(); else if (!quiet) toast('Offline. Showing what is saved on this phone.', 'bad'); return; }
+  busy(true);
+  try { const d = await api('bootstrap'); Object.assign(S, d); cache(); render(); if (!quiet) toast('Up to date'); }
+  catch (e) { if (!quiet || !S.salons.length) toast(e.message, 'bad'); }
+  finally { busy(false); }
+}
+
+/* ---------- shell ---------- */
+function render() {
+  const app = $('#app');
+  if (!S.me) { app.innerHTML = loginView(); return; }
+  reindex();
+  const v = view();
+  const fns = { today: vToday, salons: vSalons, followups: vFollowups, stock: vStock, more: vMore, salon: vSalon, product: vProduct, moves: vMoves, batch: vBatch, count: vCount, team: vTeam, reports: vReports,
+    orders: vOrders, order: vOrder, orderEdit: vOrderEdit, plan: vPlan, targets: vTargets, radar: vRadar, log: vLog };
+  const isRoot = !nav.stack.length;
+  let html = (fns[v.v] || vToday)(v);
+  const late = openFus(false).filter(a => fuBucket(a) !== 'next').length;
+  const outN = isAdminMe() ? S.products.filter(p => isActive(p) && stk(p) === 'out').length : 0;
+  const tabs = [['today', 'home', 'Today'], ['salons', 'store', 'Salons'], ['followups', 'bell', 'Follow-ups', late], ['orders', 'cart', 'Orders']];
+  if (isAdminMe()) tabs.push(['stock', 'box', 'Stock', outN]);
+  tabs.push(['more', 'menu', 'More']);
+  if (!['batch', 'count', 'orderEdit'].includes(v.v)) html += `<div class="tabbar ${tabs.length > 5 ? 'six' : ''}"><nav>${tabs.map(([k, i, l, b]) => `<button data-a="tab" data-id="${k}" class="${nav.tab === k && isRoot ? 'on' : ''}" aria-label="${l}">${ic(i)}${l}${b ? `<span class="badge">${b}</span>` : ''}</button>`).join('')}</nav></div>`;
+  app.innerHTML = netBanner() + html;
+  if (v.v === 'orderEdit') edPaint();
+}
+
+/* ---------- Today ---------- */
+function vToday() {
+  const t = today(), mo = t.slice(0, 7);
+  const fus = openFus(false), due = fus.filter(a => fuBucket(a) !== 'next'), late = due.filter(a => fuBucket(a) === 'late');
+  const visits = S.acts.filter(a => typeOf(a) === 'visit' && localDate(a.at).slice(0, 7) === mo).length;
+  const samp = S.samples.filter(x => localDate(x.at).slice(0, 7) === mo).reduce((a, x) => a + num(x.qty), 0);
+  const ords = S.orders.filter(o => liveOrd(o) && localDate(o.submittedAt || o.orderDate).slice(0, 7) === mo).length;
+  const customers = S.salons.filter(s => s.status === 'Customer').length;
+  const counts = STATUSES.map(s => [s, S.salons.filter(x => (x.status || 'Lead') === s).length]);
+  const total = S.salons.length || 1;
+  const sv = { Lead: 'var(--s-lead)', Sampled: 'var(--s-sampled)', 'Follow-up': 'var(--s-follow)', Customer: 'var(--s-customer)', Lost: 'var(--s-lost)' };
+  const low = S.products.filter(p => isActive(p) && ['low', 'out'].includes(stk(p)));
+  return `${rootTop(`<button class="ib" data-a="refresh" aria-label="Refresh">${ic('refresh')}</button>`)}<div class="wrap">
+  <div class="hello"><h1>${greet()}, ${esc(first(S.me.name))}</h1><p class="muted">${fmtD(t, true)}${DEMO ? ' <span class="pill wine">Demo data</span>' : ''}</p></div>
+  <button class="focus" data-a="tab" data-id="followups"><div class="n">${due.length}</div><div class="x">${due.length === 1 ? 'follow-up needs you today' : 'follow-ups need you today'}${late.length ? `<br><b>${late.length} overdue</b>` : due.length ? '' : '<br>You are all caught up'}</div></button>
+  ${isAdminMe() && low.length ? `<button class="card alert" data-a="stockFilter" data-id="low"><div style="display:flex;align-items:center;gap:12px">${ic('box')}<div style="flex:1;text-align:left"><b>${low.length} product${low.length === 1 ? '' : 's'} low or out of stock</b><div class="small muted">${esc(low.slice(0, 3).map(p => p.name).join(', '))}${low.length > 3 ? '…' : ''}</div></div>${ic('back', 'flip')}</div></button>` : ''}
+  <div class="btns" style="margin:0 0 18px"><button class="btn ghost" data-a="openPlan">${ic('route')}Plan my day</button><button class="btn ghost" data-a="openTargets">${ic('target')}My targets</button></div>
+  <div class="block"><div class="stats">
+    <div class="stat"><div class="v">${visits}</div><div class="l">Visits this month</div></div>
+    <div class="stat"><div class="v">${samp}</div><div class="l">Samples given this month</div></div>
+    <div class="stat"><div class="v">${ords}</div><div class="l">Orders this month</div></div>
+    <div class="stat"><div class="v">${customers}</div><div class="l">Customers</div></div>
+  </div></div>
+  ${myMonthCard()}
+  ${upcomingDeliveries()}
+  ${radarToday()}
+  ${due.length ? `<div class="sec"><h2>Due now</h2><button class="link" data-a="tab" data-id="followups">See all</button></div><div class="block">${due.slice(0, 6).map(fuRow).join('')}</div>` : ''}
+  <div class="sec"><h2>Pipeline</h2><button class="link" data-a="tab" data-id="salons">${S.salons.length} salons</button></div>
+  <div class="block"><div class="pipe">${counts.filter(c => c[1]).map(([s, n]) => `<span style="width:${n / total * 100}%;background:${sv[s]}"></span>`).join('')}</div>
+  <div class="legend">${counts.map(([s, n]) => `<button data-a="filterStatus" data-id="${s}"><span class="sw" data-s="${s}"></span>${s} <b>${n}</b></button>`).join('')}</div></div>
+  ${teamBlock(mo)}
+  <div class="sec"><h2>Latest activity</h2><button class="link" data-a="openLog">See all</button></div>
+  <div class="block"><div class="hist">${S.acts.filter(a => !isOpenFu(a)).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 8).map(a => histItem(a, true)).join('') || '<div class="empty"><b>Nothing logged yet</b>Visits, calls and samples show up here.</div>'}</div></div>
+  </div>`;
+}
+function repStats(email, from, to) {
+  const inR = d => { d = localDate(d); return d >= from && d <= to; };
+  const acts = S.acts.filter(a => lc(a.by) === email && inR(a.at));
+  return {
+    visits: acts.filter(a => typeOf(a) === 'visit').length,
+    talks: acts.filter(a => ['call', 'whatsapp', 'email', 'meeting'].includes(typeOf(a))).length,
+    samples: S.samples.filter(x => lc(x.by) === email && inR(x.at)).reduce((t, x) => t + num(x.qty), 0),
+    orders: S.orders.filter(o => liveOrd(o) && lc(o.submittedBy || o.createdBy) === email && inR(o.submittedAt || o.orderDate)).length
+  };
+}
+function teamBlock(mo) {
+  const users = S.users.filter(u => u.active !== 'no');
+  if (users.length < 2) return '';
+  const rows = users.map(u => Object.assign({ u }, repStats(u.email, mo + '-01', today()))).sort((a, b) => (b.visits + b.talks + b.samples + b.orders * 5) - (a.visits + a.talks + a.samples + a.orders * 5));
+  return `<div class="sec"><h2>Team this month</h2></div><div class="block"><div class="lb"><div class="lh"><span></span><span>Visits</span><span>Calls</span><span>Samples</span><span>Orders</span></div>
+  ${rows.map(r => `<div class="lr"><span class="nm">${avatar(r.u.email)}${esc(first(r.u.name))}</span><b>${r.visits}</b><b>${r.talks}</b><b>${r.samples}</b><b>${r.orders}</b></div>`).join('')}</div></div>`;
+}
+
+/* ---------- richer history ---------- */
+function dayLabel(d) { const n = daysBetween(d, today()); return n === 0 ? 'Today' : n === 1 ? 'Yesterday' : fmtD(d, d.slice(0, 4) !== today().slice(0, 4)); }
+function grouped(list, withSalon) { let out = '', last = ''; list.forEach(a => { const d = localDate(a.at); if (d !== last) { out += `<div class="day">${dayLabel(d)}</div>`; last = d; } out += histItem(a, withSalon); }); return out; }
+const HTYPE = { visit: ['pin', 'Visit'], call: ['phone', 'Call'], whatsapp: ['chat', 'WhatsApp'], email: ['note', 'Email'], meeting: ['user', 'Meeting'], note: ['note', 'Note'], samples: ['gift', 'Samples given'], followup: ['cal', 'Follow-up'], status: ['flag', 'Status changed'], created: ['star', 'Salon added'], order: ['cart', 'Order'], delivery: ['truck', 'Delivery'] };
+function histItem(a, withSalon) {
+  const t = typeOf(a), [i, l] = HTYPE[t] || ['note', t];
+  const s = X.salon[a.salonId], sm = X.samplesByAct[a.id] || [], R = num(S.settings.checkinRadius) || 150;
+  const tm = new Date(a.at), hhmm = isNaN(tm) ? '' : tm.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  let title = l, extra = '', note = a.note;
+  if (t === 'visit') {
+    if (a.distance !== '' && a.distance !== undefined && a.distance !== null) { const d = num(a.distance); extra += d <= R ? `<span class="pill ok">${ic('check', 'sm')}At the salon, ${d} m</span>` : `<span class="pill warn">${d} m from the salon pin</span>`; }
+    else if (a.lat) extra += '<span class="pill">Location recorded</span>'; else extra += '<span class="pill">No location</span>';
+  }
+  if (t === 'status') {
+    const m = String(a.note || '').match(/^(?:Status:\s*)?(.+?)\s*→\s*([A-Za-z-]+)[.:]?\s*(.*)$/);
+    if (m) { extra += `<span class="pill"><span class="sw" data-s="${esc(m[1])}"></span>${esc(m[1])}</span> → <span class="pill"><span class="sw" data-s="${esc(m[2])}"></span>${esc(m[2])}</span>`; note = m[3]; }
+  }
+  if (t === 'followup') title = isOpenFu(a) ? 'Follow-up planned' : 'Follow-up';
+  let fu = '';
+  if (a.followupDate) {
+    if (isDone(a.done)) { const when = /^\d{4}-\d{2}-\d{2}/.test(String(a.done)) ? ' ' + fmtD(a.done) : ''; fu = `<div class="fuline done">${ic('check', 'sm')}<div><b>Done</b>${when}${a.doneBy ? ' by ' + esc(first(uName(a.doneBy))) : ''}${t === 'followup' ? ', was due ' + fmtD(a.followupDate) : ''}${a.outcome ? `<div>${esc(a.outcome)}</div>` : ''}</div></div>`; }
+    else { const b = fuBucket(a); fu = `<div class="fuline ${b}">${ic('cal', 'sm')}<div><b>${t === 'followup' ? 'Due' : 'Follow-up due'} ${rel(a.followupDate).toLowerCase()}</b>, ${fmtD(a.followupDate)}</div><button class="btn sm" data-a="fuOpen" data-id="${a.id}">Done</button></div>`; }
+  }
+  const map = a.lat && a.lng ? `<a class="tiny" href="https://www.google.com/maps?q=${esc(a.lat)},${esc(a.lng)}" target="_blank" rel="noopener">${ic('pin', 'sm')}Map</a>` : '';
+  const canDel = !withSalon && (isAdminMe() || lc(a.by) === S.me.email) && !['status', 'created', 'order', 'delivery'].includes(t);
+  return `<div class="hi t-${esc(t)}"><div class="dot">${ic(i)}</div><div class="body">
+    <div class="ht">${withSalon && s ? `<button class="link" style="padding:0;color:var(--ink);font-weight:650" data-a="openSalon" data-id="${s.id}">${esc(s.name)}</button><span class="muted">, ${esc(title.toLowerCase())}</span>` : `<b>${esc(title)}</b>`}</div>
+    <div class="hm">${avatar(a.by, 18)}${esc(uName(a.by))}, ${withSalon ? (daysBetween(localDate(a.at), today()) <= 1 ? dayLabel(localDate(a.at)).toLowerCase() : dayLabel(localDate(a.at))) + ', ' : ''}${hhmm} ${map}</div>
+    ${extra ? `<div class="hx">${extra}</div>` : ''}
+    ${note ? `<p>${esc(note)}</p>` : ''}
+    ${sm.length ? `<div class="hx">${sm.map(x => `<span class="pill wine">${esc(x.product)} <b>× ${esc(x.qty)}</b></span>`).join('')}</div>` : ''}
+    ${fu}
+  </div>${canDel ? `<button class="ib" data-a="delAct" data-id="${a.id}" aria-label="Delete entry" style="width:34px;height:34px">${ic('trash', 'sm')}</button>` : ''}</div>`;
+}
+const HFILTERS = [['all', 'All'], ['visit', 'Visits'], ['call', 'Calls'], ['whatsapp', 'WhatsApp'], ['samples', 'Samples'], ['order', 'Orders'], ['note', 'Notes'], ['followup', 'Follow-ups'], ['status', 'Status']];
+const hMatch = (a, k) => k === 'all' || typeOf(a) === k || (k === 'order' && typeOf(a) === 'delivery') || (k === 'note' && ['email', 'meeting', 'created'].includes(typeOf(a)));
+function salonTimeline(s) {
+  const all = X.acts[s.id] || [];
+  return `<div class="chips">${HFILTERS.filter(([k]) => k === 'all' || all.some(a => hMatch(a, k))).map(([k, lb]) => `<button class="chip ${ui.hType === k ? 'on' : ''}" data-a="hType" data-id="${k}">${lb} ${all.filter(a => hMatch(a, k)).length}</button>`).join('')}</div>
+  <div class="block"><div class="hist">${grouped(all.filter(a => hMatch(a, ui.hType)), false) || '<div class="empty"><b>No history yet</b>Check in, call or leave samples to start the history.</div>'}</div></div>`;
+}
+function vLog() {
+  const types = [['all', 'All'], ['visit', 'Visits'], ['call', 'Calls'], ['whatsapp', 'WhatsApp'], ['samples', 'Samples'], ['order', 'Orders'], ['followup', 'Follow-ups'], ['status', 'Status'], ['note', 'Notes']];
+  let l = S.acts.filter(a => X.salon[a.salonId]);
+  if (ui.logUser !== 'all') l = l.filter(a => lc(a.by) === ui.logUser || lc(a.doneBy) === ui.logUser);
+  if (ui.logType !== 'all') l = l.filter(a => hMatch(a, ui.logType));
+  l.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+  return `${topbar('Activity log')}<div class="wrap" style="padding-top:0">
+  <div class="chips"><button class="chip ${ui.logUser === 'all' ? 'on' : ''}" data-a="logUser" data-id="all">Everyone</button>${S.users.map(u => `<button class="chip ${ui.logUser === u.email ? 'on' : ''}" data-a="logUser" data-id="${esc(u.email)}">${esc(first(u.name))}</button>`).join('')}</div>
+  <div class="chips">${types.map(([k, lb]) => `<button class="chip ${ui.logType === k ? 'on' : ''}" data-a="logType" data-id="${k}">${lb}</button>`).join('')}</div>
+  <p class="small muted" style="margin:0 2px">${l.length} entries${l.length > 200 ? ', showing the latest 200' : ''}</p>
+  <div class="block"><div class="hist">${grouped(l.slice(0, 200), true) || '<div class="empty"><b>Nothing here</b></div>'}</div></div></div>`;
+}
+
+/* ---------- salons ---------- */
+function vSalons() {
+  return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 12px">Salons</h1>
+  <div class="search">${ic('search')}<input id="q" data-in="q" placeholder="Search name, area, owner, phone" value="${esc(ui.q)}" autocomplete="off"></div>
+  <div class="chips">${['All', ...STATUSES].map(s => `<button class="chip ${ui.status === s ? 'on' : ''}" data-a="setStatusFilter" data-id="${s}">${s === 'All' ? '' : `<span class="sw" data-s="${s}"></span>`}${s}</button>`).join('')}</div>
+  <div class="chips"><button class="chip ${ui.mine ? 'on' : ''}" data-a="toggleMine">My salons</button>
+  ${[['near', 'Nearest'], ['next', 'Next follow-up'], ['recent', 'Recently contacted'], ['stale', 'Not contacted longest'], ['samples', 'Most samples'], ['name', 'A to Z']].map(([k, l]) => `<button class="chip ${ui.sort === k ? 'on' : ''}" data-a="setSort" data-id="${k}">${l}</button>`).join('')}</div>
+  <div id="list">${salonList()}</div></div>
+  <button class="btn fab" data-a="newSalon">${ic('plus')}Add salon</button>`;
+}
+function salonList() {
+  const q = ui.q.trim().toLowerCase();
+  let l = S.salons.filter(s => (ui.status === 'All' || (s.status || 'Lead') === ui.status) && (!ui.mine || lc(s.assignedTo) === S.me.email) &&
+    (!q || [s.name, s.area, s.emirate, s.owner, s.phone, s.whatsapp, s.instagram, s.tags, s.decisionMaker].join(' ').toLowerCase().includes(q)));
+  const nums = {}; l.forEach(s => nums[s.id] = salonNums(s.id));
+  const by = {
+    next: (a, b) => (a.nextFollowup || '9999').localeCompare(b.nextFollowup || '9999'),
+    recent: (a, b) => String(b.lastContact || '').localeCompare(String(a.lastContact || '')),
+    stale: (a, b) => String(a.lastContact || '').localeCompare(String(b.lastContact || '')),
+    samples: (a, b) => nums[b.id].samples - nums[a.id].samples, name: (a, b) => String(a.name).localeCompare(String(b.name)),
+    near: (a, b) => (distTo(a) === null ? 1e9 : distTo(a)) - (distTo(b) === null ? 1e9 : distTo(b))
+  };
+  l.sort(by[ui.sort] || by.next);
+  if (ui.sort === 'near' && !ui.pos) return `<div class="block"><div class="empty"><b>Finding your location…</b>Allow location for this app if your phone asks.</div></div>`;
+  if (!l.length) return `<div class="block"><div class="empty"><b>${S.salons.length ? 'No salons match' : 'No salons yet'}</b>${S.salons.length ? 'Try another search or filter.' : 'Add your first salon with the button below.'}</div></div>`;
+  return `<p class="small muted" style="margin:0 2px">${l.length} salon${l.length === 1 ? '' : 's'}</p><div class="block">${l.map(s => {
+    const n = nums[s.id], nf = s.nextFollowup ? localDate(s.nextFollowup) : '';
+    const tag = nf ? `<span class="pill ${nf < today() ? 'bad' : nf === today() ? 'warn' : ''}">${rel(nf)}</span>` : n.samples ? `<span class="small muted">${n.samples} samples</span>` : '';
+    const dd = ui.sort === 'near' && distTo(s) !== null ? `<span class="small"><b>${km(distTo(s))}</b></span><br>` : '';
+    return `<button class="row" data-a="openSalon" data-id="${s.id}"><span class="sw" data-s="${esc(s.status || 'Lead')}"></span><div class="main"><div class="t">${esc(s.name)}${s.priority === 'Hot' ? ' <span class="pill bad tiny">Hot</span>' : ''}</div><div class="s">${esc([s.area, s.emirate].filter(Boolean).join(', ') || 'No area')}, contacted ${ago(s.lastContact).toLowerCase()}</div></div><div class="end">${dd}${tag}</div></button>`;
+  }).join('')}</div>`;
+}
+function vSalon(v) {
+  const s = X.salon[v.id];
+  if (!s) return topbar('Salon') + '<div class="wrap"><div class="empty"><b>This salon was removed</b></div></div>';
+  const n = salonNums(s.id);
+  const fus = (X.acts[s.id] || []).filter(isOpenFu).sort((a, b) => String(a.followupDate).localeCompare(String(b.followupDate)));
+  const tabs = [['timeline', 'History'], ['orders', 'Orders' + ((X.orders[s.id] || []).length ? ' ' + (X.orders[s.id] || []).length : '')], ['samples', 'Samples'], ['profile', 'Profile']];
+  return `${topbar('', `<button class="ib" data-a="editSalon" data-id="${s.id}" aria-label="Edit salon">${ic('edit')}</button>`)}<div class="wrap" style="padding-top:0">
+  <div class="hero"><span class="sw big" data-s="${esc(s.status || 'Lead')}"></span><div style="min-width:0"><h1>${esc(s.name)}</h1>
+  <div class="small muted">${esc([s.owner, s.area, s.emirate].filter(Boolean).join(', '))}</div>
+  <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><button class="pill wine" data-a="statusSheet" data-id="${s.id}">${esc(s.status || 'Lead')} ${ic('edit', 'sm')}</button>${s.priority ? `<span class="pill ${s.priority === 'Hot' ? 'bad' : s.priority === 'Warm' ? 'warn' : ''}">${esc(s.priority)}</span>` : ''}${s.assignedTo ? `<span class="pill">${avatar(s.assignedTo, 16)}${esc(first(uName(s.assignedTo)))}</span>` : ''}</div></div></div>
+  <div class="actions">
+    ${actBtn('call', 'phone', 'Call')}${actBtn('wa', 'chat', 'WhatsApp')}${actBtn('directions', 'nav', 'Directions')}${actBtn('checkin', 'pin', 'Check in')}
+    ${actBtn('noteSheet', 'note', 'Note')}${actBtn('samplesSheet', 'gift', 'Samples')}${actBtn('fuSheet', 'cal', 'Follow-up')}${actBtn('newOrderFor', 'cart', 'Order')}
+  </div>
+  ${fus.length ? fus.map(f => `<div class="card ${fuBucket(f) === 'late' ? 'late' : fuBucket(f) === 'today' ? 'due' : ''}"><div style="display:flex;align-items:center;gap:10px"><div style="flex:1;min-width:0"><div class="small muted">Follow-up, planned by ${esc(first(uName(f.by)))}</div><b>${rel(f.followupDate)}</b> <span class="muted">${esc(f.note || '')}</span></div><button class="ib" data-a="snooze" data-id="${f.id}" aria-label="Move date">${ic('clock')}</button><button class="btn sm" data-a="fuOpen" data-id="${f.id}">${ic('check')}Done</button></div></div>`).join('')
+    : `<div class="card"><div style="display:flex;align-items:center;gap:10px"><div style="flex:1" class="muted">No follow-up planned</div><button class="btn sm line" data-a="fuSheet" data-id="${s.id}">Plan one</button></div></div>`}
+  ${radarCard(s)}
+  <div class="block"><div class="stats" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="stat"><div class="v">${n.visits}</div><div class="l">Visits</div></div>
+    <div class="stat"><div class="v">${n.touches}</div><div class="l">Calls and messages</div></div>
+    <div class="stat"><div class="v">${n.samples}</div><div class="l">Samples, ${n.products} products</div></div>
+    <div class="stat"><div class="v">${s.lastContact ? daysBetween(s.lastContact, today()) + 'd' : 'None'}</div><div class="l">Since last contact</div></div>
+    <div class="stat"><div class="v">${n.orders}</div><div class="l">Orders, ${n.orderUnits} units</div></div>
+    <div class="stat"><div class="v">${n.fuDone}</div><div class="l">Follow-ups done</div></div>
+  </div></div>
+  <div class="seg">${tabs.map(([k, l]) => `<button class="${ui.salonTab === k ? 'on' : ''}" data-a="salonTab" data-id="${k}">${l}</button>`).join('')}</div>
+  ${ui.salonTab === 'orders' ? salonOrders(s) : ui.salonTab === 'samples' ? salonSamples(s) : ui.salonTab === 'profile' ? salonProfile(s) : salonTimeline(s)}
+  </div>`;
+}
+function vMore() {
+  const adm = isAdminMe();
+  return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 16px">More</h1>
+  <div class="block"><div class="row" style="cursor:default">${avatar(S.me.email, 42)}<div class="main"><div class="t">${esc(S.me.name)}</div><div class="s">${esc(S.me.email)}, ${adm ? 'admin' : 'sales'}</div></div></div></div>
+  <div class="block">
+    <button class="row" data-a="openPlan">${ic('route')}<div class="main"><div class="t">Plan my day</div><div class="s">Who to visit, opened as a Google Maps route</div></div></button>
+    <button class="row" data-a="openRadar">${ic('radar')}<div class="main"><div class="t">Reorder radar</div><div class="s">Customers due to reorder</div></div><span class="pill">${radar().filter(r => r.left <= 3).length || ''}</span></button>
+    <button class="row" data-a="openTargets">${ic('target')}<div class="main"><div class="t">Targets and commission</div><div class="s">${adm ? 'Set monthly targets, progress per person' : 'Your progress this month'}</div></div></button>
+    <button class="row" data-a="openLog">${ic('clock')}<div class="main"><div class="t">Activity log</div><div class="s">Everything the team did, by person and type</div></div></button>
+    <button class="row" data-a="go" data-id="reports">${ic('star')}<div class="main"><div class="t">Reports</div><div class="s">Activity by person, sample results, top products</div></div></button>
+  </div>
+  <div class="block">
+    ${adm ? `<button class="row" data-a="go" data-id="team">${ic('user')}<div class="main"><div class="t">Team</div><div class="s">Add people, roles, PINs</div></div></button>
+    <button class="row" data-a="go" data-id="moves">${ic('box')}<div class="main"><div class="t">Stock history</div><div class="s">Every unit in and out</div></div></button>` : ''}
+    <button class="row" data-a="pinSheet">${ic('key')}<div class="main"><div class="t">Change my PIN</div></div></button>
+    <button class="row" data-a="refresh">${ic('refresh')}<div class="main"><div class="t">Refresh data</div><div class="s">Pull the latest from the team</div></div></button>
+    <button class="row" data-a="installHelp">${ic('share')}<div class="main"><div class="t">Install on your phone</div><div class="s">Add to home screen for the full app</div></div></button>
+  </div>
+  ${adm ? `<p class="small muted" style="margin:0 2px 14px">Discount tiers, VAT, commission, Zoho and follow-up timing live in the Settings tab of the Google Sheet.${S.settings.zohoConnected === 'yes' ? ' Zoho Books is connected.' : ''}</p>` : ''}
+  ${DEMO ? `<button class="btn ghost block" data-a="resetDemo">Reset demo data</button>` : `<button class="btn ghost block" data-a="signOut">Sign out</button>`}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">JOIA Sales ${APP_VERSION}, The Beauty Lab</p></div>`;
+}
+/* ============================================================
+ * ORDERS (sales orders, invoiced in Zoho Books)
+ * ============================================================ */
+const OSTEP = { Draft: 0, Submitted: 1, Invoiced: 2, Delivered: 3 };
+const OPILL = { Draft: '', Submitted: 'warn', Invoiced: 'wine', Delivered: 'ok', Cancelled: '' };
+const OLABEL = { Draft: 'Draft', Submitted: 'To invoice', Invoiced: 'To deliver', Delivered: 'Delivered', Cancelled: 'Cancelled' };
+const SLOTS = [['Morning', 'Morning, 9 to 12'], ['Afternoon', 'Afternoon, 12 to 4'], ['Evening', 'Evening, 4 to 8'], ['Any time', 'Any time']];
+const PAYS = ['Cash on delivery', 'Card on delivery', 'Bank transfer', 'Credit terms'];
+const oName = o => o.orderNo || 'Draft';
+
+function orderRow(o, withSalon = true) {
+  const s = X.salon[o.salonId] || { name: 'Removed salon' };
+  const late = o.status === 'Invoiced' || o.status === 'Submitted' ? o.deliveryDate && localDate(o.deliveryDate) < today() : false;
+  return `<button class="row" data-a="openOrder" data-id="${o.id}">${withSalon ? `<span class="sw" data-s="${esc(s.status || 'Lead')}"></span>` : ''}<div class="main"><div class="t">${withSalon ? esc(s.name) : esc(oName(o))}</div>
+  <div class="s">${withSalon ? esc(oName(o)) + ', ' : ''}${num(o.units)} units, ${o.status === 'Delivered' ? 'delivered ' + fmtD(o.deliveredAt || o.deliveryDate) : o.status === 'Cancelled' ? 'cancelled' : o.deliveryDate ? 'deliver ' + esc(rel(o.deliveryDate).toLowerCase()) + (o.deliverySlot && o.deliverySlot !== 'Any time' ? ' ' + esc(o.deliverySlot.toLowerCase()) : '') : 'no delivery date'}</div></div>
+  <div class="end">${showMoney() && num(o.total) ? `<b class="small">${money0(o.total)}</b><br>` : ''}<span class="pill ${late ? 'bad' : OPILL[o.status]} tiny">${late ? 'Late' : OLABEL[o.status] || o.status}</span>${zohoPayPill(o) ? '<br>' + zohoPayPill(o) : ''}</div></button>`;
+}
+function upcomingDeliveries() {
+  const t = today(), lim = addDays(t, 2);
+  const l = S.orders.filter(o => (o.status === 'Submitted' || o.status === 'Invoiced') && o.deliveryDate && localDate(o.deliveryDate) <= lim).sort((a, b) => String(a.deliveryDate).localeCompare(String(b.deliveryDate)));
+  if (!l.length) return '';
+  return `<div class="sec"><h2>Deliveries coming up</h2><button class="link" data-a="tab" data-id="orders">All orders</button></div><div class="block">${l.slice(0, 6).map(o => orderRow(o)).join('')}</div>`;
+}
+function salonOrders(s) {
+  const l = X.orders[s.id] || [];
+  const n = salonNums(s.id);
+  return `${l.length ? `<p class="small muted" style="margin:0 2px">${n.orders} order${n.orders === 1 ? '' : 's'}, ${n.orderUnits} units${showMoney() && n.orderValue ? ', ' + money0(n.orderValue) + ' estimated' : ''}${n.lastOrder ? '. Last ordered ' + ago(n.lastOrder).toLowerCase() : ''}</p>` : ''}
+  <div class="block">${l.map(o => orderRow(o, false)).join('') || '<div class="empty"><b>No orders yet</b>Tap Order when the salon is ready to buy.</div>'}</div>
+  <div class="btns">${l.find(liveOrd) ? `<button class="btn line" data-a="reorder" data-id="${l.find(liveOrd).id}">${ic('copy')}Repeat last order</button>` : ''}<button class="btn" data-a="newOrderFor" data-id="${s.id}">${ic('plus')}New order</button></div>`;
+}
+
+/* ORDERS TAB */
+function vOrders() {
+  const t = today(), mo = t.slice(0, 7);
+  const F = {
+    open: ['Open', o => o.status === 'Submitted' || o.status === 'Invoiced'],
+    Submitted: ['To invoice', o => o.status === 'Submitted'],
+    Invoiced: ['To deliver', o => o.status === 'Invoiced'],
+    Draft: ['Drafts', o => o.status === 'Draft'],
+    Delivered: ['Delivered', o => o.status === 'Delivered'],
+    Cancelled: ['Cancelled', o => o.status === 'Cancelled'],
+    unpaid: ['Unpaid in Zoho', o => o.zohoInvoiceId && !['paid', 'void'].includes(o.zohoStatus) && o.status !== 'Cancelled'],
+    all: ['All', () => true]
+  };
+  if (!zConnected() && !S.orders.some(o => o.zohoInvoiceId)) delete F.unpaid;
+  if (!F[ui.oFilter]) ui.oFilter = 'open';
+  const q = ui.oq.trim().toLowerCase();
+  const base = S.orders.filter(o => !ui.oMine || lc(o.createdBy) === S.me.email);
+  let l = base.filter(F[ui.oFilter][1]).filter(o => !q || [o.orderNo, o.zohoInvoice, (X.salon[o.salonId] || {}).name, o.deliveryArea].join(' ').toLowerCase().includes(q));
+  if (ui.oFilter === 'open' || ui.oFilter === 'Invoiced' || ui.oFilter === 'Submitted') l.sort((a, b) => String(a.deliveryDate || '9').localeCompare(String(b.deliveryDate || '9')));
+  else l.sort((a, b) => String(b.updatedAt || b.createdAt).localeCompare(String(a.updatedAt || a.createdAt)));
+  const mOrders = S.orders.filter(o => liveOrd(o) && localDate(o.submittedAt || o.orderDate).slice(0, 7) === mo);
+  const cnt = k => base.filter(F[k][1]).length;
+  return `${rootTop()}<div class="wrap" style="padding-top:0"><h1 style="padding:8px 0 12px">Orders</h1>
+  <div class="block"><div class="stats" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="stat"><div class="v">${mOrders.length}</div><div class="l">This month</div></div>
+  <div class="stat"><div class="v">${mOrders.reduce((a, o) => a + num(o.units), 0)}</div><div class="l">Units this month</div></div>
+  <div class="stat"><div class="v">${showMoney() ? money0(mOrders.reduce((a, o) => a + num(o.total), 0)) : S.orders.filter(o => o.status === 'Invoiced').length}</div><div class="l">${showMoney() ? 'Estimated value' : 'To deliver'}</div></div></div></div>
+  <div class="search">${ic('search')}<input id="oq" data-in="oq" placeholder="Search salon, order or Zoho invoice number" value="${esc(ui.oq)}" autocomplete="off"></div>
+  <div class="chips">${Object.keys(F).map(k => `<button class="chip ${ui.oFilter === k ? 'on' : ''}" data-a="oFilter" data-id="${k}">${F[k][0]}${k === 'all' ? '' : ' ' + cnt(k)}</button>`).join('')}</div>
+  <div class="chips"><button class="chip ${ui.oMine ? 'on' : ''}" data-a="oMine">My orders</button><button class="chip" data-a="openRadar">${ic('radar', 'sm')}Reorder radar ${radar().filter(r => r.left <= 3).length || ''}</button></div>
+  <div class="block">${l.map(o => orderRow(o)).join('') || `<div class="empty"><b>No orders here</b>${S.orders.length ? 'Try another filter.' : 'Create the first order from a salon page or the button below.'}</div>`}</div></div>
+  <button class="btn fab" data-a="newOrder">${ic('plus')}New order</button>`;
+}
+
+/* ORDER DETAIL */
+function vOrder(v) {
+  const o = X.order[v.id];
+  if (!o) return topbar('Order') + '<div class="wrap"><div class="empty"><b>This order was removed</b></div></div>';
+  const s = X.salon[o.salonId] || { name: 'Removed salon' }, items = X.items[o.id] || [], step = OSTEP[o.status];
+  const mine = lc(o.createdBy) === S.me.email;
+  const canEdit = ['Draft', 'Submitted'].includes(o.status) || isAdminMe();
+  let main = '';
+  if (o.status === 'Draft') main = `<button class="btn block" data-a="setOStatus" data-id="${o.id}" data-s="Submitted">${ic('check')}Submit order</button>`;
+  else if (o.status === 'Submitted') main = zConnected() && !o.zohoInvoiceId
+    ? `<button class="btn block" data-a="zohoInvoice" data-id="${o.id}">${ic('receipt')}${o.zohoError ? 'Try the Zoho invoice again' : 'Create Zoho invoice'}</button><button class="link" style="display:block;margin:6px auto 0" data-a="invoiceSheet" data-id="${o.id}">Already invoiced? Enter the number</button>`
+    : `<button class="btn block" data-a="invoiceSheet" data-id="${o.id}">${ic('receipt')}Mark as invoiced in Zoho</button>`;
+  else if (o.status === 'Invoiced') main = `<button class="btn block" data-a="setOStatus" data-id="${o.id}" data-s="Delivered">${ic('truck')}Mark as delivered</button><p class="tiny muted" style="text-align:center;margin:6px 0 0">This takes the products out of stock.</p>`;
+  const stamp = (lbl, at, by) => at ? `<div class="ost on"><span></span><div><b>${lbl}</b><div class="small muted">${fmtDT(at)}${by ? ', ' + esc(first(uName(by))) : ''}</div></div></div>` : `<div class="ost"><span></span><div class="muted">${lbl}</div></div>`;
+  const map = o.deliveryAddress ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([o.deliveryAddress, o.deliveryArea, o.deliveryEmirate].filter(Boolean).join(', '))}` : '';
+  const sl = s.lat && s.lng ? `https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}` : map;
+  const late = (o.status === 'Submitted' || o.status === 'Invoiced') && o.deliveryDate && localDate(o.deliveryDate) < today();
+  return `${topbar(oName(o), canEdit && o.status !== 'Cancelled' ? `<button class="ib" data-a="editOrder" data-id="${o.id}" aria-label="Edit order">${ic('edit')}</button>` : '')}<div class="wrap" style="padding-top:0">
+  <button class="row" style="padding:6px 0 12px;background:none" data-a="openSalon" data-id="${s.id || ''}"><span class="sw" data-s="${esc(s.status || 'Lead')}"></span><div class="main"><div class="t" style="font-size:20px;font-family:'Bricolage Grotesque',system-ui,sans-serif">${esc(s.name)}</div><div class="s">Taken ${fmtD(o.orderDate, true)} by ${esc(uName(o.createdBy))}</div></div></button>
+  ${o.status === 'Cancelled' ? `<div class="warnbox">Cancelled ${fmtD(o.cancelledAt)}${o.cancelReason ? ': ' + esc(o.cancelReason) : ''}</div>` : `${isTrue(o.stockOut) ? '<p class="small" style="margin:0 0 8px;color:var(--ok)">Stock taken out on delivery</p>' : ''}<div class="steps">${[0, 1, 2, 3].map(i => `<div class="${i <= step ? 'on' : ''}"></div>`).join('')}</div>`}
+  ${main}
+  ${zohoBlock(o)}
+  <div class="sec" style="margin-top:14px"><h2>Delivery</h2>${late ? '<span class="pill bad">Late</span>' : ''}</div>
+  <div class="block"><dl class="kv">
+    <dt>Preferred date</dt><dd><b>${o.deliveryDate ? fmtD(o.deliveryDate, true) : 'Not set'}</b>${o.deliverySlot ? '<br>' + esc(o.deliverySlot) : ''}</dd>
+    <dt>Address</dt><dd>${esc([o.deliveryAddress, o.deliveryArea, o.deliveryEmirate].filter(Boolean).join(', ') || 'Not set')}${sl ? `<br><a href="${esc(sl)}" target="_blank" rel="noopener">Directions</a>` : ''}</dd>
+    ${o.contactName || o.contactPhone ? `<dt>Receiver</dt><dd>${esc(o.contactName)}${o.contactPhone ? `<br><a href="tel:${esc(o.contactPhone)}">${esc(o.contactPhone)}</a>` : ''}</dd>` : ''}
+    ${o.paymentMethod ? `<dt>Payment</dt><dd>${esc(o.paymentMethod)}</dd>` : ''}
+    ${o.poRef ? `<dt>Salon reference</dt><dd>${esc(o.poRef)}</dd>` : ''}
+    ${o.zohoInvoice ? `<dt>Zoho invoice</dt><dd><b>${esc(o.zohoInvoice)}</b></dd>` : ''}
+  </dl></div>
+  <div class="sec"><h2>Products</h2><span class="small muted">${num(o.units)} units</span></div>
+  <div class="block"><div style="padding:6px 16px">${items.map(i => `<div class="line"><div class="nm">${esc(i.product)}${showMoney() && num(i.price) ? `<div class="small muted">${money(i.price)} each</div>` : ''}</div><b>× ${esc(i.qty)}</b>${showMoney() && num(i.price) ? `<span class="small" style="width:92px;text-align:right">${money(i.lineTotal)}</span>` : ''}</div>`).join('')}</div>
+  ${showMoney() && num(o.subtotal) ? `<div style="padding:12px 16px 16px;border-top:1px solid var(--line)">${totalsGrid(o)}<p class="tiny muted" style="margin:8px 0 0">Estimate. The Zoho invoice is final.</p></div>` : ''}</div>
+  ${o.notes ? `<div class="card" style="white-space:pre-wrap"><div class="small muted">Notes</div>${esc(o.notes)}</div>` : ''}
+  <div class="sec"><h2>Progress</h2></div>
+  <div class="card otl">${stamp('Created', o.createdAt, o.createdBy)}${stamp('Submitted', o.submittedAt, o.submittedBy)}${stamp('Invoiced in Zoho' + (o.zohoInvoice ? ', ' + esc(o.zohoInvoice) : ''), o.invoicedAt, o.invoicedBy)}${stamp('Delivered', o.deliveredAt, o.deliveredBy)}</div>
+  <div class="btns">
+    ${o.status !== 'Draft' && o.status !== 'Cancelled' ? `<button class="btn ghost" data-a="sendOps" data-id="${o.id}">${ic('share')}Send to office</button>` : ''}
+    <button class="btn ghost" data-a="sendSalon" data-id="${o.id}">${ic('chat')}Confirm to salon</button>
+    <button class="btn ghost" data-a="reorder" data-id="${o.id}">${ic('copy')}Repeat</button>
+  </div>
+  <div class="btns" style="margin-top:8px">
+    ${['Submitted', 'Invoiced'].includes(o.status) || (o.status === 'Delivered' && isAdminMe()) ? `<button class="btn ghost sm" data-a="cancelOrder" data-id="${o.id}">Cancel order</button>` : ''}
+    ${(o.status === 'Draft' && (mine || isAdminMe())) || isAdminMe() ? `<button class="btn danger sm" data-a="delOrder" data-id="${o.id}">${ic('trash')}Delete</button>` : ''}
+  </div></div>`;
+}
+function totalsGrid(o) {
+  return `<div class="tot"><span class="muted">Subtotal</span><span>${money(o.subtotal)}</span>
+  ${num(o.discount) ? `<span class="muted">Discount ${num(o.discountPct)}%</span><span>− ${money(o.discount)}</span>` : ''}
+  <span class="muted">Delivery</span><span>${num(o.delivery) ? money(o.delivery) : 'Free'}</span>
+  ${num(o.vatRate) ? `<span class="muted">VAT ${num(o.vatRate)}%</span><span>${money(o.vat)}</span>` : ''}
+  <span class="big">Total</span><span class="big">${money(o.total)}</span></div>`;
+}
+
+/* ORDER EDITOR */
+function startOrder(salonId, from, repeat) {
+  const s = X.salon[salonId] || {};
+  ED = { id: '', salonId, status: 'Draft', discountMode: 'auto', discountPct: '', deliveryMode: 'auto', notes: '', lines: [], q: '',
+    deliveryDate: addDays(today(), 2), deliverySlot: 'Any time', deliveryAddress: s.address || '', deliveryArea: s.area || '', deliveryEmirate: s.emirate || '',
+    contactName: s.owner || '', contactPhone: s.phone || s.whatsapp || '', paymentMethod: 'Cash on delivery', poRef: '' };
+  if (from) {
+    ['discountMode', 'discountPct', 'deliveryMode', 'deliverySlot', 'deliveryAddress', 'deliveryArea', 'deliveryEmirate', 'contactName', 'contactPhone', 'paymentMethod'].forEach(k => { if (from[k] !== undefined && from[k] !== '') ED[k] = from[k]; });
+    if (!repeat) Object.assign(ED, { id: from.id, status: from.status, notes: from.notes || '', poRef: from.poRef || '', deliveryDate: localDate(from.deliveryDate) || ED.deliveryDate });
+    ED.lines = (X.items[from.id] || []).filter(i => !repeat || !i.sku || (X.prod[i.sku] && isActive(X.prod[i.sku]))).map(i => ({ sku: i.sku || '', product: i.sku && X.prod[i.sku] ? pLabel(X.prod[i.sku]) : i.product, qty: num(i.qty), price: repeat && i.sku && X.prod[i.sku] ? num(X.prod[i.sku].price) : num(i.price) }));
+  }
+  go('orderEdit');
+}
+function vOrderEdit() {
+  const s = X.salon[ED.salonId];
+  const dchips = [[1, 'Tomorrow'], [2, 'In 2 days'], [3, 'In 3 days'], [7, 'Next week']];
+  return `${topbar(ED.id ? 'Edit ' + oName(X.order[ED.id] || {}) : 'New order')}<div class="wrap" style="padding-top:0;padding-bottom:40px">
+  <button class="row" style="padding:4px 0 14px;background:none" data-a="pickSalonForOrder"><span class="sw" data-s="${esc(s ? s.status : 'Lead')}"></span><div class="main"><div class="t" style="font-size:19px">${s ? esc(s.name) : 'Choose salon'}</div><div class="s">${s ? 'Tap to change salon' : 'Required'}</div></div>${ic('edit')}</button>
+  <div class="fs" style="border:0;padding:0">Products</div>
+  <div class="search">${ic('search')}<input id="edq" data-in="edq" placeholder="Type a code, shade or SKU, e.g. 188" autocomplete="off" value="${esc(ED.q)}"></div>
+  <div id="ed-results"></div>
+  <div class="block"><div id="ed-lines" style="padding:4px 16px"></div></div>
+  <div class="fs">Delivery</div>
+  <div class="chips">${dchips.map(([d, l]) => `<button class="chip ${ED.deliveryDate === addDays(today(), d) ? 'on' : ''}" data-a="edDate" data-days="${d}">${l}</button>`).join('')}</div>
+  <label class="f"><span>Preferred delivery date</span><input type="date" data-ch="deliveryDate" min="${today()}" value="${esc(ED.deliveryDate)}"></label>
+  <div class="small muted" style="margin:0 0 6px">Time</div>
+  <div class="chips" style="flex-wrap:wrap">${SLOTS.map(([v, l]) => `<button class="chip ${ED.deliverySlot === v ? 'on' : ''}" data-a="edSet" data-k="deliverySlot" data-v="${v}">${l}</button>`).join('')}</div>
+  <label class="f"><span>Delivery address <span class="tiny">(prefilled from the salon, edit if needed)</span></span><textarea data-ch="deliveryAddress" style="min-height:64px" placeholder="Building, street, shop or villa number">${esc(ED.deliveryAddress)}</textarea></label>
+  <div class="grid2"><label class="f"><span>Area</span><input data-ch="deliveryArea" value="${esc(ED.deliveryArea)}"></label><label class="f"><span>Emirate</span><select data-ch="deliveryEmirate">${EMIRATES.map(e => `<option ${e === ED.deliveryEmirate ? 'selected' : ''}>${e}</option>`).join('')}</select></label></div>
+  <div id="ed-addr-note"></div>
+  <div class="grid2"><label class="f"><span>Receiver name</span><input data-ch="contactName" value="${esc(ED.contactName)}"></label><label class="f"><span>Receiver phone</span><input type="tel" inputmode="tel" data-ch="contactPhone" value="${esc(ED.contactPhone)}"></label></div>
+  <div class="fs">Payment and notes</div>
+  <div class="chips" style="flex-wrap:wrap">${PAYS.map(p => `<button class="chip ${ED.paymentMethod === p ? 'on' : ''}" data-a="edSet" data-k="paymentMethod" data-v="${p}">${p}</button>`).join('')}</div>
+  <div class="grid2"><label class="f"><span>Discount</span><select data-ch="discountMode"><option value="auto" ${ED.discountMode !== 'manual' ? 'selected' : ''}>Standard tiers</option><option value="manual" ${ED.discountMode === 'manual' ? 'selected' : ''}>Custom %</option></select></label>
+  <label class="f"><span>Delivery fee</span><select data-ch="deliveryMode"><option value="auto" ${ED.deliveryMode !== 'free' ? 'selected' : ''}>Standard</option><option value="free" ${ED.deliveryMode === 'free' ? 'selected' : ''}>Free</option></select></label></div>
+  <label class="f" id="ed-dpct" style="${ED.discountMode === 'manual' ? '' : 'display:none'}"><span>Discount %</span><input type="number" inputmode="decimal" data-ch="discountPct" value="${esc(ED.discountPct)}"></label>
+  ${fldCh('Salon PO or reference (optional)', 'poRef', ED.poRef)}
+  <label class="f"><span>Notes for the office and driver</span><textarea data-ch="notes" placeholder="Gate code, call before arriving, promised extras...">${esc(ED.notes)}</textarea></label>
+  <div class="card"><div id="ed-totals"></div></div>
+  <div class="btns">${ED.status === 'Draft' ? `<button class="btn ghost" data-a="saveOrder" data-s="Draft">Save draft</button><button class="btn" data-a="saveOrder" data-s="Submitted">${ic('check')}Submit order</button>` : `<button class="btn" data-a="saveOrder" data-s="">${ic('check')}Save changes</button>`}</div>
+  </div>`;
+}
+const fldCh = (label, k, v) => `<label class="f"><span>${label}</span><input data-ch="${k}" value="${esc(v)}"></label>`;
+function edAddrNote() {
+  const el = $('#ed-addr-note'), s = X.salon[ED.salonId]; if (!el || !s) return;
+  const changed = s.address && (ED.deliveryAddress.trim() !== String(s.address).trim() || (ED.deliveryArea || '') !== (s.area || '') || (ED.deliveryEmirate || '') !== (s.emirate || ''));
+  el.innerHTML = changed ? `<label class="chk"><input type="checkbox" data-a="edAddrSave" ${ED.updateSalonAddress ? 'checked' : ''}>Also update the salon's saved address</label>` : '';
+  if (!changed) ED.updateSalonAddress = false;
+}
+function edPaint(skipLines) {
+  const L = $('#ed-lines'), T = $('#ed-totals'), R = $('#ed-results');
+  if (!L) return;
+  edAddrNote();
+  const sm = showMoney();
+  if (!skipLines) L.innerHTML = ED.lines.map((l, i) => { const p = X.prod[l.sku], short = p && tracked(p) && num(p.stock) < num(l.qty); return `<div class="line"><div class="nm">${esc(l.product)}<div class="small muted">${sm ? money(num(l.qty) * num(l.price)) : ''}${p && tracked(p) ? `${sm ? ', ' : ''}<span style="${short ? 'color:var(--bad);font-weight:700' : ''}">${num(p.stock)} in stock</span>` : ''}</div></div>
+    ${sm ? `<input class="price" type="number" inputmode="decimal" step="0.01" data-li="${i}" data-f="price" value="${esc(l.price)}" aria-label="Unit price">` : ''}
+    <div class="step"><button data-a="qty" data-id="${i}" data-d="-1" aria-label="Less">−</button><input type="number" inputmode="numeric" data-li="${i}" data-f="qty" value="${esc(l.qty)}" aria-label="Quantity"><button data-a="qty" data-id="${i}" data-d="1" aria-label="More">+</button></div></div>`; }).join('')
+    || '<div class="empty" style="padding:20px 6px"><b>No products yet</b>Search above and tap to add.</div>';
+  const t = calcTotals(ED.lines, S.settings, ED);
+  const nextTier = num(S.settings.tier1Amount) > t.subtotal ? [num(S.settings.tier1Amount), S.settings.tier1Pct] : num(S.settings.tier2Amount) > t.subtotal ? [num(S.settings.tier2Amount), S.settings.tier2Pct] : null;
+  T.innerHTML = sm ? `${totalsGrid(t)}<p class="small muted" style="margin:10px 0 0">${t.units} units. Estimate, the Zoho invoice is final.${ED.discountMode !== 'manual' && nextTier && t.subtotal > 0 ? ` Add ${money(nextTier[0] - t.subtotal, 0)} more for ${nextTier[1]}% off.` : ''}</p>${t.belowMin ? `<div class="warnbox">Below the ${money(S.settings.minOrder, 0)} minimum order.</div>` : ''}`
+    : `<div class="tot"><span class="big">Units</span><span class="big">${t.units}</span></div><p class="tiny muted" style="margin:8px 0 0">Add prices in the Products tab of the sheet to see estimates here.</p>`;
+  const q = ED.q.trim().toLowerCase();
+  if (!q) { R.innerHTML = ''; return; }
+  const words = q.split(/\s+/).filter(Boolean);
+  const hits = S.products.filter(p => isActive(p) && words.every(w => [p.sku, p.code, p.name, p.category, p.size].join(' ').toLowerCase().includes(w))).slice(0, 30);
+  R.innerHTML = `<div class="results">${hits.map(p => `<button class="row" data-a="addLine" data-id="${esc(p.sku)}"><div class="main"><div class="t">${esc(p.name)}</div><div class="s">${esc([p.size, p.sku].filter(Boolean).join(', '))}</div></div><div class="end">${sm && num(p.price) ? `<b class="small">${money(p.price)}</b><br>` : ''}${stkPill(p)}</div></button>`).join('')}
+  <button class="row" data-a="addCustom"><div class="main"><div class="t">Add "${esc(ED.q.trim())}"</div><div class="s">Not in the list</div></div>${ic('plus')}</button></div>`;
+}
+
+/* share texts */
+function orderText(o, forSalon) {
+  const s = X.salon[o.salonId] || {}, items = X.items[o.id] || [], sm = showMoney() && num(o.subtotal);
+  const L = forSalon
+    ? [`Hi ${first(s.owner) || 'there'}, thank you for your order with ${S.settings.businessName}!`, '', `*Order ${oName(o)}*`]
+    : [`*New order ${oName(o)}*`, `Salon: ${s.name || ''}`, `Taken by: ${uName(o.createdBy)}`];
+  L.push('');
+  items.forEach(i => L.push(`${i.qty} × ${i.product}${sm && num(i.price) ? ' = ' + money(i.lineTotal) : ''}`));
+  L.push(`Units: ${num(o.units)}`);
+  if (sm) { if (num(o.discount)) L.push(`Discount ${num(o.discountPct)}%: −${money(o.discount)}`); L.push(`Delivery: ${num(o.delivery) ? money(o.delivery) : 'Free'}`); if (num(o.vatRate)) L.push(`VAT: ${money(o.vat)}`); L.push(`*Estimated total: ${money(o.total)}*`); }
+  L.push('', `*Delivery:* ${o.deliveryDate ? fmtD(o.deliveryDate, true) : 'to confirm'}${o.deliverySlot ? ', ' + o.deliverySlot : ''}`);
+  L.push([o.deliveryAddress, o.deliveryArea, o.deliveryEmirate].filter(Boolean).join(', '));
+  if (o.contactName || o.contactPhone) L.push(`Receiver: ${[o.contactName, o.contactPhone].filter(Boolean).join(', ')}`);
+  if (o.paymentMethod) L.push(`Payment: ${o.paymentMethod}`);
+  if (!forSalon && o.poRef) L.push(`Salon ref: ${o.poRef}`);
+  if (!forSalon && o.notes) L.push('', `Notes: ${o.notes}`);
+  if (!forSalon && s.trn) L.push(`TRN: ${s.trn}`);
+  if (forSalon) L.push('', 'Your invoice will follow from our accounts team.');
+  return L.join('\n');
+}
+
+/* handlers */
+Object.assign(H, {
+  oFilter: id => { ui.oFilter = id; render(); }, oMine: () => { ui.oMine = !ui.oMine; render(); },
+  openOrder: id => go('order', id), openSamples: () => go('samples'),
+  newOrderFor: id => startOrder(id),
+  newOrder: () => pickSalonSheet(id => startOrder(id)),
+  pickSalonForOrder: () => pickSalonSheet(id => { const s = X.salon[id]; ED.salonId = id; if (s) Object.assign(ED, { deliveryAddress: s.address || '', deliveryArea: s.area || '', deliveryEmirate: s.emirate || '', contactName: s.owner || '', contactPhone: s.phone || s.whatsapp || '' }); render(); }),
+  editOrder: id => { const o = X.order[id]; startOrder(o.salonId, o); },
+  reorder: id => { const o = X.order[id]; startOrder(o.salonId, o, true); toast('Copied. Check quantities and the delivery date.'); },
+  edAddrSave(_, el) { ED.updateSalonAddress = el.checked; },
+  edDate(_, el) { ED.deliveryDate = addDays(today(), +el.dataset.days); render(); },
+  edSet(_, el) { ED[el.dataset.k] = el.dataset.v; el.parentNode.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c === el)); },
+  addLine(sku) { const p = X.prod[sku] || {}, ex = ED.lines.find(l => l.sku === sku); if (ex) ex.qty = num(ex.qty) + 1; else ED.lines.push({ sku, product: pLabel(p), qty: 1, price: num(p.price) }); ED.q = ''; $('#edq').value = ''; $('#edq').focus(); edPaint(); },
+  addCustom() { ED.lines.push({ sku: '', product: ED.q.trim(), qty: 1, price: 0 }); ED.q = ''; $('#edq').value = ''; edPaint(); },
+  qty(i, el) { const l = ED.lines[+i]; l.qty = Math.max(0, num(l.qty) + +el.dataset.d); if (!l.qty) ED.lines.splice(+i, 1); edPaint(); },
+  async saveOrder(_, el) {
+    if (!ED.salonId) { toast('Choose a salon first.', 'bad'); return; }
+    if (!ED.lines.length) { toast('Add at least one product.', 'bad'); return; }
+    const st = el.dataset.s;
+    if (st === 'Submitted') {
+      if (!ED.deliveryDate) { toast('Pick a preferred delivery date.', 'bad'); return; }
+      if (!ED.deliveryAddress.trim()) { toast('Add the delivery address.', 'bad'); return; }
+      const short = ED.lines.filter(l => { const p = X.prod[l.sku]; return p && tracked(p) && num(p.stock) < num(l.qty); });
+      if (short.length && !confirm('Not enough stock for: ' + short.map(l => l.product).join(', ') + '. Submit anyway?')) return;
+      const t = calcTotals(ED.lines, S.settings, ED);
+      if (t.belowMin && !confirm(`This order is below the ${money(S.settings.minOrder, 0)} minimum. Submit anyway?`)) return;
+    }
+    const order = Object.assign({}, ED); delete order.lines; delete order.q; delete order.updateSalonAddress;
+    if (st) order.status = st; else delete order.status;
+    try {
+      const tx = await run('saveOrder', { order, items: ED.lines, updateSalonAddress: !!ED.updateSalonAddress }, st === 'Submitted' ? 'Order submitted' : st === 'Draft' ? 'Draft saved' : 'Saved');
+      const saved = (tx.upsert.orders || []).slice(-1)[0]; const wasNew = !ED.id; ED = null; popView();
+      if (wasNew && saved) go('order', saved.id); else render();
+      if (st === 'Submitted' && S.settings.opsWhatsApp && saved && confirm('Send this order to the office on WhatsApp now?')) H.sendOps(saved.id);
+    } catch (e) {}
+  },
+  async setOStatus(id, el) {
+    const s = el.dataset.s;
+    if (s === 'Delivered' && !confirm('Mark as delivered? The products come out of stock.')) return;
+    try { await run('setOrderStatus', { id, status: s }, s === 'Submitted' ? 'Order submitted' : s === 'Delivered' ? 'Marked as delivered' : 'Updated');
+      if (s === 'Submitted' && S.settings.opsWhatsApp && confirm('Send this order to the office on WhatsApp now?')) H.sendOps(id); } catch (e) {}
+  },
+  invoiceSheet(id) {
+    openSheet('Invoiced in Zoho', `<p class="muted" style="margin:0 0 12px">Add the Zoho Books invoice number so anyone can find it later.</p>${fld('Zoho invoice number', 'zoho', '', 'placeholder="INV-000123" autocapitalize="characters"')}`,
+      `<button class="btn block" data-a="saveInvoiced" data-id="${id}">${ic('check')}Mark as invoiced</button>`);
+  },
+  async saveInvoiced(id) { const v = vals(); try { await run('setOrderStatus', { id, status: 'Invoiced', zohoInvoice: v.zoho }, 'Marked as invoiced'); closeSheet(); } catch (e) {} },
+  cancelOrder(id) {
+    openSheet('Cancel order', `${fld('Reason', 'reason', '', 'placeholder="Salon changed their mind, out of stock..."')}`, `<button class="btn danger block" data-a="saveCancel" data-id="${id}">Cancel order</button>`);
+  },
+  async saveCancel(id) { const v = vals(); try { await run('setOrderStatus', { id, status: 'Cancelled', reason: v.reason }, 'Order cancelled'); closeSheet(); } catch (e) {} },
+  async delOrder(id) { if (!confirm('Delete this order completely?')) return; try { await run('deleteOrder', { id }, 'Order deleted'); back(); } catch (e) {} },
+  sendOps(id) { const o = X.order[id]; window.open('https://wa.me/' + waNum(S.settings.opsWhatsApp) + '?text=' + encodeURIComponent(orderText(o, false)), '_blank'); },
+  sendSalon(id) { const o = X.order[id], s = X.salon[o.salonId] || {}; window.open('https://wa.me/' + waNum(s.whatsapp || s.phone) + '?text=' + encodeURIComponent(orderText(o, true)), '_blank'); }
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.in === 'edq' && ED) { ED.q = t.value; edPaint(true); return; }
+  if (t.dataset.in === 'oq') { ui.oq = t.value; const pos = t.selectionStart; render(); const n = document.getElementById('oq'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } return; }
+  if (t.dataset.ch && ED) { ED[t.dataset.ch] = t.value; const a = $('#ed-dpct'); if (a) a.style.display = ED.discountMode === 'manual' ? '' : 'none'; edPaint(true); return; }
+  if (t.dataset.li !== undefined && ED) { ED.lines[+t.dataset.li][t.dataset.f] = t.value; edPaint(true); }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.dataset.li !== undefined && ED) { const l = ED.lines[+t.dataset.li]; if (l && t.dataset.f === 'qty' && num(l.qty) <= 0) ED.lines.splice(+t.dataset.li, 1); edPaint(); }
+  if (t.dataset.ch === 'deliveryDate' && ED) render();
+});
+
+/* ============================================================
+ * 3.1: location, reorder radar, plan my day, targets, Zoho UI
+ * ============================================================ */
+function getPos(cb, quiet) {
+  if (ui.pos && Date.now() - ui.pos.at < 300000) { cb && cb(ui.pos); return; }
+  if (!navigator.geolocation) { if (!quiet) toast('Location is not available on this device.', 'bad'); return; }
+  navigator.geolocation.getCurrentPosition(p => { ui.pos = { lat: p.coords.latitude, lng: p.coords.longitude, at: Date.now() }; cb && cb(ui.pos); render(); },
+    () => { if (!quiet) toast('Allow location for this app in your phone settings.', 'bad'); }, { enableHighAccuracy: false, timeout: 15000, maximumAge: 120000 });
+}
+const distTo = s => ui.pos && s.lat && s.lng ? dist(ui.pos.lat, ui.pos.lng, num(s.lat), num(s.lng)) : null;
+const km = m => m < 1000 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(m < 10000 ? 1 : 0) + ' km';
+
+/* REORDER RADAR */
+function radar() {
+  const t = today(), cad = num(S.settings.cadenceCustomer) || 30;
+  return S.salons.filter(s => s.status !== 'Lost').map(s => {
+    const all = X.orders[s.id] || [];
+    if (all.some(o => o.status === 'Submitted' || o.status === 'Invoiced')) return null;
+    const live = all.filter(liveOrd); if (!live.length) return null;
+    const ds = live.map(o => localDate(o.deliveredAt || o.deliveryDate || o.orderDate)).sort();
+    const gaps = []; for (let i = 1; i < ds.length; i++) { const g = daysBetween(ds[i - 1], ds[i]); if (g >= 5) gaps.push(g); }
+    const every = gaps.length ? Math.round(gaps.reduce((a, b) => a + b, 0) / gaps.length) : cad;
+    const last = ds[ds.length - 1], since = daysBetween(last, t);
+    return { s, every, learned: gaps.length, last, since, left: every - since, lastOrder: live[0], units: Math.round(live.reduce((a, o) => a + num(o.units), 0) / live.length) };
+  }).filter(Boolean).sort((a, b) => a.left - b.left);
+}
+const radarPill = r => r.left < 0 ? `<span class="pill bad">${-r.left} days late</span>` : r.left === 0 ? '<span class="pill warn">Due today</span>' : r.left <= 3 ? `<span class="pill warn">In ${r.left} days</span>` : `<span class="pill">In ${r.left} days</span>`;
+function radarRow(r) {
+  return `<div class="row" style="cursor:default"><span class="sw" data-s="${esc(r.s.status || 'Customer')}"></span><button class="main" style="background:none;border:0;text-align:left;padding:0;cursor:pointer" data-a="openSalon" data-id="${r.s.id}"><div class="t">${esc(r.s.name)}</div><div class="s">Every ${r.every} days${r.learned ? '' : ' (default)'}, last ${r.since} days ago, about ${r.units} units</div></button><div class="end">${radarPill(r)}<br><button class="link" data-a="reorder" data-id="${r.lastOrder.id}" style="padding:4px 0">Reorder</button></div></div>`;
+}
+function radarToday() {
+  const l = radar().filter(r => r.left <= 3);
+  if (!l.length) return '';
+  return `<div class="sec"><h2>Due to reorder</h2><button class="link" data-a="openRadar">Radar</button></div><div class="block">${l.slice(0, 5).map(radarRow).join('')}</div>`;
+}
+function radarCard(s) {
+  const r = radar().find(x => x.s.id === s.id);
+  if (!r) return '';
+  return `<div class="card ${r.left < 0 ? 'late' : r.left <= 3 ? 'due' : ''}"><div style="display:flex;align-items:center;gap:10px"><div style="flex:1;min-width:0"><div class="small muted">${ic('radar', 'sm')} Reorder radar</div><b>${r.left < 0 ? 'Reorder is ' + (-r.left) + ' days late' : r.left === 0 ? 'Reorder due today' : 'Next reorder in ' + r.left + ' days'}</b><div class="small muted">Orders every ${r.every} days${r.learned ? ', learned from ' + (r.learned + 1) + ' orders' : ' (default until a second order)'}. Last ${r.since} days ago.</div></div><button class="btn sm" data-a="reorder" data-id="${r.lastOrder.id}">${ic('copy')}Reorder</button></div></div>`;
+}
+function vRadar() {
+  const l = radar();
+  return `${topbar('Reorder radar')}<div class="wrap" style="padding-top:0">
+  <p class="small muted" style="margin:0 2px 8px">Learns how often each customer orders. After two orders it uses their real rhythm, before that the ${num(S.settings.cadenceCustomer) || 30} day default. Customers with an order on the way are hidden.</p>
+  <div class="block">${l.map(radarRow).join('') || '<div class="empty"><b>No customers yet</b>Customers show up here after their first order.</div>'}</div></div>`;
+}
+
+/* PLAN MY DAY */
+function planCandidates() {
+  const t = today(), rad = {}; radar().forEach(r => rad[r.s.id] = r);
+  return S.salons.filter(s => s.status !== 'Lost').map(s => {
+    const why = []; let score = 0;
+    const fu = (X.acts[s.id] || []).filter(isOpenFu).sort((a, b) => String(a.followupDate).localeCompare(String(b.followupDate)))[0];
+    if (fu && localDate(fu.followupDate) <= t) { score += 100; why.push(fuBucket(fu) === 'late' ? 'Follow-up overdue' : 'Follow-up today'); }
+    else if (fu && localDate(fu.followupDate) <= addDays(t, 2)) { score += 30; why.push('Follow-up ' + rel(fu.followupDate).toLowerCase()); }
+    const r = rad[s.id]; if (r && r.left <= 3) { score += 90; why.push(r.left < 0 ? 'Reorder ' + (-r.left) + ' days late' : 'Reorder due'); }
+    const since = s.lastContact ? daysBetween(s.lastContact, t) : null;
+    if (s.priority === 'Hot') { score += 50; why.push('Hot'); } else if (s.priority === 'Warm') { score += 25; }
+    if (s.status === 'Sampled' && since !== null && since >= 7) { score += 40; why.push('Sampled, no news for ' + since + ' days'); }
+    if ((s.status || 'Lead') === 'Lead' && !(X.acts[s.id] || []).some(a => typeOf(a) === 'visit')) { score += 30; why.push('Never visited'); }
+    if (since !== null && since >= 21 && s.status !== 'Customer') { score += 15; why.push('Quiet for ' + since + ' days'); }
+    if (!why.length) return null;
+    return { s, score, why, d: distTo(s) };
+  }).filter(Boolean);
+}
+function vPlan() {
+  const ems = EMIRATES.filter(e => e && S.salons.some(s => s.emirate === e));
+  let l = planCandidates();
+  if (ui.planArea === 'near') l = ui.pos ? l.filter(c => c.d !== null && c.d <= 20000) : [];
+  else l = l.filter(c => c.s.emirate === ui.planArea);
+  l.sort((a, b) => b.score - a.score || (a.d || 0) - (b.d || 0));
+  const pick = ui.planPick.filter(id => X.salon[id]);
+  return `${topbar('Plan my day')}<div class="wrap" style="padding-top:0">
+  <p class="small muted" style="margin:0 2px 8px">The app ranks who to see: due follow-ups, reorders, hot leads, sampled salons gone quiet. Tick up to 10 and open the route.</p>
+  <div class="chips"><button class="chip ${ui.planArea === 'near' ? 'on' : ''}" data-a="planArea" data-id="near">${ic('pin', 'sm')}Near me</button>${ems.map(e => `<button class="chip ${ui.planArea === e ? 'on' : ''}" data-a="planArea" data-id="${e}">${e}</button>`).join('')}</div>
+  ${ui.planArea === 'near' && !ui.pos ? '<div class="block"><div class="empty"><b>Finding your location…</b>Allow location if your phone asks.</div></div>' : `
+  <div class="block">${l.map(c => { const on = pick.includes(c.s.id), pinned = c.s.lat && c.s.lng; return `<div class="row" style="cursor:default"><button class="tick ${on ? 'on' : ''}" data-a="planToggle" data-id="${c.s.id}" ${pinned ? '' : 'disabled'} aria-label="Add to route">${on ? ic('check') : ''}</button><button class="main" style="background:none;border:0;text-align:left;padding:0;cursor:pointer" data-a="openSalon" data-id="${c.s.id}"><div class="t">${esc(c.s.name)}</div><div class="s" style="white-space:normal">${esc(c.why.join(', '))}${pinned ? '' : '. No map pin yet, check in once to pin it'}</div></button><div class="end small">${c.d !== null ? '<b>' + km(c.d) + '</b><br>' : ''}<span class="sw" data-s="${esc(c.s.status || 'Lead')}" style="display:inline-block"></span></div></div>`; }).join('') || '<div class="empty"><b>Nothing urgent here</b>Try another area.</div>'}</div>`}
+  <div class="planbar"><span><b>${pick.length}</b> stop${pick.length === 1 ? '' : 's'} picked</span>${pick.length ? '<button class="link" data-a="planClear">Clear</button>' : ''}<button class="btn" data-a="planGo" ${pick.length ? '' : 'disabled'}>${ic('nav')}Open route</button></div></div>`;
+}
+function routeUrl(ids) {
+  let stops = ids.map(id => X.salon[id]).filter(s => s && s.lat && s.lng);
+  if (ui.pos) { const out = []; let cur = { lat: ui.pos.lat, lng: ui.pos.lng }; while (stops.length) { stops.sort((a, b) => dist(cur.lat, cur.lng, num(a.lat), num(a.lng)) - dist(cur.lat, cur.lng, num(b.lat), num(b.lng))); const n = stops.shift(); out.push(n); cur = { lat: num(n.lat), lng: num(n.lng) }; } stops = out; }
+  const last = stops[stops.length - 1], mids = stops.slice(0, -1);
+  return `https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=${last.lat},${last.lng}${mids.length ? '&waypoints=' + encodeURIComponent(mids.map(s => s.lat + ',' + s.lng).join('|')) : ''}${ui.pos ? `&origin=${ui.pos.lat},${ui.pos.lng}` : ''}`;
+}
+
+/* TARGETS AND COMMISSION */
+const TMETRICS = [['visits', 'Visits'], ['newSalons', 'New salons'], ['orders', 'Orders'], ['units', 'Units'], ['value', 'Order value']];
+const tgt = (email, month) => S.targets.find(t => t.month === month && lc(t.email) === email) || {};
+const commissionOn = () => num(S.settings.commissionPct) > 0 || num(S.settings.commissionPerUnit) > 0;
+function bars(email, month) {
+  const a = monthActuals(email, month, S), t = tgt(email, month);
+  const rows = TMETRICS.filter(([k]) => num(t[k]) > 0).map(([k, l]) => {
+    const pct = Math.min(100, Math.round(a[k] / num(t[k]) * 100));
+    const fmt = v => k === 'value' ? money0(v) : v;
+    return `<div class="tg"><div class="tgh"><span>${l}</span><span><b>${fmt(a[k])}</b> of ${fmt(num(t[k]))}</span></div><div class="bar2"><span style="width:${pct}%;${pct >= 100 ? 'background:var(--ok)' : ''}"></span></div></div>`;
+  }).join('');
+  const com = commissionOn() ? `<div class="tgh" style="margin-top:10px"><span>Commission so far</span><b>${money(commissionFor(a, S.settings))}</b></div><div class="tiny muted">From ${a.deliveredUnits} units delivered this month${num(S.settings.commissionPct) ? ', ' + S.settings.commissionPct + '% of value before VAT' : ''}${num(S.settings.commissionPerUnit) ? ', AED ' + S.settings.commissionPerUnit + ' per unit' : ''}</div>` : '';
+  return { html: rows + com, has: !!(rows || com), a };
+}
+function myMonthCard() {
+  const m = today().slice(0, 7), b = bars(S.me.email, m);
+  if (!b.has) return '';
+  const d = new Date(), left = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate() - d.getDate();
+  return `<div class="sec"><h2>My month</h2><span class="small muted">${left} days left</span></div><div class="card">${b.html}</div>`;
+}
+function vTargets() {
+  const m = ui.tMonth, label = new Date(m + '-15').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  const people = isAdminMe() ? S.users.filter(u => u.active !== 'no') : S.users.filter(u => u.email === S.me.email);
+  return `${topbar('Targets', isAdminMe() ? `<button class="ib" data-a="targetSheet" aria-label="Edit targets">${ic('edit')}</button>` : '')}<div class="wrap" style="padding-top:0">
+  <div class="mnav"><button class="ib" data-a="tMonth" data-d="-1" aria-label="Previous month">${ic('back')}</button><b>${label}</b><button class="ib" data-a="tMonth" data-d="1" aria-label="Next month" style="transform:scaleX(-1)">${ic('back')}</button></div>
+  ${people.map(u => { const b = bars(u.email, m); return `<div class="card"><div style="display:flex;align-items:center;margin-bottom:8px">${avatar(u.email, 30)}<b>${esc(u.name)}</b></div>${b.has ? b.html : `<div class="small muted">No targets set${isAdminMe() ? '. Tap the pencil to set them.' : ' yet.'} This month: ${b.a.visits} visits, ${b.a.newSalons} new salons, ${b.a.orders} orders, ${b.a.units} units.</div>`}</div>`; }).join('')}
+  ${isAdminMe() ? `<button class="btn block" data-a="targetSheet">${ic('target')}Set targets for ${esc(label)}</button>${commissionOn() ? '' : '<p class="tiny muted" style="text-align:center">Turn on commission with commissionPct or commissionPerUnit in the Settings tab.</p>'}` : ''}</div>`;
+}
+function targetSheet() {
+  const m = ui.tMonth, users = S.users.filter(u => u.active !== 'no');
+  openSheet('Targets for ' + new Date(m + '-15').toLocaleDateString('en-GB', { month: 'long' }), users.map(u => { const t = tgt(u.email, m); return `<div class="fs">${esc(u.name)}</div><div class="tgrid">${TMETRICS.map(([k, l]) => `<label class="f"><span>${l}</span><input inputmode="numeric" data-tu="${esc(u.email)}" data-tk="${k}" value="${esc(t[k] || '')}"></label>`).join('')}</div>`; }).join('')
+    + '<p class="tiny muted">Order value is before VAT and delivery. Leave empty for no target.</p>' + (S.targets.some(t => t.month < m) ? `<button class="btn ghost sm" data-a="copyTargets">Copy last month</button>` : ''),
+    `<button class="btn block" data-a="saveTargets">${ic('check')}Save targets</button>`);
+}
+
+/* ZOHO on orders */
+const ZST = { draft: ['Draft in Zoho', ''], sent: ['Sent, unpaid', 'warn'], overdue: ['Overdue', 'bad'], partially_paid: ['Part paid', 'warn'], paid: ['Paid', 'ok'], void: ['Void', ''], viewed: ['Viewed, unpaid', 'warn'], unpaid: ['Unpaid', 'warn'] };
+const zConnected = () => S.settings.zohoConnected === 'yes';
+function zohoBlock(o) {
+  if (!zConnected() && !o.zohoInvoiceId) return '';
+  if (o.zohoInvoiceId) {
+    const [l, c] = ZST[o.zohoStatus] || [o.zohoStatus || 'Unknown', ''];
+    return `<div class="sec"><h2>Zoho invoice</h2><span class="pill ${c}">${esc(l)}</span></div><div class="block"><dl class="kv">
+      <dt>Invoice</dt><dd><b>${esc(o.zohoInvoice)}</b></dd><dt>Total</dt><dd>${money(o.zohoTotal)}</dd><dt>Balance due</dt><dd style="${num(o.zohoBalance) > 0 ? 'color:var(--bad)' : 'color:var(--ok)'}"><b>${money(o.zohoBalance)}</b></dd>
+      <dt>Checked</dt><dd>${o.zohoSyncedAt ? ago(o.zohoSyncedAt).toLowerCase() : ''}</dd></dl>
+      ${zConnected() ? `<div style="padding:0 16px 14px"><button class="btn ghost sm" data-a="zohoRefresh" data-id="${o.id}">${ic('refresh')}Check Zoho now</button></div>` : ''}</div>`;
+  }
+  if (o.zohoError) return `<div class="warnbox" style="background:var(--bad-soft);color:var(--bad)">Zoho invoice not created: ${esc(o.zohoError)}</div>`;
+  return '';
+}
+const zohoPayPill = o => o.zohoInvoiceId && ZST[o.zohoStatus] ? `<span class="pill ${ZST[o.zohoStatus][1]} tiny">${o.zohoStatus === 'draft' ? 'Zoho draft' : ZST[o.zohoStatus][0]}</span>` : '';
+
+/* handlers */
+Object.assign(H, {
+  flush: () => flush(),
+  openRadar: () => go('radar'), openTargets: () => go('targets'),
+  openPlan: () => { go('plan'); if (ui.planArea === 'near') getPos(); },
+  planArea: id => { ui.planArea = id; if (id === 'near') getPos(); render(); },
+  planToggle(id) { const i = ui.planPick.indexOf(id); if (i >= 0) ui.planPick.splice(i, 1); else if (ui.planPick.length >= 10) { toast('Google Maps takes up to 10 stops.', 'bad'); return; } else ui.planPick.push(id); LS.set('tbl_plan_' + new Date().toISOString().slice(0, 10), ui.planPick); render(); },
+  planClear() { ui.planPick = []; LS.set('tbl_plan_' + new Date().toISOString().slice(0, 10), []); render(); },
+  planGo() { const ids = ui.planPick.filter(id => X.salon[id] && X.salon[id].lat); if (!ids.length) return; const go2 = () => window.open(routeUrl(ids), '_blank'); if (!ui.pos) getPos(go2, true); go2(); },
+  setSort: id => { ui.sort = id; if (id === 'near') getPos(); render(); },
+  tMonth(_, el) { const [y, m] = ui.tMonth.split('-').map(Number), d = new Date(y, m - 1 + +el.dataset.d, 15); ui.tMonth = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); render(); },
+  targetSheet: () => targetSheet(),
+  copyTargets() { const prev = S.targets.filter(t => t.month < ui.tMonth).map(t => t.month).sort().pop(); document.querySelectorAll('.sheet [data-tu]').forEach(i => { const t = tgt(i.dataset.tu, prev); if (t[i.dataset.tk]) i.value = t[i.dataset.tk]; }); toast('Copied from ' + prev); },
+  async saveTargets() {
+    const rows = {}; document.querySelectorAll('.sheet [data-tu]').forEach(i => { (rows[i.dataset.tu] = rows[i.dataset.tu] || { email: i.dataset.tu })[i.dataset.tk] = i.value.trim(); });
+    try { await run('saveTargets', { month: ui.tMonth, rows: Object.values(rows) }, 'Targets saved'); closeSheet(); } catch (e) {}
+  },
+  async zohoInvoice(id) { try { await run('zohoInvoice', { id }, 'Zoho invoice created'); } catch (e) {} },
+  async zohoRefresh(id) { try { await run('zohoRefresh', { id }, 'Updated from Zoho'); } catch (e) {} }
+});
+
+/* ---------- 3.2 handlers ---------- */
+Object.assign(H, {
+  hType: id => { ui.hType = id; render(); },
+  logUser: id => { ui.logUser = id; render(); }, logType: id => { ui.logType = id; render(); },
+  openLog: () => go('log'),
+  openSalon: id => { if (!id || !X.salon[id]) return; closeSheet(); ui.salonTab = 'timeline'; ui.hType = 'all'; go('salon', id); }
+});
+
+/* ---------- demo: simulated Zoho and sample orders ---------- */
+if (DEMO) {
+  let zn = 140;
+  const fakeInv = (tx, me, o) => { const t = nowISO(); zn++; put(tx, 'orders', { id: o.id, status: o.status === 'Delivered' ? 'Delivered' : 'Invoiced', zohoInvoice: 'INV-000' + zn, zohoInvoiceId: 'z' + zn, zohoStatus: 'draft', zohoTotal: o.total, zohoBalance: o.total, zohoError: '', zohoSyncedAt: t, invoicedAt: o.invoicedAt || t, invoicedBy: o.invoicedBy || me.email });
+    addAct(tx, me, o.salonId, { type: 'order', note: (o.orderNo || 'Order') + ' invoiced in Zoho (INV-000' + zn + ', draft, AED ' + num(o.total).toFixed(2) + ')' }); };
+  window.ZOHO_HOOK = (tx, me, o) => { if (!o.zohoInvoiceId) fakeInv(tx, me, o); };
+  API.zohoInvoice = (me, p) => { const o = findRow('orders', p.id), tx = newTx(); fakeInv(tx, me, o); return tx; };
+  API.zohoRefresh = (me, p) => { const o = findRow('orders', p.id), tx = newTx(), nx = { draft: 'sent', sent: 'partially_paid', partially_paid: 'paid', paid: 'paid' }[o.zohoStatus] || 'sent';
+    put(tx, 'orders', { id: o.id, zohoStatus: nx, zohoBalance: nx === 'paid' ? 0 : nx === 'partially_paid' ? r2(num(o.zohoTotal) / 2) : o.zohoTotal, zohoSyncedAt: nowISO() }); return tx; };
+  const boot0 = API.bootstrap; API.bootstrap = me => { const o = boot0(me); o.settings.zohoConnected = 'yes'; return o; };
+}
+function seedExtra(me, at, T, ids) {
+  DB.upsert('settings', { key: 'commissionPct', value: '5' });
+  DB.upsert('settings', { key: 'opsWhatsApp', value: '0500000009' });
+  const P = i => { const r = DEMO_PRODUCTS[i]; return { sku: r[0], product: r[2] + (r[4] ? ', ' + r[4] : ''), price: r[5] }; };
+  const sal = id => DB.all('salons').find(x => x.id === id);
+  const order = (u, id, lines, extra) => { const s = sal(id); return API.saveOrder(me(u), { order: Object.assign({ salonId: id, status: 'Submitted', deliveryAddress: s.address || s.area, deliveryArea: s.area, deliveryEmirate: s.emirate, contactName: s.owner, contactPhone: s.phone, paymentMethod: 'Cash on delivery', deliverySlot: 'Morning' }, extra), items: lines.map(([i, q]) => Object.assign(P(i), { qty: q })) }).upsert.orders.slice(-1)[0].id; };
+  [[52, 50], [27, 25]].forEach(([od, dd], k) => { at(od); const oid = order(1, ids.b, [[0, 6 + k], [1, 4], [5, 3], [12, 2]], { deliveryDate: addDays(T, -dd), paymentMethod: 'Bank transfer' }); at(dd); API.setOrderStatus(me(0), { id: oid, status: 'Delivered' }); DB.upsert('orders', { id: oid, zohoStatus: 'paid', zohoBalance: 0 }); });
+  at(2); order(1, ids.a, [[0, 6], [2, 4], [3, 4], [12, 2]], { deliveryDate: addDays(T, 1), deliverySlot: 'Afternoon', notes: 'Call Khadiga 15 min before arriving.' });
+  at(0); order(2, ids.d, [[4, 3], [6, 3]], { status: 'Draft', deliveryDate: addDays(T, 3) });
+  API.saveTargets(me(0), { month: T.slice(0, 7), rows: [{ email: MEM.users[0].email, visits: 15, newSalons: 5, orders: 4, units: 200, value: 6000 }, { email: MEM.users[1].email, visits: 25, newSalons: 8, orders: 6, units: 300, value: 9000 }, { email: MEM.users[2].email, visits: 25, newSalons: 8, orders: 5, units: 250, value: 7500 }] });
+}
+
+boot();
 </script>
 </body>
 </html>
