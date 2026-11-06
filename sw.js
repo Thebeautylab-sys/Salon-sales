@@ -1,6 +1,6 @@
-// JOIA Sales offline shell. Network first, cache as fallback, so updates arrive on the next open.
-const C = 'joia-sales-v3';
-const SHELL = ['./', './index.html', './config.js', './manifest.webmanifest', './icon-192.png', './joia-logo-white.png'];
+// Salon Sales offline shell. Network first, cache as fallback.
+const C = 'salon-sales-v5';
+const SHELL = ['./', './index.html', './config.js', './manifest.webmanifest', './icon-192.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(C).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== C).map(x => caches.delete(x)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', e => {
